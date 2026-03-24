@@ -789,8 +789,20 @@
     .services-grid { grid-template-columns: 1fr; }
     .collabs-inner { grid-template-columns: 1fr; gap: 60px; }
     .alana-section { grid-template-columns: 1fr; gap: 48px; padding: 80px 24px; }
-    nav { padding: 16px 24px; }
+    nav { padding: 16px 20px; }
     .nav-links { gap: 20px; }
+  }
+
+  @media (max-width: 600px) {
+    .nav-links { display: none; }
+    nav { justify-content: space-between; }
+    .nav-logo { letter-spacing: 4px; white-space: nowrap; }
+    .hero-title { font-size: clamp(56px, 15vw, 96px); }
+    .service-card { padding: 40px 28px; }
+    .service-name { font-size: 32px; }
+    .collabs-inner { padding: 0; }
+    .alana-section { padding: 60px 20px; }
+    .section-pad { padding: 60px 20px; }
   }
 </style>
 </head>
