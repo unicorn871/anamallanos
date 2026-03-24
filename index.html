@@ -107,8 +107,8 @@
   .hero-text-col {
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
-    padding: 80px 56px 80px 56px;
+    justify-content: center;
+    padding: 80px 56px 60px 56px;
     position: relative;
   }
 
@@ -133,12 +133,20 @@
 
   .hero-title {
     font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(52px, 6vw, 88px);
+    font-size: clamp(60px, 7vw, 104px);
     font-weight: 300;
     letter-spacing: 2px;
     color: var(--ink);
     line-height: 1;
-    margin-bottom: 32px;
+    margin-bottom: 12px;
+  }
+
+  .hero-handle {
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--sand);
+    text-transform: lowercase;
+    margin-bottom: 28px;
   }
 
   .hero-line {
@@ -841,6 +849,7 @@
     <span class="hero-number">01 — Intro</span>
     <div class="hero-eyebrow" id="hero-eyebrow">Abogada · Coach · Creadora</div>
     <h1 class="hero-title">Ana<br>Llanos</h1>
+    <div class="hero-handle">@anamallanos</div>
     <div class="hero-line"></div>
     <p class="hero-tagline" id="hero-tagline">
       Acompaño a personas hacia su mejor versión — en su relación con el cuerpo y la comida, la abundancia, el presente y la vida que quieren construir.
