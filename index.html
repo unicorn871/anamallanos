@@ -1,0 +1,1240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ana Llanos</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --white: #FAFAF8;
+    --cream: #F4EFE8;
+    --sand: #C8B49A;
+    --sand-light: #E8DDD2;
+    --ink: #1C1714;
+    --ink-mid: #3A3430;
+    --gray: #9A928C;
+    --warm-black: #141210;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Jost', sans-serif;
+    background: var(--white);
+    color: var(--ink);
+    font-weight: 300;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 24px 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(250,250,248,0.94);
+    backdrop-filter: blur(10px);
+  }
+
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px;
+    font-weight: 300;
+    letter-spacing: 8px;
+    text-transform: uppercase;
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 40px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 9px;
+    font-weight: 400;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gray);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+
+  .nav-links a:hover { color: var(--ink); }
+
+  .lang-toggle {
+    display: flex;
+    gap: 0;
+  }
+
+  .lang-btn {
+    font-size: 9px;
+    font-weight: 400;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 5px 10px;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    color: var(--gray);
+    transition: color 0.2s;
+  }
+
+  .lang-btn.active { color: var(--ink); font-weight: 500; }
+  .lang-btn:hover:not(.active) { color: var(--ink-mid); }
+
+  .lang-divider {
+    font-size: 9px;
+    color: var(--sand-light);
+    align-self: center;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 5fr 7fr;
+    padding-top: 80px;
+  }
+
+  .hero-text-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 80px 56px 80px 56px;
+    position: relative;
+  }
+
+  .hero-number {
+    position: absolute;
+    top: 120px;
+    left: 56px;
+    font-size: 9px;
+    letter-spacing: 4px;
+    color: var(--sand);
+    text-transform: uppercase;
+  }
+
+  .hero-eyebrow {
+    font-size: 9px;
+    font-weight: 400;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--sand);
+    margin-bottom: 24px;
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(52px, 6vw, 88px);
+    font-weight: 300;
+    letter-spacing: 2px;
+    color: var(--ink);
+    line-height: 1;
+    margin-bottom: 32px;
+  }
+
+  .hero-line {
+    width: 32px;
+    height: 1px;
+    background: var(--sand);
+    margin-bottom: 28px;
+  }
+
+  .hero-tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(14px, 1.4vw, 17px);
+    font-style: italic;
+    font-weight: 300;
+    color: var(--ink-mid);
+    line-height: 2.2;
+    margin-bottom: 48px;
+  }
+
+  .hero-ctas {
+    display: flex;
+    gap: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .btn-dark {
+    font-size: 9px;
+    font-weight: 400;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--white);
+    background: var(--ink);
+    padding: 14px 32px;
+    text-decoration: none;
+    transition: background 0.3s;
+  }
+
+  .btn-dark:hover { background: var(--ink-mid); }
+
+  .btn-text {
+    font-size: 9px;
+    font-weight: 400;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gray);
+    text-decoration: none;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--sand-light);
+    transition: color 0.3s, border-color 0.3s;
+  }
+
+  .btn-text:hover { color: var(--ink); border-color: var(--sand); }
+
+  .hero-photo-col {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 15%;
+    display: block;
+    min-height: 100vh;
+  }
+
+  /* ── SECTION SHARED ── */
+  .section-pad { padding: 120px 56px; }
+
+  .label {
+    font-size: 9px;
+    font-weight: 400;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--sand);
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  .headline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: 300;
+    letter-spacing: 1px;
+    color: var(--ink);
+    line-height: 1.1;
+  }
+
+  .body-text {
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--gray);
+    line-height: 2.2;
+  }
+
+  /* ── SERVICES ── */
+  .services {
+    background: var(--cream);
+  }
+
+  .services-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .services-header {
+    margin-bottom: 72px;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--sand-light);
+  }
+
+  .service-card {
+    background: var(--cream);
+    padding: 56px 48px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .service-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .service-card:hover {
+    background: var(--ink);
+    box-shadow: 0 20px 60px rgba(28,23,20,0.25);
+    transform: translateY(-4px);
+  }
+
+  .service-card:hover .service-name,
+  .service-card:hover .service-num,
+  .service-card:hover .service-symbol { color: var(--white); }
+  .service-card:hover .service-desc { color: rgba(250,250,248,0.55); }
+  .service-card:hover .service-tag { color: var(--sand); border-color: rgba(200,180,154,0.3); }
+  .service-card:hover .service-for { color: rgba(250,250,248,0.4); }
+  .service-card:hover .service-for strong { color: var(--sand-light); }
+  .service-card:hover .service-includes li { border-color: rgba(200,180,154,0.15); color: rgba(250,250,248,0.7); }
+  .service-card:hover .service-includes li::before { color: var(--sand); }
+  .service-card:hover .service-price { color: var(--sand); }
+  .service-card:hover .service-btn { background: var(--sand); color: var(--ink); }
+
+  .service-symbol {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 48px;
+    font-weight: 300;
+    color: var(--sand-light);
+    line-height: 1;
+    margin-bottom: 20px;
+    display: block;
+    transition: color 0.3s;
+  }
+
+  .service-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 11px;
+    color: var(--sand);
+    letter-spacing: 3px;
+    margin-bottom: 12px;
+    display: block;
+    transition: color 0.3s;
+  }
+
+  .service-tag {
+    display: inline-block;
+    font-size: 8px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gray);
+    border: 1px solid var(--sand-light);
+    padding: 4px 10px;
+    margin-bottom: 20px;
+    transition: all 0.3s;
+  }
+
+  .service-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 300;
+    color: var(--ink);
+    margin-bottom: 16px;
+    letter-spacing: 1px;
+    transition: color 0.3s;
+  }
+
+  .service-desc {
+    font-size: 12px;
+    font-weight: 300;
+    color: var(--gray);
+    line-height: 2.2;
+    margin-bottom: 20px;
+    transition: color 0.3s;
+  }
+
+  .service-for {
+    font-size: 11px;
+    color: var(--gray);
+    line-height: 1.8;
+    margin-bottom: 24px;
+    transition: color 0.3s;
+  }
+  .service-for strong {
+    display: block;
+    font-size: 8px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--ink-mid);
+    margin-bottom: 6px;
+    font-weight: 500;
+    transition: color 0.3s;
+  }
+
+  .service-includes {
+    list-style: none;
+    margin-bottom: 36px;
+  }
+
+  .service-includes li {
+    font-size: 11px;
+    font-weight: 300;
+    color: var(--ink-mid);
+    line-height: 1;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--sand-light);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .service-includes li::before {
+    content: "—";
+    color: var(--sand);
+    font-size: 10px;
+    flex-shrink: 0;
+  }
+
+  .service-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: auto;
+    padding-top: 8px;
+  }
+
+  .service-price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    font-style: italic;
+    color: var(--sand);
+    letter-spacing: 1px;
+  }
+
+  .service-btn {
+    font-size: 8px;
+    font-weight: 500;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--white);
+    background: var(--ink);
+    padding: 11px 24px;
+    text-decoration: none;
+    transition: background 0.3s;
+  }
+
+  .service-btn:hover { background: var(--sand); }
+
+  .service-card { cursor: pointer; }
+
+  /* ── MODAL ── */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(28,23,20,0.85);
+    z-index: 200;
+    backdrop-filter: blur(6px);
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+  .modal-overlay.open { display: flex; }
+
+  .modal-box {
+    background: var(--white);
+    max-width: 680px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 20px; right: 24px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    color: var(--gray);
+    cursor: pointer;
+    line-height: 1;
+  }
+  .modal-close:hover { color: var(--ink); }
+
+  .modal-top {
+    background: var(--ink);
+    padding: 56px 48px 40px;
+  }
+
+  .modal-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 11px;
+    color: var(--sand);
+    letter-spacing: 3px;
+    display: block;
+    margin-bottom: 16px;
+  }
+
+  .modal-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px;
+    font-weight: 300;
+    color: var(--white);
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+  }
+
+  .modal-subtitle {
+    font-size: 11px;
+    color: var(--sand);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+
+  .modal-body { padding: 40px 48px 48px; }
+
+  .modal-desc {
+    font-size: 13px;
+    color: var(--gray);
+    line-height: 2.2;
+    margin-bottom: 40px;
+  }
+
+  .modal-steps-label {
+    font-size: 9px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--sand);
+    margin-bottom: 24px;
+    display: block;
+  }
+
+  .modal-steps { list-style: none; margin-bottom: 40px; }
+
+  .modal-steps li {
+    display: grid;
+    grid-template-columns: 32px 1fr;
+    gap: 16px;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--sand-light);
+    align-items: start;
+  }
+
+  .step-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 300;
+    color: var(--sand);
+    line-height: 1;
+  }
+
+  .step-content {}
+  .step-name {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--ink);
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    font-size: 9px;
+    letter-spacing: 2px;
+  }
+  .step-desc {
+    font-size: 12px;
+    color: var(--gray);
+    line-height: 1.8;
+  }
+
+  .modal-note {
+    background: var(--cream);
+    padding: 20px 24px;
+    border-left: 2px solid var(--sand);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    font-style: italic;
+    color: var(--ink-mid);
+    line-height: 1.8;
+    margin-bottom: 32px;
+  }
+
+  .modal-cta {
+    display: inline-block;
+    font-size: 9px;
+    font-weight: 400;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--white);
+    background: var(--ink);
+    padding: 14px 32px;
+    text-decoration: none;
+    transition: background 0.3s;
+    cursor: pointer;
+    border: none;
+  }
+  .modal-cta:hover { background: var(--sand); color: var(--ink); }
+
+  /* ── COLLABS ── */
+  .collabs {
+    background: var(--white);
+  }
+
+  .collabs-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 100px;
+    align-items: start;
+  }
+
+  .collabs-left { }
+
+  .collabs-right { padding-top: 16px; }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--sand-light);
+    margin: 48px 0;
+  }
+
+  .stat {
+    background: var(--white);
+    padding: 28px 24px;
+  }
+
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px;
+    font-weight: 300;
+    color: var(--ink);
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .stat-label {
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gray);
+  }
+
+  .deliverables-list {
+    list-style: none;
+    margin-bottom: 40px;
+  }
+
+  .deliverables-list li {
+    font-size: 11px;
+    font-weight: 300;
+    color: var(--ink-mid);
+    padding: 12px 0;
+    border-bottom: 1px solid var(--sand-light);
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .deliverables-list li::before {
+    content: "✦";
+    color: var(--sand);
+    font-size: 8px;
+    flex-shrink: 0;
+  }
+
+  .collabs-body {
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--gray);
+    line-height: 2.2;
+    margin: 24px 0 40px;
+  }
+
+  /* ── ALANA ── */
+  .alana-section {
+    background: var(--ink);
+    padding: 120px 56px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 100px;
+    align-items: center;
+  }
+
+  .alana-left .label { color: rgba(200,180,154,0.7); }
+
+  .alana-headline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(40px, 5vw, 68px);
+    font-weight: 300;
+    letter-spacing: 12px;
+    text-transform: uppercase;
+    color: var(--white);
+    line-height: 1;
+    margin: 16px 0 24px;
+  }
+
+  .alana-tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    font-style: italic;
+    color: var(--sand-light);
+    line-height: 2;
+    margin-bottom: 40px;
+  }
+
+  .btn-sand {
+    display: inline-block;
+    font-size: 9px;
+    font-weight: 400;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--ink);
+    background: var(--sand);
+    padding: 14px 36px;
+    text-decoration: none;
+    transition: background 0.3s;
+  }
+
+  .btn-sand:hover { background: var(--sand-light); }
+
+  .alana-right {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .alana-product {
+    border: 1px solid rgba(200,180,154,0.2);
+    padding: 24px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    text-decoration: none;
+    transition: border-color 0.3s;
+  }
+
+  .alana-product:hover { border-color: var(--sand); }
+
+  .alana-product-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 300;
+    color: var(--white);
+    letter-spacing: 1px;
+  }
+
+  .alana-product-tag {
+    font-size: 8px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--sand);
+    margin-top: 4px;
+    display: block;
+  }
+
+  .alana-product-arrow {
+    font-size: 16px;
+    color: var(--sand);
+    flex-shrink: 0;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--warm-black);
+    padding: 40px 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px;
+    font-weight: 300;
+    letter-spacing: 7px;
+    text-transform: uppercase;
+    color: rgba(250,250,248,0.6);
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .footer-links a {
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(250,250,248,0.4);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover { color: var(--sand); }
+
+  .footer-copy {
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: rgba(250,250,248,0.2);
+  }
+
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero-text-col { padding: 100px 24px 48px; }
+    .hero-photo-col { height: 70vh; }
+    .hero-photo { min-height: 70vh; object-position: 50% 20%; }
+    .section-pad { padding: 80px 24px; }
+    .services-grid { grid-template-columns: 1fr; }
+    .collabs-inner { grid-template-columns: 1fr; gap: 60px; }
+    .alana-section { grid-template-columns: 1fr; gap: 48px; padding: 80px 24px; }
+    nav { padding: 16px 24px; }
+    .nav-links { gap: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Ana Llanos</a>
+  <ul class="nav-links">
+    <li><a href="#services" id="nav-services">Te acompaño</a></li>
+    <li><a href="#collabs" id="nav-collabs">Colabs</a></li>
+    <li><a href="#alana" id="nav-alana">Tienda</a></li>
+    <li><a href="portfolio/index.html" target="_blank" id="nav-book">Book</a></li>
+  </ul>
+  <div class="lang-toggle">
+    <button class="lang-btn active" onclick="setLang('es')">ES</button>
+    <span class="lang-divider">/</span>
+    <button class="lang-btn" onclick="setLang('en')">EN</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-text-col">
+    <span class="hero-number">01 — Intro</span>
+    <div class="hero-eyebrow" id="hero-eyebrow">Abogada · Coach · Creadora</div>
+    <h1 class="hero-title">Ana<br>Llanos</h1>
+    <div class="hero-line"></div>
+    <p class="hero-tagline" id="hero-tagline">
+      Acompaño a personas hacia su mejor versión — en su relación con el cuerpo y la comida, la abundancia, el presente y la vida que quieren construir.
+    </p>
+    <div class="hero-ctas">
+      <a href="#services" class="btn-dark" id="hero-cta-1">Te acompaño</a>
+      <a href="#collabs" class="btn-text" id="hero-cta-2">Colaboraciones →</a>
+    </div>
+  </div>
+  <div class="hero-photo-col">
+    <img src="ana-foto.png" alt="Ana Llanos" class="hero-photo">
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services section-pad" id="services">
+  <div class="services-inner">
+    <div class="services-header">
+      <span class="label" id="services-label">02 — Te acompaño</span>
+      <h2 class="headline" id="services-title">Vamos más profundo.</h2>
+    </div>
+    <div class="services-grid">
+
+      <div class="service-card" onclick="openModal('modal-1')">
+        <span class="service-symbol">◇</span>
+        <span class="service-num">01</span>
+        <span class="service-tag" id="service-tag-1">Sesión única · 60 min</span>
+        <div class="service-name" id="service-name-1">Clarity Session</div>
+        <p class="service-desc" id="service-desc-1">Llegas con algo que pesa — una decisión, una duda, un momento de vida. Te vas con claridad, una lectura de tarot y un próximo paso concreto.</p>
+        <div class="service-for" id="service-for-1"><strong>Para ti si...</strong>Tienes algo específico que resolver y necesitas un espacio para verlo desde afuera.</div>
+        <ul class="service-includes" id="service-includes-1">
+          <li>Mini coaching enfocado</li>
+          <li>Lectura de tarot sobre tu tema</li>
+          <li>Seguimiento por DM</li>
+        </ul>
+        <div class="service-footer">
+          <span class="service-price" id="service-price-1">Escríbeme</span>
+          <a href="#" class="service-btn" id="service-btn-1" onclick="openCalendar(event)">Agendar</a>
+        </div>
+      </div>
+
+      <div class="service-card" onclick="openModal('modal-2')">
+        <span class="service-symbol">○</span>
+        <span class="service-num">02</span>
+        <span class="service-tag" id="service-tag-2">Proceso continuo · Quincenal</span>
+        <div class="service-name" id="service-name-2">Conscious Life Coaching</div>
+        <p class="service-desc" id="service-desc-2">Un proceso real de transformación — en un área específica o en tu vida completa. Paso a paso, con acompañamiento constante y un plan que realmente funciona para ti.</p>
+        <div class="service-for" id="service-for-2"><strong>Para ti si...</strong>Estás lista para un cambio de fondo — no una sesión, sino un proceso que te sostenga.</div>
+        <ul class="service-includes" id="service-includes-2">
+          <li>Sesiones quincenales 1 a 1</li>
+          <li>Plan personalizado & hábitos</li>
+          <li>Soporte por WhatsApp</li>
+        </ul>
+        <div class="service-footer">
+          <span class="service-price" id="service-price-2">Escríbeme</span>
+          <a href="#" class="service-btn" id="service-btn-2" onclick="openCalendar(event)">Agendar</a>
+        </div>
+      </div>
+
+      <div class="service-card" onclick="openModal('modal-3')">
+        <span class="service-symbol">✦</span>
+        <span class="service-num">03</span>
+        <span class="service-tag" id="service-tag-3">Lectura · 45 min</span>
+        <div class="service-name" id="service-name-3">Tarot Reading</div>
+        <p class="service-desc" id="service-desc-3">No leer el futuro — leer energías. Una sesión intuitiva de preguntas y respuestas para que te reconectes con lo que ya sabes, pero quizás no te habías atrevido a ver.</p>
+        <div class="service-for" id="service-for-3"><strong>Para ti si...</strong>Quieres un espacio de reflexión profunda y conexión con tu intuición, sin dogmas ni predicciones.</div>
+        <ul class="service-includes" id="service-includes-3">
+          <li>Tirada completa de tarot</li>
+          <li>Preguntas & respuestas abiertas</li>
+          <li>Resumen enviado después</li>
+        </ul>
+        <div class="service-footer">
+          <span class="service-price" id="service-price-3">Escríbeme</span>
+          <a href="#" class="service-btn" id="service-btn-3" onclick="openCalendar(event)">Agendar</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- COLLABS -->
+<section class="collabs section-pad" id="collabs">
+  <div class="collabs-inner">
+    <div class="collabs-left">
+      <span class="label" id="collabs-label">03 — Collaborations</span>
+      <h2 class="headline" id="collabs-title">Let's create<br>together.</h2>
+      <p class="collabs-body" id="collabs-body">Travel, Wellness & Lifestyle content creator with an engaged audience of women ages 25–34 across Latin America and the US.</p>
+      <a href="media-kit/media-kit.html" target="_blank" class="btn-dark" id="collabs-btn">View Media Kit</a>
+    </div>
+    <div class="collabs-right">
+      <div class="stats-grid">
+        <div class="stat">
+          <span class="stat-num">243K</span>
+          <span class="stat-label" id="stat-1">Monthly Views</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">63.7%</span>
+          <span class="stat-label" id="stat-2">Non-Follower Reach</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">33K+</span>
+          <span class="stat-label" id="stat-3">TikTok Followers</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">70%</span>
+          <span class="stat-label" id="stat-4">Female Audience</span>
+        </div>
+      </div>
+      <ul class="deliverables-list">
+        <li id="deliv-1">Instagram Reel</li>
+        <li id="deliv-2">Feed Post</li>
+        <li id="deliv-3">5–8 Instagram Stories</li>
+        <li id="deliv-4">High-Quality Photos</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ALANA -->
+<section class="alana-section" id="alana">
+  <div class="alana-left">
+    <span class="label" id="alana-label">04 — The Shop</span>
+    <div class="alana-headline">Alana</div>
+    <p class="alana-tagline" id="alana-tagline">Journals, card games & books designed to help you grow — one conversation, one question, one page at a time.</p>
+    <a href="products/alana-website.html" class="btn-sand" id="alana-btn">Shop the Collection</a>
+  </div>
+  <div class="alana-right">
+    <a href="products/alana-website.html" class="alana-product">
+      <div>
+        <div class="alana-product-name" id="alana-p1-name">Moon Journal</div>
+        <span class="alana-product-tag" id="alana-p1-tag">Journal · PDF · $9.99</span>
+      </div>
+      <span class="alana-product-arrow">→</span>
+    </a>
+    <a href="products/alana-website.html" class="alana-product">
+      <div>
+        <div class="alana-product-name" id="alana-p2-name">The Art of Knowing Us</div>
+        <span class="alana-product-tag" id="alana-p2-tag">Card Game · PDF · $12.99</span>
+      </div>
+      <span class="alana-product-arrow">→</span>
+    </a>
+  </div>
+</section>
+
+<!-- MODAL 1: CLARITY SESSION -->
+<div class="modal-overlay" id="modal-1">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('modal-1')">✕</button>
+    <div class="modal-top">
+      <span class="modal-num">01</span>
+      <div class="modal-title" id="m1-title">Clarity Session</div>
+      <div class="modal-subtitle" id="m1-sub">60 min · 1 on 1</div>
+    </div>
+    <div class="modal-body">
+      <p class="modal-desc" id="m1-desc">Una sesión diseñada para cuando tienes algo específico que resolver — una decisión, una situación, un momento de vida. No necesitas tenerlo todo claro para llegar. Llegamos juntas al fondo de lo que necesitas.</p>
+      <span class="modal-steps-label" id="m1-steps-label">Cómo fluye la sesión</span>
+      <ul class="modal-steps">
+        <li>
+          <span class="step-num">1</span>
+          <div class="step-content">
+            <div class="step-name" id="m1-s1-name">Llegada & Enfoque</div>
+            <div class="step-desc" id="m1-s1-desc">Conversamos sobre lo que traes hoy — sin filtros. Identificamos juntas el hilo central de lo que quieres explorar.</div>
+          </div>
+        </li>
+        <li>
+          <span class="step-num">2</span>
+          <div class="step-content">
+            <div class="step-name" id="m1-s2-name">Mini Coaching</div>
+            <div class="step-desc" id="m1-s2-desc">Trabajo contigo desde el coaching para mover la perspectiva — preguntas poderosas, reflexión, claridad sobre lo que realmente está pasando.</div>
+          </div>
+        </li>
+        <li>
+          <span class="step-num">3</span>
+          <div class="step-content">
+            <div class="step-name" id="m1-s3-name">Lectura de Tarot</div>
+            <div class="step-desc" id="m1-s3-desc">Sacamos las cartas sobre el tema que trabajamos. Las energías hablan — y tú decides qué hacer con lo que emerge.</div>
+          </div>
+        </li>
+        <li>
+          <span class="step-num">4</span>
+          <div class="step-content">
+            <div class="step-name" id="m1-s4-name">Cierre & Seguimiento</div>
+            <div class="step-desc" id="m1-s4-desc">Cerramos con intención y claridad. Te envío un resumen de la sesión por DM para que lo tengas presente.</div>
+          </div>
+        </li>
+      </ul>
+      <div class="modal-note" id="m1-note">"No hace falta saber qué preguntarle a la vida — solo necesitas el espacio para escucharla."</div>
+      <button class="modal-cta" id="m1-cta" onclick="openCalendar(event)">Agendar sesión</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL 2: CONSCIOUS LIFE COACHING -->
+<div class="modal-overlay" id="modal-2">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('modal-2')">✕</button>
+    <div class="modal-top">
+      <span class="modal-num">02</span>
+      <div class="modal-title" id="m2-title">Conscious Life Coaching</div>
+      <div class="modal-subtitle" id="m2-sub">Proceso continuo · Quincenal</div>
+    </div>
+    <div class="modal-body">
+      <p class="modal-desc" id="m2-desc">Para quienes quieren un acompañamiento real — ya sea en un área específica de su vida o en todo el panorama. Vamos paso a paso, sin prisa, construyendo la versión de ti que ya sabes que puedes ser.</p>
+      <span class="modal-steps-label" id="m2-steps-label">Cómo funciona el proceso</span>
+      <ul class="modal-steps">
+        <li>
+          <span class="step-num">1</span>
+          <div class="step-content">
+            <div class="step-name" id="m2-s1-name">Sesión Inicial</div>
+            <div class="step-desc" id="m2-s1-desc">Nos conocemos, mapeamos dónde estás y hacia dónde quieres ir. Definimos el enfoque: ¿un área específica o tu vida en general?</div>
+          </div>
+        </li>
+        <li>
+          <span class="step-num">2</span>
+          <div class="step-content">
+            <div class="step-name" id="m2-s2-name">Sesiones Quincenales</div>
+            <div class="step-desc" id="m2-s2-desc">Cada dos semanas trabajamos juntas — revisamos avances, desbloqueamos lo que aparezca y seguimos construyendo desde adentro.</div>
+          </div>
+        </li>
+        <li>
+          <span class="step-num">3</span>
+          <div class="step-content">
+            <div class="step-name" id="m2-s3-name">Plan & Hábitos</div>
+            <div class="step-desc" id="m2-s3-desc">Te acompaño a crear un plan personalizado con acciones concretas, hábitos alineados y una visión clara de lo que estás construyendo.</div>
+          </div>
+        </li>
+        <li>
+          <span class="step-num">4</span>
+          <div class="step-content">
+            <div class="step-name" id="m2-s4-name">Soporte Entre Sesiones</div>
+            <div class="step-desc" id="m2-s4-desc">Estoy disponible por WhatsApp para acompañarte cuando lo necesites — no estás sola en el proceso.</div>
+          </div>
+        </li>
+      </ul>
+      <div class="modal-note" id="m2-note">"El cambio no se da de golpe — se construye con presencia, con intención y con alguien que te crea antes de que tú te creas."</div>
+      <button class="modal-cta" id="m2-cta" onclick="openCalendar(event)">Agendar sesión inicial</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL 3: TAROT READING -->
+<div class="modal-overlay" id="modal-3">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('modal-3')">✕</button>
+    <div class="modal-top">
+      <span class="modal-num">03</span>
+      <div class="modal-title" id="m3-title">Tarot Reading</div>
+      <div class="modal-subtitle" id="m3-sub">45 min · Preguntas & Energías</div>
+    </div>
+    <div class="modal-body">
+      <p class="modal-desc" id="m3-desc">El tarot no predice el futuro — lee energías. Es una herramienta de reflexión y autoconocimiento que te ayuda a ver con más claridad lo que ya sabes, pero quizás no te habías atrevido a mirar.</p>
+      <span class="modal-steps-label" id="m3-steps-label">Cómo fluye la lectura</span>
+      <ul class="modal-steps">
+        <li>
+          <span class="step-num">1</span>
+          <div class="step-content">
+            <div class="step-name" id="m3-s1-name">Apertura</div>
+            <div class="step-desc" id="m3-s1-desc">Creamos el espacio. Puedes llegar con preguntas específicas o simplemente con apertura — ambas son válidas.</div>
+          </div>
+        </li>
+        <li>
+          <span class="step-num">2</span>
+          <div class="step-content">
+            <div class="step-name" id="m3-s2-name">La Tirada</div>
+            <div class="step-desc" id="m3-s2-desc">Sacamos las cartas y leemos las energías que rodean tu momento actual — lo que está activo, lo que bloquea, lo que quiere emerger.</div>
+          </div>
+        </li>
+        <li>
+          <span class="step-num">3</span>
+          <div class="step-content">
+            <div class="step-name" id="m3-s3-name">Preguntas & Diálogo</div>
+            <div class="step-desc" id="m3-s3-desc">Conversamos sobre lo que aparece. Puedes preguntar lo que quieras — este es tu espacio.</div>
+          </div>
+        </li>
+        <li>
+          <span class="step-num">4</span>
+          <div class="step-content">
+            <div class="step-name" id="m3-s4-name">Cierre</div>
+            <div class="step-desc" id="m3-s4-desc">Cerramos con una reflexión final y te envío el resumen de la lectura después de la sesión.</div>
+          </div>
+        </li>
+      </ul>
+      <div class="modal-note" id="m3-note">"El tarot no te dice lo que va a pasar — te ayuda a ver lo que ya está pasando adentro."</div>
+      <button class="modal-cta" id="m3-cta" onclick="openCalendar(event)">Agendar lectura</button>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Ana Llanos</div>
+  <ul class="footer-links">
+    <li><a href="#services" id="footer-services">Te acompaño</a></li>
+    <li><a href="https://instagram.com/anamallanos" target="_blank">Instagram</a></li>
+    <li><a href="https://tiktok.com/@anamallanos" target="_blank">TikTok</a></li>
+    <li><a href="products/alana-website.html">Alana</a></li>
+    <li><a href="portfolio/index.html" target="_blank">Book</a></li>
+  </ul>
+  <div class="footer-copy">© 2026 Ana Llanos</div>
+</footer>
+
+<script>
+const CALENDAR_URL = 'YOUR_GOOGLE_CALENDAR_LINK_HERE';
+
+function openModal(id) {
+  document.getElementById(id).classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal(id) {
+  document.getElementById(id).classList.remove('open');
+  document.body.style.overflow = '';
+}
+// Close on overlay click
+document.querySelectorAll('.modal-overlay').forEach(overlay => {
+  overlay.addEventListener('click', function(e) {
+    if (e.target === this) closeModal(this.id);
+  });
+});
+
+function openCalendar(e) {
+  e.preventDefault();
+  if (CALENDAR_URL === 'YOUR_GOOGLE_CALENDAR_LINK_HERE') {
+    window.open('https://instagram.com/anamallanos', '_blank');
+  } else {
+    window.open(CALENDAR_URL, '_blank');
+  }
+}
+
+const translations = {
+  en: {
+    'nav-services': 'How I Guide You', 'nav-collabs': 'Collabs', 'nav-alana': 'Shop', 'nav-book': 'Book',
+    'hero-eyebrow': 'Lawyer · Coach · Creator',
+    'hero-tagline': 'I guide people toward the best version of themselves — in their relationship with food, money, the present moment, and the life they want to live.',
+    'hero-cta-1': 'How I Guide You', 'hero-cta-2': 'Brand Collaborations →',
+    'services-label': '02 — How I Guide You', 'services-title': "Let's go deeper.",
+    'service-name-1': 'Clarity Session',
+    'service-desc-1': "A one-on-one conversation + tarot reading to help you gain clarity on a decision, a season of life, or a question you've been sitting with.",
+    'service-includes-1': ['60-minute video call','Intuitive tarot reading','Deep conversation & reflection','Follow-up notes via DM'],
+    'service-price-1': 'DM to book', 'service-btn-1': 'Schedule',
+    'service-name-2': 'Conscious Life Coaching',
+    'service-desc-2': 'Ongoing support to help you design a life that feels intentional, aligned, and beautiful — on your own terms.',
+    'service-includes-2': ['Bi-weekly video calls','Personalized action plan','Habits, vision & alignment work','WhatsApp support between sessions'],
+    'service-price-2': 'DM to book', 'service-btn-2': 'Schedule',
+    'service-name-3': 'Tarot Reading',
+    'service-desc-3': 'An intuitive tarot session to help you access clarity, reflect on where you are, and reconnect with your own inner knowing.',
+    'service-includes-3': ['45-minute video call','Full tarot spread & reading','Space for questions & reflection','Summary sent after the session'],
+    'service-price-3': 'DM to book', 'service-btn-3': 'Schedule',
+    'collabs-label': '03 — Collaborations', 'collabs-title': "Let's create<br>together.",
+    'collabs-body': 'Travel, Wellness & Lifestyle content creator with an engaged audience of women ages 25–34 across Latin America and the US.',
+    'collabs-btn': 'View Media Kit',
+    'stat-1': 'Monthly Views', 'stat-2': 'Non-Follower Reach', 'stat-3': 'TikTok Followers', 'stat-4': 'Female Audience',
+    'deliv-1': 'Instagram Reel', 'deliv-2': 'Feed Post', 'deliv-3': '5–8 Instagram Stories', 'deliv-4': 'High-Quality Photos',
+    'alana-label': '04 — The Shop',
+    'alana-tagline': 'Journals, card games & books designed to help you grow — one conversation, one question, one page at a time.',
+    'alana-btn': 'Shop the Collection',
+    'alana-p1-name': 'Moon Journal', 'alana-p1-tag': 'Journal · PDF · $9.99',
+    'alana-p2-name': 'The Art of Knowing Us', 'alana-p2-tag': 'Card Game · PDF · $12.99',
+    'footer-services': 'Work with Me',
+  },
+  es: {
+    'nav-services': 'Te acompaño', 'nav-collabs': 'Colabs', 'nav-alana': 'Tienda', 'nav-book': 'Book',
+    'hero-eyebrow': 'Abogada · Coach · Creadora',
+    'hero-tagline': 'Acompaño a personas hacia su mejor versión — en su relación con el cuerpo y la comida, la abundancia, el presente y la vida que quieren construir.',
+    'hero-cta-1': 'Te acompaño', 'hero-cta-2': 'Colaboraciones →',
+    'services-label': '02 — Te acompaño', 'services-title': 'Vamos más profundo.',
+    'service-name-1': 'Sesión de Claridad',
+    'service-desc-1': 'Una conversación 1 a 1 + lectura de tarot para ganar claridad sobre una decisión, una etapa de vida o una pregunta que llevas cargando.',
+    'service-includes-1': ['Videollamada de 60 minutos','Lectura intuitiva de tarot','Conversación profunda y reflexión','Notas de seguimiento por DM'],
+    'service-price-1': 'Escríbeme para reservar', 'service-btn-1': 'Agendar',
+    'service-name-2': 'Coaching de Vida Consciente',
+    'service-desc-2': 'Acompañamiento continuo para diseñar una vida intencional, alineada y bonita — en tus propios términos.',
+    'service-includes-2': ['Videollamadas quincenales','Plan de acción personalizado','Trabajo de hábitos, visión y alineación','Soporte por WhatsApp entre sesiones'],
+    'service-price-2': 'Escríbeme para reservar', 'service-btn-2': 'Agendar',
+    'service-name-3': 'Lectura de Tarot',
+    'service-desc-3': 'Una sesión intuitiva de tarot para acceder a claridad, reflexionar sobre dónde estás y reconectarte con tu propio conocimiento interior.',
+    'service-includes-3': ['Videollamada de 45 minutos','Tirada completa de tarot','Espacio para preguntas y reflexión','Resumen enviado después de la sesión'],
+    'service-price-3': 'Escríbeme para reservar', 'service-btn-3': 'Agendar',
+    'collabs-label': '03 — Colaboraciones', 'collabs-title': 'Creemos<br>juntas.',
+    'collabs-body': 'Creadora de contenido de Travel, Wellness y Lifestyle con una audiencia comprometida de mujeres entre 25 y 34 años en Latinoamérica y EE.UU.',
+    'collabs-btn': 'Ver Media Kit',
+    'stat-1': 'Vistas Mensuales', 'stat-2': 'Alcance No Seguidores', 'stat-3': 'Seguidores TikTok', 'stat-4': 'Audiencia Femenina',
+    'deliv-1': 'Instagram Reel', 'deliv-2': 'Post en Feed', 'deliv-3': '5–8 Historias', 'deliv-4': 'Fotos de Alta Calidad',
+    'alana-label': '04 — La Tienda',
+    'alana-tagline': 'Diarios, juegos de cartas y libros diseñados para ayudarte a crecer — una conversación, una pregunta, una página a la vez.',
+    'alana-btn': 'Ver la Colección',
+    'alana-p1-name': 'Diario Lunar', 'alana-p1-tag': 'Diario · PDF · $9.99',
+    'alana-p2-name': 'Del Arte de Conocernos', 'alana-p2-tag': 'Juego de Cartas · PDF · $12.99',
+    'footer-services': 'Te acompaño',
+  }
+};
+
+function setLang(lang) {
+  const t = translations[lang];
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`).classList.add('active');
+
+  const html_ids = ['hero-tagline','collabs-title'];
+  const text_ids = Object.keys(t).filter(k => !html_ids.includes(k) && !k.includes('includes'));
+
+  text_ids.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = t[id];
+  });
+
+  html_ids.forEach(id => {
+    const el = document.getElementById(id);
+    if (el && t[id]) el.innerHTML = t[id];
+  });
+
+  ['1','2','3'].forEach(n => {
+    const ul = document.getElementById('service-includes-' + n);
+    if (ul && t['service-includes-' + n]) {
+      ul.innerHTML = t['service-includes-' + n].map(item => `<li>${item}</li>`).join('');
+    }
+  });
+}
+</script>
+</body>
+</html>

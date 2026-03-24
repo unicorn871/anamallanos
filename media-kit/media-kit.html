@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Media Kit — Ana Llanos @anamallanos</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Georgia', serif; background: #f5f0eb; color: #1a1a1a; }
+
+  @page {
+    size: A4;
+    margin: 0;
+  }
+
+  /* PAGE */
+  .page {
+    width: 210mm;
+    height: 279mm;
+    margin: 0 auto;
+    background: #f5f0eb;
+    position: relative;
+    overflow: hidden;
+    page-break-after: always;
+    break-after: page;
+  }
+
+  @media screen {
+    .page { margin: 0 auto 20px; box-shadow: 0 2px 20px rgba(0,0,0,0.1); }
+  }
+
+  /* PAGE 1 — COVER */
+  .cover {
+    display: flex;
+    flex-direction: row;
+    height: 279mm;
+  }
+  .cover-left {
+    width: 45%;
+    background: #1a1a1a;
+    color: #f5f0eb;
+    padding: 70px 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .cover-top-label {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #666;
+    margin-bottom: 40px;
+  }
+  .cover-name {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 72px;
+    font-weight: 800;
+    letter-spacing: -2px;
+    text-transform: uppercase;
+    line-height: 0.95;
+    margin-bottom: 24px;
+  }
+  .cover-handle {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    letter-spacing: 4px;
+    color: #888;
+  }
+  .cover-tagline {
+    font-size: 13px;
+    letter-spacing: 2px;
+    color: #666;
+    margin-top: 10px;
+    font-style: italic;
+  }
+  .cover-stats-row {
+    display: flex;
+    gap: 24px;
+    margin-top: 60px;
+    padding-top: 40px;
+    border-top: 1px solid #333;
+  }
+  .cover-stat {}
+  .cover-stat-num {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 22px;
+    font-weight: 800;
+    color: #f5f0eb;
+  }
+  .cover-stat-lbl {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #666;
+    margin-top: 4px;
+  }
+  .cover-right {
+    flex: 1;
+  }
+  .cover-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+  }
+
+  /* PAGE 2 — ABOUT + STATS */
+  .about-page {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: 279mm;
+  }
+  .about-left {
+    background: #1a1a1a;
+    color: #f5f0eb;
+    padding: 70px 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .section-label {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #888;
+    margin-bottom: 24px;
+  }
+  .section-label.dark { color: #888; }
+  .section-label.light { color: #bbb; }
+  .about-title {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 42px;
+    font-weight: 800;
+    text-transform: uppercase;
+    line-height: 1.1;
+    margin-bottom: 28px;
+  }
+  .about-text {
+    font-size: 15px;
+    line-height: 1.8;
+    color: #ccc;
+  }
+  .about-right {
+    background: #f5f0eb;
+    padding: 70px 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-top: 32px;
+  }
+  .stat-item {}
+  .stat-number {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 42px;
+    font-weight: 800;
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #888;
+    margin-top: 6px;
+  }
+  .stat-highlight .stat-number { color: #1a1a1a; }
+  .stat-star .stat-number { font-size: 52px; }
+
+  /* PAGE 3 — OFFER + PHOTO */
+  .offer-page {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: 279mm;
+  }
+  .offer-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+  .offer-right {
+    background: #f5f0eb;
+    padding: 70px 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .offer-title {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 38px;
+    font-weight: 800;
+    text-transform: uppercase;
+    line-height: 1.1;
+    margin-bottom: 32px;
+  }
+  .offer-package {
+    background: #1a1a1a;
+    color: #f5f0eb;
+    padding: 32px;
+    margin-bottom: 24px;
+  }
+  .package-title {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 13px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #aaa;
+    margin-bottom: 16px;
+  }
+  .package-item {
+    font-size: 14px;
+    line-height: 2;
+    color: #e0dbd4;
+  }
+  .package-item::before { content: "✦  "; color: #888; }
+  .offer-note {
+    font-size: 13px;
+    color: #888;
+    font-style: italic;
+    line-height: 1.7;
+  }
+
+  /* PAGE 4 — AUDIENCE + CONTACT */
+  .audience-page {
+    height: 279mm;
+    padding: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .audience-top {}
+  .audience-title {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 54px;
+    font-weight: 800;
+    text-transform: uppercase;
+    line-height: 1;
+    margin-bottom: 50px;
+  }
+  .audience-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin-top: 32px;
+  }
+  .audience-item {
+    background: #1a1a1a;
+    color: #f5f0eb;
+    padding: 32px 24px;
+  }
+  .audience-item:nth-child(even) {
+    background: #2e2e2e;
+  }
+  .audience-metric {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 28px;
+    font-weight: 800;
+  }
+  .audience-desc {
+    font-size: 12px;
+    letter-spacing: 1px;
+    color: #999;
+    margin-top: 6px;
+    text-transform: uppercase;
+  }
+  .countries-row {
+    display: flex;
+    gap: 2px;
+    margin-top: 2px;
+  }
+  .country-tag {
+    background: #e8e2da;
+    padding: 16px 20px;
+    flex: 1;
+    text-align: center;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  .contact-bottom {
+    border-top: 1px solid #ccc;
+    padding-top: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+  .contact-left .contact-title {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 28px;
+    font-weight: 800;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .contact-detail {
+    font-size: 15px;
+    color: #555;
+    line-height: 2;
+  }
+  .contact-right {
+    text-align: right;
+    font-size: 12px;
+    letter-spacing: 2px;
+    color: #aaa;
+    text-transform: uppercase;
+  }
+
+  @media print {
+    body { background: white; }
+    .page { margin: 0; box-shadow: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1: COVER -->
+<div class="page">
+  <div class="cover">
+    <div class="cover-left">
+      <div class="cover-top-label">Media Kit 2026</div>
+      <div class="cover-name">Ana<br>Llanos</div>
+      <div class="cover-handle">@anamallanos</div>
+      <div class="cover-tagline">Travel · Wellness · Lifestyle</div>
+      <div class="cover-stats-row">
+        <div class="cover-stat">
+          <div class="cover-stat-num">243K+</div>
+          <div class="cover-stat-lbl">Monthly Views</div>
+        </div>
+        <div class="cover-stat">
+          <div class="cover-stat-num">4.4K</div>
+          <div class="cover-stat-lbl">Instagram</div>
+        </div>
+        <div class="cover-stat">
+          <div class="cover-stat-num">33K+</div>
+          <div class="cover-stat-lbl">TikTok</div>
+        </div>
+      </div>
+    </div>
+    <div class="cover-right">
+      <img src="foto1.png" class="cover-photo" alt="Ana Llanos">
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 2: ABOUT + STATS -->
+<div class="page">
+  <div class="about-page">
+    <div class="about-left">
+      <div class="section-label light">About</div>
+      <div class="about-title">Who<br>I Am</div>
+      <p class="about-text">
+        I'm Ana — a travel, wellness and lifestyle content creator based in Colombia.<br><br>
+        I create aesthetic and authentic content that inspires women to explore the world while living with intention: moving their bodies, nourishing their minds, and choosing beauty in the everyday.<br><br>
+        My content blends elegant travel experiences, mindful living, and real moments — curated for women who value quality and a life well-lived.
+      </p>
+    </div>
+    <div class="about-right">
+      <div class="section-label dark">Numbers</div>
+      <div class="stats-grid">
+        <div class="stat-item stat-star">
+          <div class="stat-number">243K+</div>
+          <div class="stat-label">Monthly<br>Instagram Views</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">4.4K</div>
+          <div class="stat-label">Instagram<br>Followers</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">33K+</div>
+          <div class="stat-label">TikTok<br>Followers</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">70%</div>
+          <div class="stat-label">Female<br>Audience</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 3: OFFER + PHOTO -->
+<div class="page">
+  <div class="offer-page">
+    <img src="foto2.png" class="offer-photo" alt="Ana Llanos">
+    <div class="offer-right">
+      <div class="section-label dark">Collaboration</div>
+      <div class="offer-title">What<br>I Offer</div>
+      <div class="offer-package">
+        <div class="package-title">Content Package — Canje / Gifting</div>
+        <div class="package-item">1 Reel in feed (aesthetic, edited)</div>
+        <div class="package-item">5 photos living the experience — me in your space</div>
+        <div class="package-item">3–5 Stories with tag & mention</div>
+        <div class="package-item">Brand usage rights (UGC)</div>
+      </div>
+      <p class="offer-note">
+        Authentic content showing real people enjoying your space — ideal for campaigns, website, and social media.
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 4: AUDIENCE + CONTACT -->
+<div class="page">
+  <div class="audience-page">
+    <div class="audience-top">
+      <div class="section-label dark">Audience</div>
+      <div class="audience-title">Who<br>I Reach</div>
+      <div class="audience-grid">
+        <div class="audience-item">
+          <div class="audience-metric">25–34</div>
+          <div class="audience-desc">Primary Age Range</div>
+        </div>
+        <div class="audience-item">
+          <div class="audience-metric">70%</div>
+          <div class="audience-desc">Female</div>
+        </div>
+        <div class="audience-item">
+          <div class="audience-metric">243K+</div>
+          <div class="audience-desc">Monthly Reach</div>
+        </div>
+      </div>
+      <div class="countries-row">
+        <div class="country-tag">Colombia</div>
+        <div class="country-tag">México</div>
+        <div class="country-tag">Argentina</div>
+        <div class="country-tag">USA</div>
+      </div>
+    </div>
+    <div class="contact-bottom">
+      <div class="contact-left">
+        <div class="contact-title">Let's Work<br>Together</div>
+        <div class="contact-detail">
+          anamallanos@gmail.com<br>
+          @anamallanos
+        </div>
+      </div>
+      <div class="contact-right">
+        Travel · Wellness<br>Lifestyle · Colombia
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
