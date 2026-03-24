@@ -421,6 +421,8 @@
   .service-btn:hover { background: var(--sand); }
 
   .service-card { cursor: pointer; }
+  .service-card--alt { background: var(--cream); }
+  .service-card--alt:hover { background: var(--ink); }
 
   /* ── MODAL ── */
   .modal-overlay {
@@ -862,7 +864,7 @@
     </div>
     <div class="services-grid">
 
-      <div class="service-card" style="background:var(--cream);" onclick="openModal('modal-1')">
+      <div class="service-card service-card--alt" onclick="openModal('modal-1')">
         <span class="service-symbol">◇</span>
         <span class="service-num">01</span>
         <span class="service-tag" id="service-tag-1">Sesión única · 60 min</span>
@@ -898,7 +900,7 @@
         </div>
       </div>
 
-      <div class="service-card" style="background:var(--cream);" onclick="openModal('modal-3')">
+      <div class="service-card service-card--alt" onclick="openModal('modal-3')">
         <span class="service-symbol">✦</span>
         <span class="service-num">03</span>
         <span class="service-tag" id="service-tag-3">Lectura · 45 min</span>
