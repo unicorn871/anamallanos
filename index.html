@@ -116,9 +116,9 @@
     position: absolute;
     top: 120px;
     left: 56px;
-    font-size: 9px;
+    font-size: 11px;
     letter-spacing: 4px;
-    color: var(--sand);
+    color: var(--sand-dark, #A0856A);
     text-transform: uppercase;
   }
 
@@ -212,11 +212,11 @@
   .section-pad { padding: 120px 56px; }
 
   .label {
-    font-size: 9px;
+    font-size: 11px;
     font-weight: 400;
     letter-spacing: 5px;
     text-transform: uppercase;
-    color: var(--sand);
+    color: #A0856A;
     margin-bottom: 16px;
     display: block;
   }
@@ -259,7 +259,7 @@
   }
 
   .service-card {
-    background: var(--cream);
+    background: var(--white);
     padding: 56px 48px;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -808,7 +808,7 @@
     .collabs-inner { padding: 0; }
     .alana-section { padding: 60px 20px; }
     .section-pad { padding: 60px 20px; }
-    .lang-toggle { display: none; }
+    .lang-toggle { display: flex; }
   }
 </style>
 </head>
@@ -821,7 +821,7 @@
     <li><a href="#services" id="nav-services" onclick="closeMenu()">Te acompaño</a></li>
     <li><a href="#collabs" id="nav-collabs" onclick="closeMenu()">Colabs</a></li>
     <li><a href="#alana" id="nav-alana" onclick="closeMenu()">Tienda</a></li>
-    <li><a href="portfolio/index.html" target="_blank" id="nav-book">Book</a></li>
+    <li><a href="portfolio/index.html" target="_blank" id="nav-book">Photobook</a></li>
   </ul>
   <div class="lang-toggle">
     <button class="lang-btn active" onclick="setLang('es')">ES</button>
@@ -862,7 +862,7 @@
     </div>
     <div class="services-grid">
 
-      <div class="service-card" onclick="openModal('modal-1')">
+      <div class="service-card" style="background:var(--cream);" onclick="openModal('modal-1')">
         <span class="service-symbol">◇</span>
         <span class="service-num">01</span>
         <span class="service-tag" id="service-tag-1">Sesión única · 60 min</span>
@@ -898,7 +898,7 @@
         </div>
       </div>
 
-      <div class="service-card" onclick="openModal('modal-3')">
+      <div class="service-card" style="background:var(--cream);" onclick="openModal('modal-3')">
         <span class="service-symbol">✦</span>
         <span class="service-num">03</span>
         <span class="service-tag" id="service-tag-3">Lectura · 45 min</span>
