@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Del arte de conocernos — Alana · By Ana Llanos</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+@page { size: 3.5in 5in; margin: 0; }
+
+@media screen { .card { zoom: 1.45; } body { gap: 0.45in !important; } }
+@media print { .card { zoom: 1 !important; } }
+
+body {
+  background: #f0f0f0;
+  font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+}
+
+.card {
+  width: 3.5in;
+  height: 5in;
+  overflow: hidden;
+  page-break-after: always;
+  break-after: page;
+  position: relative;
+}
+
+/* ─── COVER ─────────────────────────────────── */
+.cover {
+  background: #F5F2EE;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0;
+}
+
+.cover-top {
+  padding: 0.28in 0.3in 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.cover-tag {
+  display: inline-block;
+  background: #111;
+  color: #F5F2EE;
+  font-size: 5.5pt;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 5px 10px;
+  border-radius: 100px;
+  margin-bottom: 0.2in;
+}
+
+.cover-title {
+  font-size: 28pt;
+  font-weight: 900;
+  color: #111;
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+  margin-bottom: 0.16in;
+}
+
+.cover-sub {
+  font-size: 7.5pt;
+  font-weight: 400;
+  color: #666;
+  line-height: 1.6;
+  max-width: 2.5in;
+}
+
+.cover-bottom {
+  height: 0.65in;
+  display: flex;
+  align-items: stretch;
+}
+
+.cover-stripe {
+  flex: 1;
+}
+
+/* ─── INSTRUCTIONS ───────────────────────────── */
+.instructions {
+  background: #111;
+  padding: 0.3in;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.instr-eyebrow {
+  font-size: 5.5pt;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #ffffff50;
+  margin-bottom: 0.1in;
+}
+
+.instr-title {
+  font-size: 17pt;
+  font-weight: 900;
+  color: #fff;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  margin-bottom: 0.18in;
+}
+
+.instr-body {
+  font-size: 7.5pt;
+  font-weight: 400;
+  color: #ffffff70;
+  line-height: 1.7;
+  margin-bottom: 0.18in;
+  flex: 1;
+}
+
+.instr-sep { width: 100%; height: 1px; background: #ffffff15; margin-bottom: 0.16in; }
+
+.instr-levels-label {
+  font-size: 5.5pt;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #ffffff35;
+  margin-bottom: 0.11in;
+}
+
+.level-row { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 11px; }
+
+.lvl-num {
+  font-size: 7pt;
+  font-weight: 900;
+  color: #ffffff30;
+  padding-top: 1px;
+  width: 14px;
+  flex-shrink: 0;
+}
+
+.lvl-info {}
+
+.lvl-name {
+  font-size: 7.5pt;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 2px;
+}
+
+.lvl-desc {
+  font-size: 6.5pt;
+  font-weight: 400;
+  color: #ffffff50;
+  line-height: 1.45;
+}
+
+.instr-footer {
+  margin-top: 0.1in;
+  font-size: 5.5pt;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #ffffff25;
+}
+
+/* ─── CAT INTRO ───────────────────────────────── */
+.cat-intro {
+  display: flex;
+  flex-direction: column;
+}
+
+.cat-intro-header {
+  flex-shrink: 0;
+  padding: 0.28in 0.28in 0.22in;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  position: relative;
+  overflow: hidden;
+}
+
+.cat-header-circle {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.15);
+}
+
+.cat-intro-num {
+  font-size: 5.5pt;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 7px;
+}
+
+.cat-intro-name {
+  font-size: 25pt;
+  font-weight: 900;
+  color: #fff;
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+}
+
+.cat-intro-body {
+  flex: 1;
+  background: #F5F2EE;
+  padding: 0.22in 0.28in;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.cat-why-label {
+  font-size: 5.5pt;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 7px;
+}
+
+.cat-why-text {
+  font-size: 7.5pt;
+  font-weight: 400;
+  color: #333;
+  line-height: 1.65;
+  flex: 1;
+}
+
+.cat-count {
+  font-size: 5.5pt;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #999;
+  margin-top: 0.1in;
+}
+
+/* ─── QUESTION CARD ───────────────────────────── */
+.q-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.q-card-head {
+  flex-shrink: 0;
+  padding: 0.2in 0.26in 0.18in;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+}
+
+.q-head-circle {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.12);
+  pointer-events: none;
+}
+
+.q-cat-label {
+  font-size: 5.5pt;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.75);
+}
+
+.q-level-tag {
+  font-size: 5.5pt;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.45);
+}
+
+.q-card-body {
+  flex: 1;
+  background: #F5F2EE;
+  padding: 0.2in 0.26in 0.18in;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.q-text {
+  font-size: 13pt;
+  font-weight: 800;
+  color: #111;
+  line-height: 1.3;
+  letter-spacing: -0.025em;
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.q-psych-block {
+  border-top: 1px solid #ddd;
+  padding-top: 9px;
+  margin-top: 9px;
+}
+
+.q-concept {
+  font-size: 5.5pt;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.q-psych-text {
+  font-size: 6.5pt;
+  font-weight: 400;
+  color: #555;
+  line-height: 1.55;
+}
+
+/* ─── CARD BACK ───────────────────────────────── */
+.card-back {
+  background: #111;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.back-grid {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  opacity: 0.06;
+  background-image:
+    linear-gradient(#fff 1px, transparent 1px),
+    linear-gradient(90deg, #fff 1px, transparent 1px);
+  background-size: 0.3in 0.3in;
+}
+
+.back-center {
+  position: relative;
+  text-align: center;
+}
+
+/* ─── CLOSING ─────────────────────────────────── */
+.closing {
+  background: #F5F2EE;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0;
+}
+
+.closing-body {
+  flex: 1;
+  padding: 0.3in;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.closing-quote {
+  font-size: 16pt;
+  font-weight: 900;
+  color: #111;
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+  margin-bottom: 0.18in;
+}
+
+.closing-bottom {
+  height: 0.55in;
+  display: flex;
+  align-items: stretch;
+}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script>
+const cats = {
+  amigos:  { color: '#1A6B3C', label: 'Amigos',         num: '01', count: '13 preguntas' },
+  familia: { color: '#B84E00', label: 'Familia',         num: '02', count: '13 preguntas' },
+  pareja:  { color: '#B01D5B', label: 'Pareja',          num: '03', count: '13 preguntas' },
+  contigo: { color: '#3B1FA8', label: 'Contigo misma',   num: '04', count: '13 preguntas' },
+};
+
+const catData = [
+  {
+    id: 'amigos',
+    why: `La psicología del apego muestra que las amistades elegidas son el primer espacio donde aprendemos a confiar fuera de la familia. Las personas que elegimos para estar cerca nos dicen más sobre quiénes somos que cualquier test de personalidad.`,
+    cards: [
+      { level:1, q:'¿Cuál es el recuerdo más feliz que tenemos juntos?',
+        concept:'Memoria relacional', psych:'Recordar juntos activa la reconsolidación de memoria — fortalece el vínculo y reconstruye la historia compartida.' },
+      { level:1, q:'¿Qué es lo que más admiras de mí? ¿Y lo que menos entiendes?',
+        concept:'Admiración y ambivalencia', psych:'Nombrar la admiración en voz alta activa circuitos de recompensa en quien la recibe. La confusión honesta crea más cercanía que la aprobación constante.' },
+      { level:1, q:'¿Hay algo que siempre hayas querido preguntarme pero no te atreviste?',
+        concept:'Inhibición comunicativa', psych:'Lo que no preguntamos ocupa espacio mental silencioso. Abrir ese espacio reduce la distancia invisible entre dos personas.' },
+      { level:1, q:'¿Cuándo fue el momento en que sentiste que éramos realmente amigos?',
+        concept:'Punto de inflexión relacional', psych:'Todos los vínculos tienen un momento fundador. Nombrarlo activa la memoria episódica compartida y refuerza la identidad del "nosotros".' },
+      { level:2, q:'¿Crees que la amistad puede sobrevivir cuando nos convertimos en personas muy distintas?',
+        concept:'Identidad y cambio relacional', psych:'Las amistades que se sostienen en el cambio requieren renegociar la relación, no solo recordar quiénes fuimos — eso implica una madurez emocional poco frecuente.' },
+      { level:2, q:'¿Hay algo que yo haya hecho que te lastimó y que nunca me dijiste?',
+        concept:'Heridas relacionales silentes', psych:'Las heridas no expresadas no desaparecen — se almacenan como resentimiento o distancia. Nombrarlas abre la posibilidad del cierre emocional.' },
+      { level:2, q:'¿Qué crees que nadie sabe de ti, excepto yo?',
+        concept:'Intimidad y auto-revelación', psych:'La auto-revelación selectiva es la base de la intimidad real. Lo que elegimos compartir solo con alguien define el nivel de confianza de ese vínculo.' },
+      { level:2, q:'¿Cuándo fue la última vez que lloraste de verdad? ¿Por qué?',
+        concept:'Vulnerabilidad como vínculo', psych:'Brené Brown encontró que la vulnerabilidad es el estado emocional requerido para la conexión genuina. No se puede tener cercanía real sin ella.' },
+      { level:2, q:'¿Hay algo en tu vida que estás evitando enfrentar?',
+        concept:'Evitación experiencial', psych:'La evitación tiene un costo acumulado: la energía que usamos en evitar algo supera casi siempre la que usaríamos para enfrentarlo.' },
+      { level:3, q:'Si pudieras cambiar una sola decisión del pasado, ¿cuál sería?',
+        concept:'Remordimiento y valores', psych:'Los remordimientos revelan la jerarquía de valores que una persona tiene hoy. Lo que habríamos cambiado dice más sobre quiénes somos que lo que sí hicimos.' },
+      { level:3, q:'¿Qué es lo que más temes perder en esta etapa de tu vida?',
+        concept:'Miedo a la pérdida', psych:'El miedo a la pérdida es proporcional al valor que le damos a algo. Nombrarlo no lo acerca — pero nos pone en contacto con lo que de verdad importa.' },
+      { level:3, q:'¿Quién eres cuando nadie te está mirando?',
+        concept:'Yo público vs. yo privado', psych:'La distancia entre quien somos en público y en privado mide el nivel de autenticidad — y el costo emocional que pagamos por la diferencia.' },
+      { level:3, q:'¿Crees que estás viviendo la vida que realmente quieres?',
+        concept:'Disonancia vital', psych:'Viktor Frankl llamó "vacío existencial" a la sensación de vivir una vida que no sentimos propia. Reconocer la disonancia es el primer paso para cambiarla.' },
+    ]
+  },
+  {
+    id: 'familia',
+    why: `La teoría de sistemas familiares de Murray Bowen muestra que todos llevamos los patrones emocionales de nuestra familia de origen. Solo podemos transformar lo que primero somos capaces de ver y nombrar.`,
+    cards: [
+      { level:1, q:'¿Qué tradición familiar valoras más y por qué?',
+        concept:'Rituales y pertenencia', psych:'Los rituales familiares funcionan como anclas de identidad. Participar en ellos —incluso de adultos— activa el sentido de pertenencia y continuidad.' },
+      { level:1, q:'¿Hay un recuerdo de la infancia que siempre te hace sonreír?',
+        concept:'Memoria positiva y resiliencia', psych:'Los recuerdos positivos de la infancia son factores protectores reales: se asocian con mayor resiliencia y regulación emocional en la vida adulta.' },
+      { level:1, q:'¿Qué cualidad de un familiar desearías tener tú?',
+        concept:'Modelado familiar', psych:'Los modelos de rol familiares se internalizan desde la infancia y moldean nuestras aspiraciones sin que lo notemos. Nombrarlos los hace conscientes.' },
+      { level:1, q:'¿Cuál es el consejo familiar que más has aplicado en tu vida?',
+        concept:'Transmisión intergeneracional', psych:'La sabiduría heredada opera como heurísticos mentales: tomamos decisiones siguiendo aprendizajes familiares sin ni siquiera reconocerlos como tales.' },
+      { level:2, q:'¿Hay algo que tus padres nunca supieron de ti?',
+        concept:'Secretos y soledad familiar', psych:'Guardar secretos en la familia nos protege de juicios, pero crea una soledad estructural: estar presente y al mismo tiempo no ser del todo conocidos.' },
+      { level:2, q:'¿Sientes que en tu familia se habla de lo que realmente importa?',
+        concept:'Comunicación emocional familiar', psych:'Las familias con baja comunicación emocional no son frías — simplemente no tienen el lenguaje. Y ese lenguaje se puede aprender en cualquier momento.' },
+      { level:2, q:'¿Cuándo fue la última vez que le dijiste a alguien de tu familia que lo amabas?',
+        concept:'Expresión afectiva', psych:'Las culturas latinas tienen alta calidez no verbal pero frecuentemente baja expresión verbal del afecto. Decirlo en palabras crea un tipo de conexión distinto.' },
+      { level:2, q:'¿Hay algo que te hubiera gustado que fuera diferente en tu crianza?',
+        concept:'Duelo de la infancia idealizada', psych:'Reconocer lo que nos faltó no significa culpar a los padres — significa procesar ese duelo para no seguir buscándolo inconscientemente en otras relaciones.' },
+      { level:2, q:'¿Qué patrón familiar reconoces en ti que quieres romper?',
+        concept:'Patrones intergeneracionales', psych:'Los patrones se transmiten porque son la única forma que conocimos de relacionarnos. Nombrarlos es el primer acto de ruptura consciente.' },
+      { level:3, q:'¿Qué tan bien conoces a tus padres como personas, más allá de su rol?',
+        concept:'Diferenciación del yo', psych:'Bowen identificó la "diferenciación del yo" como la capacidad de ver a los padres como personas independientes de su función. Es un marcador de madurez emocional.' },
+      { level:3, q:'¿Hay algo que sientas que no has podido perdonar dentro de tu familia?',
+        concept:'Perdón y liberación', psych:'El perdón no es un acto moral — es un proceso psicológico de liberación propia. No requiere reconciliación ni excusar al otro. Solo soltar la carga.' },
+      { level:3, q:'¿Qué quieres que las próximas generaciones aprendan de ti?',
+        concept:'Legado consciente', psych:'Pensar en el legado nos desplaza del corto al largo plazo. Activa el procesamiento de valores — nos fuerza a distinguir lo urgente de lo que de verdad importa.' },
+      { level:3, q:'¿Qué significa "familia" para ti, más allá de la sangre?',
+        concept:'Familia elegida', psych:'La investigación sobre vínculos protectores muestra que la calidad de los lazos importa más que el origen. La familia elegida puede ser tan sanadora —o más— que la biológica.' },
+    ]
+  },
+  {
+    id: 'pareja',
+    why: `La teoría del apego (Bowlby, Ainsworth) muestra que la pareja romántica activa los mismos circuitos del apego temprano. En ninguna otra relación somos tan visibles — ni tan vulnerables. Y en esa vulnerabilidad vive la posibilidad de sanar.`,
+    cards: [
+      { level:1, q:'¿Cuál fue el primer momento en que sentiste algo por mí?',
+        concept:'Origen del vínculo', psych:'Los orígenes del amor se almacenan en memoria episódica y funcionan como ancla emocional. Revisitarlos juntos reconstruye el sentido de la relación.' },
+      { level:1, q:'¿Qué es lo que más te gusta de estar conmigo?',
+        concept:'Amplificación positiva', psych:'Gottman encontró que las parejas estables tienen una ratio de 5:1 entre interacciones positivas y negativas. Nombrar lo positivo no es ingenuo — es estratégico.' },
+      { level:1, q:'¿Cuál es tu recuerdo favorito de nosotros?',
+        concept:'Memoria afectiva compartida', psych:'Las parejas construyen una "base de datos emocional" compartida. Acceder a ella con regularidad fortalece la identidad del vínculo.' },
+      { level:1, q:'¿Qué pequeña cosa de mi parte te hace sentir amado/a?',
+        concept:'Lenguajes del amor', psych:'Chapman identificó 5 lenguajes del amor. La mayoría de los conflictos no son de falta de amor — son de idiomas distintos que no nos hemos enseñado.' },
+      { level:2, q:'¿Hay algo que necesitas de esta relación y que aún no me has pedido?',
+        concept:'Necesidades no expresadas', psych:'Las necesidades que callamos no desaparecen — se convierten en expectativas implícitas que el otro no puede cumplir porque ni siquiera las conoce.' },
+      { level:2, q:'¿Cuándo te has sentido más solo/a estando conmigo?',
+        concept:'Soledad relacional', psych:'La soledad dentro de una pareja es psicológicamente más pesada que la soledad física — porque tiene una dimensión de traición a la promesa de la compañía.' },
+      { level:2, q:'¿Hay algo de nuestro futuro que te da miedo?',
+        concept:'Ansiedad anticipatoria', psych:'Hablar del miedo en pareja lo convierte en territorio compartido. Lo que permanece sin nombrar se procesa en soledad y se convierte en distancia.' },
+      { level:2, q:'¿Qué parte de ti sientes que yo todavía no conozco bien?',
+        concept:'Partes no vistas', psych:'La Ventana de Johari muestra que todos tenemos áreas privadas incluso en relaciones cercanas. Revelarlas reduce la soledad interior y profundiza el vínculo.' },
+      { level:2, q:'¿Hay algo que hayas sacrificado por esta relación que todavía pesa?',
+        concept:'Sacrificios relacionales', psych:'Los sacrificios son inevitables en toda relación. El problema no es hacerlos — es hacerlos sin nombrarlos. El resentimiento crece en el silencio.' },
+      { level:3, q:'¿Qué me enseñaste sobre el amor que no sabía antes?',
+        concept:'Crecimiento post-relacional', psych:'Cada relación nos modifica neurológicamente — cambia cómo procesamos el apego. Reconocerlo convierte la experiencia en aprendizaje consciente.' },
+      { level:3, q:'¿Cómo quieres que te recuerde si algún día ya no estamos juntos?',
+        concept:'Legado relacional', psych:'Pensar en el legado que deseamos activa el procesamiento de valores. Nos hace conscientes de lo que de verdad queremos construir —no solo de lo que tenemos.' },
+      { level:3, q:'¿Crees que el amor se elige o se siente? ¿Y tú qué eliges?',
+        concept:'Amor como emoción y decisión', psych:'La neurociencia confirma: el amor romántico activa regiones de recompensa (emoción) y de juicio (decisión). Se siente primero — y se sostiene eligiéndolo después.' },
+      { level:3, q:'¿Cuál es la versión de ti que quieres construir conmigo?',
+        concept:'Michelangelo Effect', psych:'El "Efecto Michelangelo" describe cómo las parejas se esculpen mutuamente — acercándonos o alejándonos de nuestro yo ideal. Nombrarlo es elegirlo de forma consciente.' },
+    ]
+  },
+  {
+    id: 'contigo',
+    why: `La psicología humanista (Maslow, Rogers) pone la autoconciencia como base del crecimiento. La relación con una misma es la más larga que tendremos — y también la más descuidada. Conocerse con honestidad, sin juicio, cambia todo lo demás.`,
+    cards: [
+      { level:1, q:'¿Qué es lo que más te gusta de ti?',
+        concept:'Autocompasión activa', psych:'Kristin Neff demostró que la autocompasión —no la autoexigencia— es el predictor más fuerte de bienestar. Reconocer lo propio con amor es el primer paso.' },
+      { level:1, q:'¿Cuál ha sido tu mayor logro que casi nadie conoce?',
+        concept:'Logros internos', psych:'Los logros externos son visibles; los internos —superar un miedo, cambiar un patrón— son los más transformadores. Nombrarlos los hace reales.' },
+      { level:1, q:'¿Qué actividad te hace perder la noción del tiempo?',
+        concept:'Estado de flujo', psych:'Csikszentmihalyi identificó el "flujo" como el estado de máximo bienestar y rendimiento. Saber dónde lo experimentas es saber dónde vive tu propósito.' },
+      { level:1, q:'¿Qué frase te describe mejor en este momento de tu vida?',
+        concept:'Narrativa de identidad', psych:'Las palabras que usamos para describirnos no son pasivas — moldean la identidad. La narrativa que elegimos sobre nosotros mismos se convierte en lo que creemos ser.' },
+      { level:2, q:'¿Hay una versión de ti que abandonaste en el camino? ¿La extrañas?',
+        concept:'Identidades no integradas', psych:'Jung llamó "sombra" a las partes de nosotros que reprimimos o abandonamos. Reintegrarlas —no suprimirlas— es la base de una psicología más completa.' },
+      { level:2, q:'¿Cuándo fue la última vez que te priorizaste sin sentirte culpable?',
+        concept:'Culpa y condicionamiento', psych:'La culpa al priorizarse es una respuesta condicionada, no una verdad moral. En su base suele haber un mensaje aprendido de que las necesidades propias son un problema.' },
+      { level:2, q:'¿Qué es lo que más te cuesta aceptar de ti misma?',
+        concept:'Integración de la sombra', psych:'Lo que más nos cuesta aceptar suele ser lo que más energía psíquica consume. Aceptarlo no significa aprobarlo — significa dejar de gastar energía en negarlo.' },
+      { level:2, q:'¿Hay algo que te dices a ti misma que nunca le dirías a alguien que amas?',
+        concept:'Diálogo interno autocrítico', psych:'La voz interna crítica se forma en la infancia a partir de voces externas internalizadas. El primer paso para cambiarla es reconocerla como una voz aprendida, no una verdad.' },
+      { level:2, q:'¿Qué es lo que más te asusta de crecer?',
+        concept:'Ansiedad de crecimiento', psych:'Maslow identificó la "ansiedad de crecimiento": el miedo a abandonar lo conocido —incluso cuando nos limita— porque lo nuevo todavía no existe como realidad.' },
+      { level:3, q:'¿Qué tan diferente eres de quien pensabas que serías a esta edad?',
+        concept:'Brecha del yo esperado', psych:'La psicología del self llama "yo ideal" a la versión que esperábamos ser. La distancia con el yo real puede procesarse como fracaso — o como información sobre lo que de verdad importamos.' },
+      { level:3, q:'¿Qué parte de ti todavía está sanando?',
+        concept:'Post-traumatic growth', psych:'La psicología positiva identifica el "crecimiento post-traumático": la capacidad de crecer a partir de las heridas. Nombrar lo que sana revela la dirección del movimiento.' },
+      { level:3, q:'¿Qué significa para ti ser feliz?',
+        concept:'Definición personal de bienestar', psych:'Sonja Lyubomirsky encontró que el 40% del bienestar depende de acciones intencionales — pero primero hay que saber qué es la felicidad para cada uno.' },
+      { level:3, q:'Si pudieras hablarle a tu yo de hace diez años, ¿qué le dirías?',
+        concept:'Perspectiva temporal y sabiduría', psych:'Este ejercicio activa la perspectiva temporal y la autocompasión. La sabiduría que le daríamos a nuestro yo pasado suele ser exactamente la que necesitamos hoy.' },
+    ]
+  }
+];
+
+const levelNames = ['', 'SUPERFICIE', 'PROFUNDO', 'ALMA'];
+
+function headCircles(color) {
+  return `
+    <div class="cat-header-circle" style="width:2.8in;height:2.8in;top:-1.4in;right:-1.4in;border-color:rgba(255,255,255,0.12)"></div>
+    <div class="cat-header-circle" style="width:1.5in;height:1.5in;bottom:-0.5in;left:0.1in;border-color:rgba(255,255,255,0.08)"></div>
+  `;
+}
+
+let html = '';
+
+// ── COVER ────────────────────────────────────────
+const stripes = Object.values(cats).map(c => `<div class="cover-stripe" style="background:${c.color}"></div>`).join('');
+html += `<div class="card cover">
+  <div class="cover-top">
+    <div class="cover-tag">Juego de conversación · 52 cartas</div>
+    <div class="cover-title">Del arte<br/>de cono-<br/>cernos</div>
+    <div class="cover-sub">Preguntas basadas en psicología para las conversaciones que sí importan.</div>
+  </div>
+  <div style="padding:0 0.3in 0.14in;display:flex;align-items:center;gap:8px">
+    <div style="width:22px;height:1px;background:#ccc"></div>
+    <div style="font-size:6pt;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:#999">Alana · By Ana Llanos</div>
+  </div>
+  <div class="cover-bottom">${stripes}</div>
+</div>`;
+
+// ── INSTRUCTIONS ─────────────────────────────────
+html += `<div class="card instructions">
+  <div class="instr-eyebrow">Cómo jugar</div>
+  <div class="instr-title">No hay<br/>respuestas<br/>incorrectas.</div>
+  <div class="instr-body">
+    Baraja las cartas. Toma una al azar o elige la categoría que sientas más en este momento.<br/><br/>
+    Lee la pregunta en voz alta. Responde con honestidad. Escucha sin interrumpir.<br/><br/>
+    Dale espacio a cada respuesta antes de pasar a la siguiente. Las mejores conversaciones no se apuran.
+  </div>
+  <div class="instr-sep"></div>
+  <div class="instr-levels-label">Los tres niveles</div>
+  <div class="level-row">
+    <div class="lvl-num">01</div>
+    <div class="lvl-info">
+      <div class="lvl-name">Superficie</div>
+      <div class="lvl-desc">Para romper el hielo y entrar en calor.</div>
+    </div>
+  </div>
+  <div class="level-row">
+    <div class="lvl-num">02</div>
+    <div class="lvl-info">
+      <div class="lvl-name">Profundo</div>
+      <div class="lvl-desc">Para ir más adentro. Se pone real.</div>
+    </div>
+  </div>
+  <div class="level-row">
+    <div class="lvl-num">03</div>
+    <div class="lvl-info">
+      <div class="lvl-name">Alma</div>
+      <div class="lvl-desc">Para los valientes. Las preguntas que cambian algo.</div>
+    </div>
+  </div>
+  <div class="instr-footer">4 categorías · 52 preguntas · 1 conversación real</div>
+</div>`;
+
+// ── COLOR LEGEND ─────────────────────────────────
+html += `<div class="card" style="background:#0c0c1a;padding:0.28in 0.3in;display:flex;flex-direction:column;justify-content:space-between">
+  ${Object.entries(cats).map(([id,c])=>`
+    <div style="position:absolute;inset:0;pointer-events:none">
+      <div style="position:absolute;top:-0.5in;right:-0.3in;width:2.5in;height:2.5in;border-radius:50%;background:radial-gradient(circle,${c.color}12 0%,transparent 70%);filter:blur(0.2in)"></div>
+    </div>`).join('')}
+  <div style="position:relative">
+    <div style="font-size:5.5pt;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:#ffffff40;margin-bottom:0.09in;font-family:Inter,sans-serif">Guía de colores</div>
+    <div style="font-size:15pt;font-weight:900;color:#fff;line-height:1.1;letter-spacing:-0.03em;margin-bottom:0.18in">¿Qué significa<br/>cada color?</div>
+    <div style="width:100%;height:1px;background:#ffffff12;margin-bottom:0.18in"></div>
+    ${Object.values(cats).map(c=>`
+      <div style="display:flex;align-items:flex-start;gap:12px;margin-bottom:0.15in">
+        <div style="width:0.2in;height:0.2in;border-radius:50%;background:${c.color};flex-shrink:0;margin-top:2px"></div>
+        <div>
+          <div style="font-size:9pt;font-weight:800;color:#fff;letter-spacing:-0.01em;margin-bottom:2px;font-family:Inter,sans-serif">${c.label}</div>
+          <div style="font-size:6.5pt;color:#ffffff60;line-height:1.5;font-family:Inter,sans-serif">${
+            c.label==='Amigos' ? 'Las personas que elegimos para ser testigos de nuestra vida.' :
+            c.label==='Familia' ? 'Los vínculos que nos forman, aunque no siempre los elijamos.' :
+            c.label==='Pareja' ? 'El espejo más cercano y el espacio donde más crecemos.' :
+            'La relación más larga — y la más descuidada — de todas.'
+          }</div>
+        </div>
+      </div>`).join('')}
+  </div>
+  <div style="font-size:5pt;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:#ffffff20;font-family:Inter,sans-serif">01 SUPERFICIE · 02 PROFUNDO · 03 ALMA</div>
+</div>`;
+
+// ── CATEGORIES + CARDS ────────────────────────────
+catData.forEach(cat => {
+  const c = cats[cat.id];
+  const headH = '1.55in';
+
+  // Category intro
+  html += `<div class="card cat-intro">
+    <div class="cat-intro-header" style="background:${c.color};height:${headH}">
+      ${headCircles(c.color)}
+      <div class="cat-intro-num">${c.num} / ${c.label}</div>
+      <div class="cat-intro-name">${c.label}</div>
+    </div>
+    <div class="cat-intro-body">
+      <div>
+        <div class="cat-why-label" style="color:${c.color}">¿Por qué importa?</div>
+        <div class="cat-why-text">${cat.why}</div>
+      </div>
+      <div class="cat-count">${c.count} · 3 niveles</div>
+    </div>
+  </div>`;
+
+  // Question cards
+  cat.cards.forEach(card => {
+    const headHeight = card.level === 1 ? '0.85in' : card.level === 2 ? '0.95in' : '1.05in';
+    html += `<div class="card q-card">
+      <div class="q-card-head" style="background:${c.color};height:${headHeight}">
+        <div class="q-head-circle" style="width:2in;height:2in;top:-1in;right:-0.8in"></div>
+        <div class="q-cat-label">${c.label}</div>
+        <div class="q-level-tag">0${card.level} · ${levelNames[card.level]}</div>
+      </div>
+      <div class="q-card-body">
+        <div class="q-text">${card.q}</div>
+        <div class="q-psych-block">
+          <div class="q-concept" style="color:${c.color}">${card.concept}</div>
+          <div class="q-psych-text">${card.psych}</div>
+        </div>
+      </div>
+    </div>`;
+  });
+});
+
+// ── CARD BACK ─────────────────────────────────────
+const backStripes = Object.values(cats).map(c => `<div style="flex:1;background:${c.color}"></div>`).join('');
+html += `<div class="card card-back">
+  <div class="back-grid"></div>
+  <div class="back-center">
+    <div style="font-size:8pt;font-weight:900;letter-spacing:0.06em;color:#ffffff18;line-height:1.2;font-family:Inter,sans-serif;text-align:center">DEL ARTE DE<br/>CONOCERNOS</div>
+    <div style="width:18px;height:1px;background:#ffffff15;margin:10px auto"></div>
+    <div style="font-size:5.5pt;font-weight:700;letter-spacing:0.2em;color:#ffffff15;font-family:Inter,sans-serif;text-align:center">ALANA · BY ANA LLANOS</div>
+  </div>
+  <div style="position:absolute;bottom:0;left:0;right:0;height:0.18in;display:flex">${backStripes}</div>
+</div>`;
+
+// ── CLOSING ───────────────────────────────────────
+html += `<div class="card closing">
+  <div class="closing-body">
+    <div class="closing-quote">"Conocernos<br/>es el acto de amor<br/>más subestimado."</div>
+    <div style="display:flex;align-items:center;gap:8px">
+      <div style="width:22px;height:1px;background:#ccc"></div>
+      <div style="font-size:6pt;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:#999">Alana · By Ana Llanos</div>
+    </div>
+  </div>
+  <div class="closing-bottom">${stripes}</div>
+</div>`;
+
+document.getElementById('app').innerHTML = html;
+</script>
+</body>
+</html>

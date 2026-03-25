@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>The Art of Knowing Us — 1x · Alana · By Ana Llanos</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+@page { size: 8.5in 11in; margin: 0; }
+
+@media print {
+  .print-note { display: none !important; }
+  body { display: block !important; padding: 0 !important; gap: 0 !important; margin: 0 !important; }
+  #app { display: block !important; margin: 0 !important; padding: 0 !important; }
+}
+
+.sheet {
+  width: 8.5in;
+  height: 11in;
+  background: #FAF8F2;
+  page-break-after: always;
+  break-after: page;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4in;
+  flex-shrink: 0;
+}
+
+.sheet-row { display: flex; gap: 0.85in; }
+.card-empty { width: 3.5in; height: 5in; flex-shrink: 0; }
+
+body {
+  background: #E8E3DC;
+  padding: 0.3in;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3in;
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+.print-note {
+  width: 100%;
+  background: #3A3028;
+  color: #FAF8F2;
+  font-family: Inter, sans-serif;
+  font-size: 8.5pt;
+  padding: 10px 16px;
+  border-radius: 8px;
+  margin-bottom: 0.12in;
+}
+.print-note strong { color: #D4C0BC; }
+
+.card {
+  width: 3.5in;
+  height: 5in;
+  overflow: hidden;
+  position: relative;
+  flex-shrink: 0;
+  background: #FAF8F2;
+  transform: scale(2.2);
+  transform-origin: center center;
+}
+
+.card-border { position: absolute; top: 0.13in; left: 0.13in; right: 0.13in; bottom: 0.13in; border: 0.8px solid; pointer-events: none; z-index: 10; }
+.orn { position: absolute; width: 10px; height: 10px; z-index: 11; }
+.orn.tl { top: 0.08in; left: 0.08in; border-top: 1.2px solid; border-left: 1.2px solid; }
+.orn.tr { top: 0.08in; right: 0.08in; border-top: 1.2px solid; border-right: 1.2px solid; }
+.orn.bl { bottom: 0.08in; left: 0.08in; border-bottom: 1.2px solid; border-left: 1.2px solid; }
+.orn.br { bottom: 0.08in; right: 0.08in; border-bottom: 1.2px solid; border-right: 1.2px solid; }
+
+.card-layout { position: absolute; top: 0; left: 0; right: 0; bottom: 0; display: flex; flex-direction: column; }
+
+.cover-main { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0.3in 0.3in 0.18in; text-align: center; gap: 0.09in; }
+.cover-eyebrow { font-family: Inter, sans-serif; font-size: 5.5pt; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: #8A8078; }
+.h-rule { width: 28px; height: 1px; background: #C8C0B8; }
+.cover-title { font-size: 21pt; font-weight: 700; color: #1E1812; line-height: 1.1; letter-spacing: -0.01em; }
+.cover-title em { font-style: italic; font-weight: 400; }
+.cover-sub { font-family: Inter, sans-serif; font-size: 7pt; font-weight: 400; color: #6E6460; line-height: 1.6; max-width: 2.1in; }
+.cover-byline { font-family: Inter, sans-serif; font-size: 5.5pt; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: #8A8078; }
+.color-bar { height: 0.16in; display: flex; }
+.color-bar div { flex: 1; }
+
+.instr-wrap { flex: 1; padding: 0.24in 0.28in; display: flex; flex-direction: column; }
+.sect-eyebrow { font-family: Inter, sans-serif; font-size: 5pt; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: #8A8078; margin-bottom: 0.08in; }
+.instr-title { font-size: 16pt; font-weight: 700; color: #1E1812; line-height: 1.12; letter-spacing: -0.01em; margin-bottom: 0.13in; }
+.instr-title em { font-style: italic; font-weight: 400; }
+.thin-rule { width: 100%; height: 0.8px; background: #DDD8D2; margin-bottom: 0.12in; }
+.body-text { font-family: Inter, sans-serif; font-size: 6.5pt; font-weight: 400; color: #4A4038; line-height: 1.7; flex: 1; margin-bottom: 0.12in; }
+.lvl-section-label { font-family: Inter, sans-serif; font-size: 5pt; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #9A9088; margin-bottom: 0.09in; }
+.lrow { display: flex; align-items: flex-start; gap: 9px; margin-bottom: 9px; }
+.lnum { font-family: Inter, sans-serif; font-size: 6pt; font-weight: 700; color: #B8B0A8; padding-top: 1px; width: 14px; flex-shrink: 0; }
+.lname { font-size: 7.5pt; font-weight: 700; color: #1E1812; margin-bottom: 1px; }
+.ldesc { font-family: Inter, sans-serif; font-size: 6pt; color: #6E6460; line-height: 1.45; }
+.footer-label { margin-top: 0.09in; font-family: Inter, sans-serif; font-size: 4.8pt; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: #B8B0A8; }
+
+.cat-head { flex-shrink: 0; padding: 0.26in 0.26in 0.2in; display: flex; flex-direction: column; justify-content: flex-end; position: relative; overflow: hidden; }
+.cat-circle { position: absolute; border-radius: 50%; border: 1px solid rgba(255,255,255,0.3); }
+.cat-num { font-family: Inter, sans-serif; font-size: 5pt; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(255,255,255,0.65); margin-bottom: 5px; }
+.cat-name-big { font-size: 23pt; font-weight: 900; color: #fff; line-height: 0.95; letter-spacing: -0.02em; }
+.cat-name-big em { font-style: italic; font-weight: 400; }
+.cat-body-area { flex: 1; background: #FAF8F2; padding: 0.18in 0.26in; display: flex; flex-direction: column; justify-content: space-between; }
+.why-label { font-family: Inter, sans-serif; font-size: 5pt; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 6px; }
+.why-text { font-family: Inter, sans-serif; font-size: 7pt; color: #3A3028; line-height: 1.65; flex: 1; }
+.cat-count-label { font-family: Inter, sans-serif; font-size: 5pt; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: #B8B0A8; margin-top: 0.09in; }
+
+.q-head-strip { flex-shrink: 0; padding: 0.17in 0.24in 0.14in; display: flex; align-items: center; justify-content: space-between; }
+.q-label { font-family: Inter, sans-serif; font-size: 5.5pt; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.88); }
+.q-lvl-tag { font-family: Inter, sans-serif; font-size: 5.5pt; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.55); }
+.q-body-area { flex: 1; background: #FAF8F2; padding: 0.17in 0.24in 0.15in; display: flex; flex-direction: column; justify-content: space-between; }
+.q-question { font-size: 12.5pt; font-weight: 700; color: #1A150F; line-height: 1.32; letter-spacing: -0.015em; flex: 1; display: flex; align-items: center; }
+.insight-block { border-top: 0.8px solid #E0DAD2; padding-top: 8px; margin-top: 8px; }
+.insight-header { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 4px; }
+.insight-concept { font-family: Inter, sans-serif; font-size: 5.5pt; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; }
+.insight-author { font-family: Inter, sans-serif; font-size: 5.5pt; font-weight: 400; font-style: italic; color: #9A9088; }
+.insight-text { font-family: Inter, sans-serif; font-size: 6.5pt; color: #5A5048; line-height: 1.55; }
+
+.back-dots { position: absolute; top: 0.28in; left: 0.28in; right: 0.28in; bottom: 0.28in; background-image: radial-gradient(circle, #C8C0B8 0.7px, transparent 0.7px); background-size: 0.17in 0.17in; opacity: 0.5; }
+.back-center-box { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); text-align: center; background: #FAF8F2; padding: 0.14in 0.22in; }
+.back-name { font-size: 9pt; font-weight: 700; color: #7A7068; line-height: 1.2; }
+.back-name em { font-style: italic; font-weight: 400; }
+.back-thin-rule { width: 20px; height: 1px; background: #C8C0B8; margin: 7px auto; }
+.back-by { font-family: Inter, sans-serif; font-size: 5.5pt; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: #A8A098; }
+
+.closing-main { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0.3in 0.3in 0.2in; text-align: center; gap: 0.1in; }
+.closing-quote { font-size: 13.5pt; font-style: italic; font-weight: 400; color: #1E1812; line-height: 1.4; letter-spacing: -0.01em; }
+.closing-attr { font-family: Inter, sans-serif; font-size: 6pt; font-weight: 500; color: #8A8078; letter-spacing: 0.12em; }
+</style>
+</head>
+<body>
+
+<div class="print-note">
+  <strong>To print:</strong> File → Print → Letter (8.5 × 11 in). No margins. 1 card per page.
+</div>
+
+<div id="app"></div>
+
+<script>
+const cats = {
+  friends:  { color: '#88C09A', borderC: '#B8D8C0', ornC: '#B0D0B8', label: 'Friends',       num: '01' },
+  family:   { color: '#D4A898', borderC: '#E8C8C0', ornC: '#E0C0B8', label: 'Family',         num: '02' },
+  partner:  { color: '#C8A0AC', borderC: '#E0C0C8', ornC: '#D8B8C0', label: 'Partner',        num: '03' },
+  yourself: { color: '#9AAAC8', borderC: '#C0CCDE', ornC: '#B8C4D8', label: 'With Yourself',  num: '04' },
+};
+
+const catData = [
+  {
+    id: 'friends',
+    why: `Attachment psychology shows that chosen friendships are the first space where we learn to trust outside the family. The people we choose to keep close reveal more about who we are than any personality test ever could.`,
+    cards: [
+      { level:1, q:'What is the happiest memory we share together?',
+        concept:'Relational memory', author:'Cognitive psychology',
+        psych:'Remembering together activates memory reconsolidation — it strengthens the bond and rebuilds the shared story between two people.' },
+      { level:1, q:'What do you admire most about me? And what do you least understand?',
+        concept:'Honest admiration', author:'Social psychology',
+        psych:'Naming admiration out loud activates reward circuits. Honest confusion creates more closeness than constant approval.' },
+      { level:1, q:'Is there something you\'ve always wanted to ask me but never dared?',
+        concept:'Communication inhibition', author:'Dan Ariely',
+        psych:'What we don\'t ask takes up silent mental space. Opening that space reduces the invisible distance between two people.' },
+      { level:1, q:'When was the moment you felt we were truly friends?',
+        concept:'Relational turning point', author:'Social psychology',
+        psych:'Every bond has a founding moment. Naming it activates shared memory and reinforces the identity of the "us".' },
+      { level:2, q:'Do you think friendship can survive when we become very different people?',
+        concept:'Identity and change', author:'Erikson',
+        psych:'Friendships that survive change require renegotiating the relationship, not just remembering who we were. That takes real emotional maturity.' },
+      { level:2, q:'Is there something I\'ve done that hurt you and you never told me?',
+        concept:'Silent wounds', author:'Gottman',
+        psych:'Unexpressed wounds don\'t disappear — they accumulate as distance or resentment. Naming them opens the possibility of emotional closure.' },
+      { level:2, q:'What do you think no one knows about you, except me?',
+        concept:'Self-disclosure', author:'Johari',
+        psych:'Selective self-disclosure is the foundation of real intimacy. What we choose to share only with someone defines the level of trust in that bond.' },
+      { level:2, q:'When was the last time you truly cried? Why?',
+        concept:'Vulnerability', author:'Brené Brown',
+        psych:'Vulnerability is the emotional state required for genuine connection. There is no real closeness without it.' },
+      { level:2, q:'Is there something in your life you\'re avoiding facing?',
+        concept:'Experiential avoidance', author:'Steven Hayes',
+        psych:'Avoidance has a cumulative cost: the energy we use to avoid something almost always exceeds what it would take to face it.' },
+      { level:3, q:'If you could change one decision from your past, what would it be?',
+        concept:'Regret and values', author:'Daniel Pink',
+        psych:'Regrets reveal our current hierarchy of values. What we would have changed says more about who we are than what we actually did.' },
+      { level:3, q:'What do you fear losing most at this stage of your life?',
+        concept:'Fear of loss', author:'Kübler-Ross',
+        psych:'Fear of loss is proportional to how much we value something. Naming it puts us in touch with what truly matters.' },
+      { level:3, q:'Who are you when no one is watching?',
+        concept:'Public vs. private self', author:'Erving Goffman',
+        psych:'The distance between who we are in public and in private measures our level of authenticity — and the emotional cost we pay for the difference.' },
+      { level:3, q:'Do you believe you\'re living the life you truly want?',
+        concept:'Existential dissonance', author:'Viktor Frankl',
+        psych:'Frankl called it the "existential vacuum" — living a life that doesn\'t feel our own. Recognizing the dissonance is the first step to changing it.' },
+    ]
+  },
+  {
+    id: 'family',
+    why: `Bowen's family systems theory shows that we all carry the emotional patterns of our family of origin. We can only transform what we are first able to see and honestly name.`,
+    cards: [
+      { level:1, q:'What family tradition do you value most, and why?',
+        concept:'Rituals and belonging', author:'Imber-Black',
+        psych:'Family rituals function as identity anchors. Participating in them activates a sense of belonging and continuity even in adulthood.' },
+      { level:1, q:'Is there a childhood memory that always makes you smile?',
+        concept:'Positive memory', author:'Martin Seligman',
+        psych:'Positive childhood memories are real protective factors — they\'re associated with greater resilience and emotional regulation in adult life.' },
+      { level:1, q:'What quality of a family member do you wish you had?',
+        concept:'Family modeling', author:'Albert Bandura',
+        psych:'Family role models are internalized from childhood and shape our aspirations without us noticing. Naming them makes them conscious.' },
+      { level:1, q:'What\'s the piece of family wisdom you\'ve applied most in your life?',
+        concept:'Intergenerational transmission', author:'Family systems',
+        psych:'Inherited wisdom operates as mental heuristics — we make decisions following family learning without even recognizing it as such.' },
+      { level:2, q:'Is there something your parents never knew about you?',
+        concept:'Family secrets', author:'Evan Imber-Black',
+        psych:'Secrets protect us from judgment, but create structural loneliness: being present while not being fully known.' },
+      { level:2, q:'Do you feel your family talks about what truly matters?',
+        concept:'Emotional communication', author:'Virginia Satir',
+        psych:'Families with low emotional communication aren\'t cold — they simply lack the language. And that language can be learned at any time.' },
+      { level:2, q:'When was the last time you told someone in your family you loved them?',
+        concept:'Affective expression', author:'John Gottman',
+        psych:'In many cultures there\'s high non-verbal warmth but low verbal expression of affection. Saying it in words creates a different kind of connection.' },
+      { level:2, q:'Is there something you wish had been different about how you were raised?',
+        concept:'Childhood grief', author:'Alice Miller',
+        psych:'Recognizing what we lacked is not about blame — it\'s about processing that grief so we stop unconsciously seeking it in other relationships.' },
+      { level:2, q:'What family pattern do you recognize in yourself that you want to break?',
+        concept:'Pattern disruption', author:'Murray Bowen',
+        psych:'Patterns are transmitted because they\'re the only way we knew how to relate. Naming them is the first act of conscious change.' },
+      { level:3, q:'How well do you really know your parents as people, beyond their role?',
+        concept:'Self-differentiation', author:'Murray Bowen',
+        psych:'Self-differentiation is the ability to see parents as people independent of their function. It\'s a marker of emotional maturity.' },
+      { level:3, q:'Is there something within your family you haven\'t been able to forgive?',
+        concept:'Forgiveness and freedom', author:'Luskin',
+        psych:'Forgiveness is not a moral act — it\'s a psychological process of self-liberation. It doesn\'t require reconciliation or excusing the other person.' },
+      { level:3, q:'What do you want future generations to learn from you?',
+        concept:'Conscious legacy', author:'Erik Erikson',
+        psych:'Thinking about legacy activates our value processing — it forces us to distinguish the urgent from what truly matters.' },
+      { level:3, q:'What does "family" mean to you, beyond blood?',
+        concept:'Chosen family', author:'Weston & Biblarz',
+        psych:'Research shows that the quality of bonds matters more than their origin. Chosen family can be just as healing as biological family.' },
+    ]
+  },
+  {
+    id: 'partner',
+    why: `Attachment theory shows that romantic partners activate the same circuits as early attachment. In no other relationship are we as visible — or as vulnerable. And within that vulnerability lives the possibility of healing.`,
+    cards: [
+      { level:1, q:'What was the first moment you felt something for me?',
+        concept:'Origin of the bond', author:'Helen Fisher',
+        psych:'The origins of love are stored in episodic memory and function as emotional anchors. Revisiting them together reconstructs the meaning of the relationship.' },
+      { level:1, q:'What do you love most about being with me?',
+        concept:'Positive amplification', author:'John Gottman',
+        psych:'Stable couples have a 5:1 ratio of positive to negative interactions. Naming the positive isn\'t naive — it\'s strategic.' },
+      { level:1, q:'What\'s your favorite memory of us?',
+        concept:'Affective memory', author:'Cognitive psychology',
+        psych:'Couples build a shared "emotional database." Accessing it regularly strengthens the identity of the bond.' },
+      { level:1, q:'What small thing I do makes you feel most loved?',
+        concept:'Love languages', author:'Gary Chapman',
+        psych:'Most couple conflicts aren\'t about lack of love — they\'re about different languages that we haven\'t taught each other yet.' },
+      { level:2, q:'Is there something you need from this relationship that you haven\'t asked for?',
+        concept:'Unexpressed needs', author:'Sue Johnson',
+        psych:'The needs we stay silent about become implicit expectations the other person can\'t fulfill because they don\'t even know they exist.' },
+      { level:2, q:'When have you felt most alone while being with me?',
+        concept:'Relational loneliness', author:'Cacioppo',
+        psych:'Loneliness within a partnership is heavier than physical loneliness — it carries a dimension of betrayal to the promise of companionship.' },
+      { level:2, q:'Is there something about our future that scares you?',
+        concept:'Anticipatory anxiety', author:'Sue Johnson',
+        psych:'Talking about fear in a partnership turns it into shared territory. What remains unspoken is processed alone and becomes distance.' },
+      { level:2, q:'What part of you do you feel I still don\'t know well?',
+        concept:'Johari Window', author:'Luft & Ingham',
+        psych:'Everyone has private areas even in close relationships. Revealing them reduces inner loneliness and deepens the bond.' },
+      { level:2, q:'Is there something you sacrificed for this relationship that still weighs on you?',
+        concept:'Relational sacrifices', author:'Caryl Rusbult',
+        psych:'Sacrifices are inevitable in every relationship. The problem isn\'t making them — it\'s making them in silence. Resentment grows in that silence.' },
+      { level:3, q:'What did you teach me about love that I didn\'t know before?',
+        concept:'Relational growth', author:'Esther Perel',
+        psych:'Every relationship modifies us — it changes how we process attachment. Recognizing this turns experience into conscious learning.' },
+      { level:3, q:'How do you want me to remember you if we\'re ever no longer together?',
+        concept:'Relational legacy', author:'Esther Perel',
+        psych:'Thinking about the legacy we want makes us aware of what we truly want to build — not just what we already have.' },
+      { level:3, q:'Do you think love is chosen or felt? And what do you choose?',
+        concept:'Love as decision', author:'Robert Sternberg',
+        psych:'Neuroscience confirms it: romantic love activates reward regions (emotion) and judgment regions (decision). It\'s felt first — and sustained by choosing it.' },
+      { level:3, q:'What version of yourself do you want to build with me?',
+        concept:'Michelangelo Effect', author:'Caryl Rusbult',
+        psych:'Partners sculpt each other — moving us closer to or further from our ideal selves. Naming it is choosing it consciously.' },
+    ]
+  },
+  {
+    id: 'yourself',
+    why: `Humanistic psychology (Maslow, Rogers) places self-awareness as the foundation of growth. The relationship with yourself is the longest one you\'ll ever have — and the most neglected. Knowing yourself honestly, without judgment, changes everything else.`,
+    cards: [
+      { level:1, q:'What do you like most about yourself?',
+        concept:'Self-compassion', author:'Kristin Neff',
+        psych:'Self-compassion — not self-demand — is the strongest predictor of well-being. Recognizing what\'s good in yourself with love is the first step.' },
+      { level:1, q:'What has been your greatest achievement that almost no one knows about?',
+        concept:'Internal achievements', author:'Carol Dweck',
+        psych:'External achievements are visible; internal ones — overcoming a fear, changing a pattern — are the most transformative. Naming them makes them real.' },
+      { level:1, q:'What activity makes you lose track of time?',
+        concept:'Flow state', author:'Csikszentmihalyi',
+        psych:'"Flow" is the state of maximum well-being and performance. Knowing where you experience it is knowing where your purpose lives.' },
+      { level:1, q:'What phrase describes you best at this point in your life?',
+        concept:'Identity narrative', author:'Dan McAdams',
+        psych:'The words we use to describe ourselves are not passive — they shape identity. The narrative we choose about ourselves becomes what we believe we are.' },
+      { level:2, q:'Is there a version of you that you left behind along the way? Do you miss her?',
+        concept:'Unintegrated identities', author:'Carl Gustav Jung',
+        psych:'Jung called "shadow" the parts of ourselves we suppress or abandon. Reintegrating them — not suppressing them — is the basis of a fuller psychology.' },
+      { level:2, q:'When was the last time you prioritized yourself without feeling guilty?',
+        concept:'Conditioned guilt', author:'Harriet Lerner',
+        psych:'Guilt when prioritizing yourself is a learned response, not a moral truth. At its root is often a message that your own needs are a problem.' },
+      { level:2, q:'What is the hardest thing for you to accept about yourself?',
+        concept:'Shadow integration', author:'Carl Gustav Jung',
+        psych:'What we find hardest to accept usually consumes the most psychic energy. Accepting it doesn\'t mean approving it — it means stopping the energy drain.' },
+      { level:2, q:'Is there something you tell yourself that you\'d never say to someone you love?',
+        concept:'Internal dialogue', author:'Kristin Neff',
+        psych:'The inner critical voice forms in childhood from external voices we internalized. The first step to changing it is recognizing it as learned, not true.' },
+      { level:2, q:'What scares you most about growing up?',
+        concept:'Growth anxiety', author:'Abraham Maslow',
+        psych:'Maslow identified "growth anxiety": the fear of leaving behind the familiar — even when it limits us — because the new doesn\'t yet exist as reality.' },
+      { level:3, q:'How different are you from who you thought you\'d be at this age?',
+        concept:'Ideal self vs. real self', author:'Tory Higgins',
+        psych:'The distance between the expected self and the real self can be processed as failure — or as valuable information about who we truly are.' },
+      { level:3, q:'What part of you is still healing?',
+        concept:'Post-traumatic growth', author:'Tedeschi & Calhoun',
+        psych:'Naming what is healing reveals the direction of inner movement. A wound we recognize is already, in some measure, being integrated.' },
+      { level:3, q:'What does being happy mean to you?',
+        concept:'Personal well-being', author:'Sonja Lyubomirsky',
+        psych:'40% of well-being depends on intentional actions — but first you have to know what happiness means for you specifically.' },
+      { level:3, q:'If you could speak to your ten-years-ago self, what would you say?',
+        concept:'Temporal perspective', author:'Philip Zimbardo',
+        psych:'The wisdom we\'d give our past self is usually exactly what we need today. The exercise activates self-compassion and clarity.' },
+    ]
+  }
+];
+
+const lvlNames = ['','SURFACE','DEEP','SOUL'];
+const lvlDescs = ['','To warm up and get started.','To go deeper. Things get real.','For the brave. The questions that change something.'];
+
+function orns(c) {
+  return `
+    <div class="orn tl" style="border-color:${c}"></div>
+    <div class="orn tr" style="border-color:${c}"></div>
+    <div class="orn bl" style="border-color:${c}"></div>
+    <div class="orn br" style="border-color:${c}"></div>
+  `;
+}
+
+const stripes = Object.values(cats).map(c=>`<div style="background:${c.color}"></div>`).join('');
+
+let html = '';
+
+// ── COVER ────────────────────────────────────────
+html += `<div class="card" data-group="intro">
+  <div class="card-border" style="border-color:#C8C0B8"></div>
+  ${orns('#C8C0B8')}
+  <div class="card-layout">
+    <div class="cover-main">
+      <div class="cover-eyebrow">Conversation game · 52 cards</div>
+      <div class="h-rule"></div>
+      <div class="cover-title">The Art of<br/><em>Knowing Us</em></div>
+      <div class="h-rule"></div>
+      <div class="cover-sub">Questions based on psychology theories for the conversations that actually matter.</div>
+      <div class="h-rule"></div>
+      <div class="cover-byline">Alana · By Ana Llanos</div>
+    </div>
+    <div class="color-bar">${stripes}</div>
+  </div>
+</div>`;
+
+// ── INSTRUCTIONS ─────────────────────────────────
+html += `<div class="card" data-group="intro">
+  <div class="card-border" style="border-color:#C8C0B8"></div>
+  ${orns('#C8C0B8')}
+  <div class="card-layout">
+    <div class="instr-wrap">
+      <div class="sect-eyebrow">How to play</div>
+      <div class="instr-title">There are no<br/><em>wrong</em><br/>answers.</div>
+      <div class="thin-rule"></div>
+      <div class="body-text">Shuffle the cards. Pick one at random or choose the category that feels right for this moment.<br/><br/>Read the question out loud. Answer honestly. Listen without interrupting or judging.<br/><br/>Give each answer space before moving on to the next card. The best conversations don't rush.</div>
+      <div class="thin-rule"></div>
+      <div class="lvl-section-label">The three levels</div>
+      <div class="lrow"><div class="lnum">01</div><div><div class="lname">Surface</div><div class="ldesc">To warm up and get started.</div></div></div>
+      <div class="lrow"><div class="lnum">02</div><div><div class="lname">Deep</div><div class="ldesc">To go further. Things get real.</div></div></div>
+      <div class="lrow"><div class="lnum">03</div><div><div class="lname">Soul</div><div class="ldesc">For the brave. The questions that change something.</div></div></div>
+      <div class="footer-label">4 categories · 52 questions · 1 real conversation</div>
+    </div>
+    <div class="color-bar">${stripes}</div>
+  </div>
+</div>`;
+
+// ── COLOR LEGEND ─────────────────────────────────
+html += `<div class="card" data-group="intro">
+  <div class="card-border" style="border-color:#C8C0B8"></div>
+  ${orns('#C8C0B8')}
+  <div class="card-layout">
+    <div class="instr-wrap" style="gap:0">
+      <div class="sect-eyebrow" style="margin-bottom:0.09in">Color guide</div>
+      <div class="instr-title" style="font-size:14pt;margin-bottom:0.13in">What does<br/><em>each color mean?</em></div>
+      <div class="thin-rule"></div>
+      ${Object.values(cats).map(c => `
+        <div style="display:flex;align-items:flex-start;gap:11px;margin-bottom:0.14in">
+          <div style="width:0.22in;height:0.22in;background:${c.color};border-radius:50%;flex-shrink:0;margin-top:2px"></div>
+          <div>
+            <div style="font-size:9pt;font-weight:700;color:#1E1812;margin-bottom:2px">${c.label}</div>
+            <div style="font-family:Inter,sans-serif;font-size:6.5pt;color:#5A504A;line-height:1.5">${
+              c.label === 'Friends' ? 'The people we choose to be witnesses of our lives.' :
+              c.label === 'Family' ? 'The bonds that shape us, even when we don\'t choose them.' :
+              c.label === 'Partner' ? 'The closest mirror and the space where we grow the most.' :
+              'The longest relationship of your life — and the most neglected.'
+            }</div>
+          </div>
+        </div>`).join('')}
+      <div class="thin-rule" style="margin-top:auto"></div>
+      <div class="footer-label">Levels: 01 Surface · 02 Deep · 03 Soul</div>
+    </div>
+    <div class="color-bar">${stripes}</div>
+  </div>
+</div>`;
+
+// ── CATEGORIES + CARDS ────────────────────────────
+catData.forEach(cat => {
+  const c = cats[cat.id];
+
+  html += `<div class="card" data-group="${cat.id}">
+    <div class="card-border" style="border-color:${c.borderC}"></div>
+    ${orns(c.ornC)}
+    <div class="card-layout">
+      <div class="cat-head" style="background:${c.color};height:1.55in">
+        <div class="cat-circle" style="width:3in;height:3in;top:-1.5in;right:-1.5in"></div>
+        <div class="cat-circle" style="width:1.2in;height:1.2in;bottom:-0.4in;left:0.1in"></div>
+        <div class="cat-num">${c.num} / ${c.label}</div>
+        <div class="cat-name-big"><em>${c.label}</em></div>
+      </div>
+      <div class="cat-body-area">
+        <div>
+          <div class="why-label" style="color:${c.color}">Why does it matter?</div>
+          <div class="why-text">${cat.why}</div>
+        </div>
+        <div class="cat-count-label">13 questions · 3 levels</div>
+      </div>
+    </div>
+  </div>`;
+
+  cat.cards.forEach(card => {
+    const hh = card.level === 1 ? '0.68in' : card.level === 2 ? '0.78in' : '0.88in';
+    html += `<div class="card" data-group="${cat.id}">
+      <div class="card-border" style="border-color:${c.borderC}"></div>
+      ${orns(c.ornC)}
+      <div class="card-layout">
+        <div class="q-head-strip" style="background:${c.color};height:${hh}">
+          <div class="q-label">${c.label}</div>
+          <div class="q-lvl-tag">0${card.level} · ${lvlNames[card.level]}</div>
+        </div>
+        <div class="q-body-area">
+          <div class="q-question">${card.q}</div>
+          <div class="insight-block">
+            <div class="insight-header">
+              <div class="insight-concept" style="color:${c.color}">${card.concept}</div>
+              <div class="insight-author">— ${card.author}</div>
+            </div>
+            <div class="insight-text">${card.psych}</div>
+          </div>
+        </div>
+      </div>
+    </div>`;
+  });
+});
+
+// ── CARD BACK ─────────────────────────────────────
+html += `<div class="card" data-group="outro">
+  <div class="card-border" style="border-color:#C8C0B8"></div>
+  ${orns('#C8C0B8')}
+  <div class="back-dots"></div>
+  <div class="back-center-box">
+    <div class="back-name">The Art of<br/><em>Knowing Us</em></div>
+    <div class="back-thin-rule"></div>
+    <div class="back-by">Alana · By Ana Llanos</div>
+  </div>
+  <div class="color-bar" style="position:absolute;bottom:0.13in;left:0.13in;right:0.13in;height:0.1in">${stripes}</div>
+</div>`;
+
+// ── CLOSING ───────────────────────────────────────
+html += `<div class="card" data-group="outro">
+  <div class="card-border" style="border-color:#C8C0B8"></div>
+  ${orns('#C8C0B8')}
+  <div class="card-layout">
+    <div class="closing-main">
+      <div class="h-rule"></div>
+      <div class="closing-quote">"Knowing each other<br/>is the most<br/>underrated act of love."</div>
+      <div class="closing-attr">— Alana</div>
+      <div class="h-rule"></div>
+      <div class="cover-byline">Alana · By Ana Llanos</div>
+    </div>
+    <div class="color-bar">${stripes}</div>
+  </div>
+</div>`;
+
+document.getElementById('app').innerHTML = html;
+const app = document.getElementById('app');
+const allCards = Array.from(app.querySelectorAll('.card'));
+app.innerHTML = '';
+
+const sheetStyle = 'width:8.5in;height:11in;display:flex;align-items:center;justify-content:center;page-break-after:always;break-after:page;background:#FAF8F2;box-sizing:border-box;overflow:hidden';
+
+allCards.forEach(card => {
+  const sheet = document.createElement('div');
+  sheet.style.cssText = sheetStyle;
+  sheet.appendChild(card);
+  app.appendChild(sheet);
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,2023 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Moon Journal — 28 Days of Lunar Magic</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@200;300;400&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Jost', sans-serif; background: #eee; color: #2d2d2d; }
+
+  .page {
+    width: 6in;
+    height: 9in;
+    margin: 0 auto 40px auto;
+    padding: 0.6in 0.65in;
+    background: #fdfaf6;
+    page-break-after: always;
+    page-break-inside: avoid;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* SVG Icons */
+  .icon { display: inline-block; vertical-align: middle; }
+
+  /* COVER */
+  .page.cover {
+    padding: 0;
+    background: linear-gradient(160deg, #1a1025 0%, #2e1a47 50%, #1a1025 100%);
+  }
+  .cover-inner {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0.5in 0.65in;
+    color: #f5efe6;
+    box-sizing: border-box;
+    position: relative;
+  }
+  .cover h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 44px;
+    font-weight: 300;
+    letter-spacing: 7px;
+    text-transform: uppercase;
+    color: #f5efe6;
+    line-height: 1.2;
+    margin: 24px 0 12px;
+  }
+  .cover .subtitle {
+    font-size: 11px;
+    font-weight: 200;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #c9a96e;
+    margin-bottom: 28px;
+  }
+  .cover .divider { width: 50px; height: 1px; background: #c9a96e; margin: 0 auto 28px; }
+  .cover .tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px;
+    font-style: italic;
+    font-weight: 300;
+    color: #e8dcc8;
+    line-height: 2;
+    max-width: 3.5in;
+  }
+  .cover .angel-number {
+    margin-top: 28px;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: #c9a96e;
+    text-transform: uppercase;
+  }
+  .cover-stars {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none;
+  }
+
+  /* INTRO */
+  .intro-page h2, .angel-page h2, .ritual-page h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 300;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #2e1a47;
+    margin-bottom: 8px;
+  }
+  .gold-line { width: 40px; height: 1px; background: #c9a96e; margin-bottom: 22px; }
+  .intro-page p {
+    font-size: 12px;
+    font-weight: 300;
+    line-height: 2;
+    color: #4a4a4a;
+    margin-bottom: 16px;
+  }
+  .phases-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 20px; }
+  .phase-card { border: 1px solid #e8dcc8; padding: 14px; }
+  .phase-card h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #2e1a47;
+    margin: 8px 0 5px;
+  }
+  .phase-card p { font-size: 10.5px; font-weight: 300; line-height: 1.7; color: #6a6a6a; }
+
+  /* ANGEL NUMBERS */
+  .angel-list { margin-top: 16px; }
+  .angel-item { display: flex; align-items: flex-start; gap: 14px; padding: 10px 0; border-bottom: 1px solid #f0e8dc; }
+  .angel-number-badge {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 400;
+    color: #c9a96e;
+    min-width: 55px;
+    letter-spacing: 1px;
+  }
+  .angel-meaning { font-size: 11px; font-weight: 300; line-height: 1.8; color: #4a4a4a; }
+  .angel-meaning strong { font-weight: 400; color: #2e1a47; display: block; margin-bottom: 1px; }
+
+  /* DAILY PAGE */
+  .daily-page .day-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 18px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid #e8dcc8;
+  }
+  .day-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 48px;
+    font-weight: 300;
+    color: #e8dcc8;
+    line-height: 1;
+  }
+  .day-info { text-align: right; }
+  .day-phase-name {
+    font-size: 9.5px;
+    font-weight: 300;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #2e1a47;
+    margin: 5px 0 3px;
+  }
+  .day-angel { font-size: 9.5px; font-weight: 200; letter-spacing: 1px; color: #c9a96e; }
+  .daily-date-field {
+    font-size: 9.5px;
+    font-weight: 300;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #aaa;
+    margin-bottom: 16px;
+  }
+  .daily-date-field .date-line { display: inline-block; width: 110px; border-bottom: 1px solid #ddd; margin-left: 8px; }
+  .prompt-section { margin-bottom: 14px; }
+  .prompt-label { font-size: 8.5px; font-weight: 400; letter-spacing: 2.5px; text-transform: uppercase; color: #c9a96e; margin-bottom: 6px; }
+  .prompt-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    font-style: italic;
+    font-weight: 300;
+    color: #2e1a47;
+    line-height: 1.6;
+    margin-bottom: 8px;
+  }
+  .write-line { border-bottom: 1px solid #ede5d8; height: 20px; margin-bottom: 2px; }
+  .gratitude-section { margin-top: 12px; padding: 10px 12px; background: #faf6f0; border-left: 2px solid #c9a96e; }
+  .mood-section { margin-top: 12px; display: flex; align-items: center; gap: 14px; }
+  .mood-label { font-size: 8.5px; font-weight: 400; letter-spacing: 2px; text-transform: uppercase; color: #c9a96e; white-space: nowrap; }
+  .mood-icons { display: flex; gap: 12px; align-items: center; }
+
+  /* RITUAL */
+  .ritual-page { background: linear-gradient(135deg, #fdfaf6 0%, #f5ede0 100%); }
+  .ritual-page .ritual-icon { text-align: center; margin: 16px 0; }
+  .ritual-page .ritual-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    font-style: italic;
+    line-height: 2;
+    color: #4a4a4a;
+    margin-bottom: 16px;
+    text-align: center;
+  }
+  .ritual-prompt { margin-bottom: 16px; }
+
+  /* CLOSING */
+  .closing-page {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .closing-page h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 30px;
+    font-weight: 300;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #2e1a47;
+    margin: 20px 0 16px;
+  }
+  .closing-page p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px;
+    font-style: italic;
+    line-height: 2;
+    color: #6a6a6a;
+    max-width: 4in;
+    margin-bottom: 20px;
+  }
+  .reflection-box { width: 100%; border: 1px solid #e8dcc8; padding: 18px; text-align: left; margin-top: 16px; }
+
+  @page { size: 6in 9in; margin: 0; }
+  @media print {
+    body { background: white; }
+    .page { margin: 0; box-shadow: none; }
+  }
+</style>
+
+<!-- SVG ICON DEFINITIONS -->
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+
+    <!-- CRESCENT MOON (cover) -->
+    <symbol id="icon-moon-crescent" viewBox="0 0 100 100">
+      <path d="M60,10 C35,10 15,30 15,55 C15,78 33,95 58,95 C68,95 77,92 84,86 C74,83 67,74 67,63 C67,45 80,30 98,28 C88,17 75,10 60,10 Z" fill="none" stroke="#c9a96e" stroke-width="2.5" stroke-linecap="round"/>
+    </symbol>
+
+    <!-- FULL MOON CIRCLE -->
+    <symbol id="icon-moon-full" viewBox="0 0 100 100">
+      <circle cx="50" cy="50" r="40" fill="none" stroke="#c9a96e" stroke-width="2.5"/>
+      <circle cx="50" cy="50" r="32" fill="none" stroke="#c9a96e" stroke-width="0.8" opacity="0.4"/>
+    </symbol>
+
+    <!-- NEW MOON -->
+    <symbol id="icon-phase-new" viewBox="0 0 40 40">
+      <circle cx="20" cy="20" r="14" fill="#2e1a47" stroke="#2e1a47" stroke-width="1.5"/>
+    </symbol>
+
+    <!-- WAXING CRESCENT -->
+    <symbol id="icon-phase-waxing-crescent" viewBox="0 0 40 40">
+      <circle cx="20" cy="20" r="14" fill="none" stroke="#2e1a47" stroke-width="1.5"/>
+      <path d="M20,6 C12,10 8,15 8,20 C8,25 12,30 20,34 C15,30 13,25 13,20 C13,15 15,10 20,6 Z" fill="#2e1a47"/>
+    </symbol>
+
+    <!-- FIRST QUARTER -->
+    <symbol id="icon-phase-first-quarter" viewBox="0 0 40 40">
+      <circle cx="20" cy="20" r="14" fill="none" stroke="#2e1a47" stroke-width="1.5"/>
+      <path d="M20,6 L20,34 A14,14 0 0,1 20,6 Z" fill="#2e1a47"/>
+    </symbol>
+
+    <!-- WAXING GIBBOUS -->
+    <symbol id="icon-phase-waxing-gibbous" viewBox="0 0 40 40">
+      <circle cx="20" cy="20" r="14" fill="#2e1a47" stroke="#2e1a47" stroke-width="1.5"/>
+      <path d="M20,6 C14,10 10,15 10,20 C10,25 14,30 20,34 C17,30 16,25 16,20 C16,15 17,10 20,6 Z" fill="#fdfaf6"/>
+    </symbol>
+
+    <!-- FULL MOON (phase) -->
+    <symbol id="icon-phase-full" viewBox="0 0 40 40">
+      <circle cx="20" cy="20" r="14" fill="#c9a96e" stroke="#c9a96e" stroke-width="1"/>
+    </symbol>
+
+    <!-- WANING GIBBOUS -->
+    <symbol id="icon-phase-waning-gibbous" viewBox="0 0 40 40">
+      <circle cx="20" cy="20" r="14" fill="#2e1a47" stroke="#2e1a47" stroke-width="1.5"/>
+      <path d="M20,6 C26,10 30,15 30,20 C30,25 26,30 20,34 C23,30 24,25 24,20 C24,15 23,10 20,6 Z" fill="#fdfaf6"/>
+    </symbol>
+
+    <!-- LAST QUARTER -->
+    <symbol id="icon-phase-last-quarter" viewBox="0 0 40 40">
+      <circle cx="20" cy="20" r="14" fill="none" stroke="#2e1a47" stroke-width="1.5"/>
+      <path d="M20,6 L20,34 A14,14 0 0,0 20,6 Z" fill="#2e1a47"/>
+    </symbol>
+
+    <!-- WANING CRESCENT -->
+    <symbol id="icon-phase-waning-crescent" viewBox="0 0 40 40">
+      <circle cx="20" cy="20" r="14" fill="none" stroke="#2e1a47" stroke-width="1.5"/>
+      <path d="M20,6 C28,10 32,15 32,20 C32,25 28,30 20,34 C25,30 27,25 27,20 C27,15 25,10 20,6 Z" fill="#2e1a47"/>
+    </symbol>
+
+    <!-- DARK MOON (day 27-28) -->
+    <symbol id="icon-phase-dark" viewBox="0 0 40 40">
+      <circle cx="20" cy="20" r="14" fill="none" stroke="#2e1a47" stroke-width="1.5" stroke-dasharray="2,3"/>
+    </symbol>
+
+    <!-- UNICORN (elegant line art) -->
+    <symbol id="icon-unicorn" viewBox="0 0 120 100">
+      <!-- Body -->
+      <ellipse cx="65" cy="62" rx="32" ry="20" fill="none" stroke="#c9a96e" stroke-width="1.8"/>
+      <!-- Neck -->
+      <path d="M42,50 C40,38 45,28 52,22" fill="none" stroke="#c9a96e" stroke-width="1.8" stroke-linecap="round"/>
+      <!-- Head -->
+      <ellipse cx="58" cy="18" rx="12" ry="9" fill="none" stroke="#c9a96e" stroke-width="1.8"/>
+      <!-- Horn -->
+      <line x1="58" y1="9" x2="62" y2="-4" stroke="#c9a96e" stroke-width="1.8" stroke-linecap="round"/>
+      <line x1="60" y1="5" x2="63" y2="1" stroke="#c9a96e" stroke-width="1" opacity="0.5"/>
+      <!-- Ear -->
+      <path d="M66,12 L70,6 L72,13" fill="none" stroke="#c9a96e" stroke-width="1.5"/>
+      <!-- Eye -->
+      <circle cx="63" cy="17" r="1.5" fill="#c9a96e"/>
+      <!-- Front legs -->
+      <line x1="48" y1="78" x2="44" y2="95" stroke="#c9a96e" stroke-width="1.8" stroke-linecap="round"/>
+      <line x1="58" y1="80" x2="56" y2="96" stroke="#c9a96e" stroke-width="1.8" stroke-linecap="round"/>
+      <!-- Back legs -->
+      <line x1="78" y1="78" x2="82" y2="95" stroke="#c9a96e" stroke-width="1.8" stroke-linecap="round"/>
+      <line x1="88" y1="76" x2="94" y2="92" stroke="#c9a96e" stroke-width="1.8" stroke-linecap="round"/>
+      <!-- Mane -->
+      <path d="M52,22 C48,26 44,30 46,36 C42,32 40,38 42,44" fill="none" stroke="#c9a96e" stroke-width="1.5" stroke-linecap="round"/>
+      <!-- Tail -->
+      <path d="M97,60 C105,52 108,60 102,68 C110,62 112,72 104,76" fill="none" stroke="#c9a96e" stroke-width="1.5" stroke-linecap="round"/>
+      <!-- Stars around -->
+      <text x="18" y="30" font-size="10" fill="#c9a96e" opacity="0.7">✦</text>
+      <text x="100" y="25" font-size="8" fill="#c9a96e" opacity="0.5">✦</text>
+      <text x="10" y="65" font-size="7" fill="#c9a96e" opacity="0.4">✦</text>
+    </symbol>
+
+    <!-- STAR (4-pointed) -->
+    <symbol id="icon-star" viewBox="0 0 20 20">
+      <path d="M10,2 L11.2,8.8 L18,10 L11.2,11.2 L10,18 L8.8,11.2 L2,10 L8.8,8.8 Z" fill="#c9a96e"/>
+    </symbol>
+
+    <!-- MOOD ICONS -->
+    <!-- Moon (small) -->
+    <symbol id="mood-moon" viewBox="0 0 24 24">
+      <path d="M12,3 C7,5 4,9 4,14 C4,19 8,23 13,23 C16,23 19,21 21,18 C18,18 15,15 15,12 C15,8 17,5 21,3 C18,2 15,2 12,3 Z" fill="none" stroke="#2e1a47" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+    <!-- Leaf -->
+    <symbol id="mood-leaf" viewBox="0 0 24 24">
+      <path d="M12,22 C12,22 4,16 4,9 C4,5 8,2 12,2 C16,2 20,5 20,9 C20,16 12,22 12,22 Z" fill="none" stroke="#2e1a47" stroke-width="1.5"/>
+      <line x1="12" y1="22" x2="12" y2="10" stroke="#2e1a47" stroke-width="1" opacity="0.5"/>
+    </symbol>
+    <!-- Star (mood) -->
+    <symbol id="mood-star" viewBox="0 0 24 24">
+      <path d="M12,2 L14.4,9.2 L22,9.2 L15.8,13.8 L18.2,21 L12,16.4 L5.8,21 L8.2,13.8 L2,9.2 L9.6,9.2 Z" fill="none" stroke="#2e1a47" stroke-width="1.5" stroke-linejoin="round"/>
+    </symbol>
+    <!-- Flame -->
+    <symbol id="mood-flame" viewBox="0 0 24 24">
+      <path d="M12,22 C8,22 5,19 5,15 C5,11 8,9 10,6 C10,9 11,10 12,10 C12,7 14,5 14,3 C16,5 19,9 19,14 C19,18 16,22 12,22 Z" fill="none" stroke="#2e1a47" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+    <!-- Wave -->
+    <symbol id="mood-wave" viewBox="0 0 24 24">
+      <path d="M2,12 C4,10 6,8 8,10 C10,12 12,14 14,12 C16,10 18,8 20,10 C21,11 22,12 22,12" fill="none" stroke="#2e1a47" stroke-width="1.5" stroke-linecap="round"/>
+      <path d="M2,16 C4,14 6,12 8,14 C10,16 12,18 14,16 C16,14 18,12 20,14 C21,15 22,16 22,16" fill="none" stroke="#2e1a47" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
+    </symbol>
+
+  </defs>
+</svg>
+
+</head>
+<body>
+
+<!-- ═══════════ COVER ═══════════ -->
+<div class="page cover">
+  <div class="cover-inner">
+    <svg class="cover-stars" viewBox="0 0 576 864" preserveAspectRatio="none">
+      <use href="#icon-star" x="50" y="40" width="14" height="14" opacity="0.5"/>
+      <use href="#icon-star" x="430" y="60" width="10" height="10" opacity="0.3"/>
+      <use href="#icon-star" x="200" y="100" width="8" height="8" opacity="0.25"/>
+      <use href="#icon-star" x="490" y="200" width="12" height="12" opacity="0.4"/>
+      <use href="#icon-star" x="30" y="300" width="8" height="8" opacity="0.3"/>
+      <use href="#icon-star" x="520" y="500" width="10" height="10" opacity="0.35"/>
+      <use href="#icon-star" x="80" y="650" width="14" height="14" opacity="0.4"/>
+      <use href="#icon-star" x="350" y="750" width="9" height="9" opacity="0.25"/>
+      <use href="#icon-star" x="460" y="800" width="11" height="11" opacity="0.3"/>
+      <use href="#icon-star" x="140" y="820" width="8" height="8" opacity="0.2"/>
+    </svg>
+    <svg width="100" height="100" viewBox="0 0 100 100"><use href="#icon-moon-crescent" width="100" height="100"/></svg>
+    <h1>Moon<br>Journal</h1>
+    <div class="subtitle">28 Days of Lunar Magic</div>
+    <div class="divider"></div>
+    <div class="tagline">
+      A sacred space to align with the moon,<br>
+      listen to your intuition,<br>
+      and let your light guide the way.
+    </div>
+    <svg width="110" height="92" viewBox="0 0 120 100" style="margin-top:28px"><use href="#icon-unicorn" width="120" height="100"/></svg>
+    <div class="angel-number">✦ &nbsp; 1111 &nbsp; ✦</div>
+    <div style="margin-top:16px;font-size:10px;letter-spacing:3px;color:#8a7a9e;text-transform:uppercase;">By Alana</div>
+  </div>
+</div>
+
+<!-- ═══════════ WELCOME ═══════════ -->
+<div class="page intro-page">
+  <h2>Welcome</h2>
+  <div class="gold-line"></div>
+  <p>The moon has always been a mirror — reflecting the tides within us, the cycles we live through, the emotions we carry. This journal is an invitation to pay attention.</p>
+  <p>Over 28 days, you will move through one complete lunar cycle. Each day has a prompt aligned with the moon's energy, a space for gratitude, and a mood check-in. There are no rules. This is your space.</p>
+  <p>You will also find angel number guidance woven through each day — gentle reminders from the universe that you are always supported, always seen, always loved.</p>
+  <div class="phases-grid">
+    <div class="phase-card">
+      <svg width="28" height="28"><use href="#icon-phase-new" width="28" height="28"/></svg>
+      <h4>New Moon</h4>
+      <p>Days 1–7. Plant seeds. Set intentions. What do you want to call in? This is the time of beginnings and quiet magic.</p>
+    </div>
+    <div class="phase-card">
+      <svg width="28" height="28"><use href="#icon-phase-first-quarter" width="28" height="28"/></svg>
+      <h4>Waxing Moon</h4>
+      <p>Days 8–14. Build momentum. Take action. What steps are you taking toward your dreams? Trust the growth.</p>
+    </div>
+    <div class="phase-card">
+      <svg width="28" height="28"><use href="#icon-phase-full" width="28" height="28"/></svg>
+      <h4>Full Moon</h4>
+      <p>Days 15–21. Illuminate. Release. What no longer serves you? Celebrate how far you've come.</p>
+    </div>
+    <div class="phase-card">
+      <svg width="28" height="28"><use href="#icon-phase-last-quarter" width="28" height="28"/></svg>
+      <h4>Waning Moon</h4>
+      <p>Days 22–28. Rest. Reflect. Let go. Prepare for the new cycle. You are always in a cycle — trust it.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ ANGEL NUMBERS ═══════════ -->
+<div class="page angel-page">
+  <h2>Angel Numbers</h2>
+  <div class="gold-line"></div>
+  <p style="font-size:11px;font-weight:300;line-height:2;color:#6a6a6a;margin-bottom:8px;">Angel numbers are sequences that carry divine guidance. When you see them, pause and breathe. A message is coming through.</p>
+  <div class="angel-list">
+    <div class="angel-item"><div class="angel-number-badge">111</div><div class="angel-meaning"><strong>New Beginnings</strong>Your thoughts are manifesting rapidly. Focus on what you want, not what you fear. You are a creator.</div></div>
+    <div class="angel-item"><div class="angel-number-badge">222</div><div class="angel-meaning"><strong>Trust the Process</strong>Everything is unfolding in perfect timing. Balance is near. Keep the faith and stay aligned.</div></div>
+    <div class="angel-item"><div class="angel-number-badge">333</div><div class="angel-meaning"><strong>Divine Support</strong>You are fully supported by the universe. Your guides are close. You are never alone.</div></div>
+    <div class="angel-item"><div class="angel-number-badge">444</div><div class="angel-meaning"><strong>You Are Protected</strong>The universe has your back. Build your foundation with confidence. Stability is yours.</div></div>
+    <div class="angel-item"><div class="angel-number-badge">555</div><div class="angel-meaning"><strong>Change is Coming</strong>A major shift is unfolding. Embrace it with an open heart. This change is for your highest good.</div></div>
+    <div class="angel-item"><div class="angel-number-badge">777</div><div class="angel-meaning"><strong>Spiritual Awakening</strong>You are on the right path. Magic is real and you are living proof. Keep going.</div></div>
+    <div class="angel-item"><div class="angel-number-badge">888</div><div class="angel-meaning"><strong>Abundance Flows</strong>Financial and emotional abundance are flowing to you. Receive it gracefully. You deserve this.</div></div>
+    <div class="angel-item"><div class="angel-number-badge">999</div><div class="angel-meaning"><strong>Completion</strong>A chapter is closing beautifully. Release with gratitude. Something better is already on its way.</div></div>
+    <div class="angel-item"><div class="angel-number-badge">1111</div><div class="angel-meaning"><strong>Make a Wish</strong>The universe is listening. This is a powerful portal of manifestation. Speak your truth out loud.</div></div>
+  </div>
+</div>
+
+<!-- ═══════════ NEW MOON RITUAL ═══════════ -->
+<div class="page ritual-page">
+  <h2>New Moon Ritual</h2>
+  <div class="gold-line"></div>
+  <div class="ritual-icon"><svg width="60" height="60"><use href="#icon-phase-new" width="60" height="60"/></svg></div>
+  <div class="ritual-text">"In the darkness of the new moon, plant the seeds<br>of everything you wish to become."</div>
+  <div class="ritual-prompts">
+    <div class="ritual-prompt">
+      <div class="prompt-label">✦ &nbsp; What am I calling in this cycle?</div>
+      <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+    </div>
+    <div class="ritual-prompt">
+      <div class="prompt-label">✦ &nbsp; My three intentions for this moon cycle</div>
+      <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+    </div>
+    <div class="ritual-prompt">
+      <div class="prompt-label">✦ &nbsp; What am I willing to release to make space?</div>
+      <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+    </div>
+    <div class="ritual-prompt">
+      <div class="prompt-label">✦ &nbsp; My word for this cycle</div>
+      <div class="write-line"></div><div class="write-line"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ DAILY PAGES MACRO ═══════════ -->
+<!-- Helper: mood icons row -->
+<!-- DAY 1 -->
+<div class="page daily-page">
+  <div class="day-header">
+    <div class="day-number">01</div>
+    <div class="day-info">
+      <svg width="32" height="32"><use href="#icon-phase-new" width="32" height="32"/></svg>
+      <div class="day-phase-name">New Moon</div>
+      <div class="day-angel">Angel Number · 111</div>
+    </div>
+  </div>
+  <div class="daily-date-field">Date <span class="date-line"></span></div>
+  <div class="prompt-section">
+    <div class="prompt-label">✦ &nbsp; Today's Reflection</div>
+    <div class="prompt-text">"What is one thing you want to manifest this lunar cycle? Write it as if it has already happened."</div>
+    <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  </div>
+  <div class="prompt-section">
+    <div class="prompt-label">✦ &nbsp; How do I feel right now?</div>
+    <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  </div>
+  <div class="gratitude-section">
+    <div class="prompt-label">✦ &nbsp; Three things I am grateful for today</div>
+    <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  </div>
+  <div class="mood-section">
+    <div class="mood-label">Today's energy</div>
+    <div class="mood-icons">
+      <svg width="20" height="20"><use href="#mood-moon" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-leaf" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-star" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-flame" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-wave" width="20" height="20"/></svg>
+    </div>
+  </div>
+</div>
+
+<!-- DAY 2 -->
+<div class="page daily-page">
+  <div class="day-header">
+    <div class="day-number">02</div>
+    <div class="day-info">
+      <svg width="32" height="32"><use href="#icon-phase-new" width="32" height="32"/></svg>
+      <div class="day-phase-name">New Moon</div>
+      <div class="day-angel">Angel Number · 222</div>
+    </div>
+  </div>
+  <div class="daily-date-field">Date <span class="date-line"></span></div>
+  <div class="prompt-section">
+    <div class="prompt-label">✦ &nbsp; Today's Reflection</div>
+    <div class="prompt-text">"Where in your life do you need more balance? What would balance actually feel like?"</div>
+    <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  </div>
+  <div class="prompt-section">
+    <div class="prompt-label">✦ &nbsp; How do I feel right now?</div>
+    <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  </div>
+  <div class="gratitude-section">
+    <div class="prompt-label">✦ &nbsp; Three things I am grateful for today</div>
+    <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  </div>
+  <div class="mood-section">
+    <div class="mood-label">Today's energy</div>
+    <div class="mood-icons">
+      <svg width="20" height="20"><use href="#mood-moon" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-leaf" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-star" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-flame" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-wave" width="20" height="20"/></svg>
+    </div>
+  </div>
+</div>
+
+<!-- DAY 3 -->
+<div class="page daily-page">
+  <div class="day-header">
+    <div class="day-number">03</div>
+    <div class="day-info">
+      <svg width="32" height="32"><use href="#icon-phase-waxing-crescent" width="32" height="32"/></svg>
+      <div class="day-phase-name">Waxing Crescent</div>
+      <div class="day-angel">Angel Number · 333</div>
+    </div>
+  </div>
+  <div class="daily-date-field">Date <span class="date-line"></span></div>
+  <div class="prompt-section">
+    <div class="prompt-label">✦ &nbsp; Today's Reflection</div>
+    <div class="prompt-text">"What is one fear that has been stopping you? What would you do if that fear didn't exist?"</div>
+    <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  </div>
+  <div class="prompt-section">
+    <div class="prompt-label">✦ &nbsp; How do I feel right now?</div>
+    <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  </div>
+  <div class="gratitude-section">
+    <div class="prompt-label">✦ &nbsp; Three things I am grateful for today</div>
+    <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  </div>
+  <div class="mood-section">
+    <div class="mood-label">Today's energy</div>
+    <div class="mood-icons">
+      <svg width="20" height="20"><use href="#mood-moon" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-leaf" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-star" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-flame" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-wave" width="20" height="20"/></svg>
+    </div>
+  </div>
+</div>
+
+<!-- DAY 4 -->
+<div class="page daily-page">
+  <div class="day-header">
+    <div class="day-number">04</div>
+    <div class="day-info">
+      <svg width="32" height="32"><use href="#icon-phase-waxing-crescent" width="32" height="32"/></svg>
+      <div class="day-phase-name">Waxing Crescent</div>
+      <div class="day-angel">Angel Number · 444</div>
+    </div>
+  </div>
+  <div class="daily-date-field">Date <span class="date-line"></span></div>
+  <div class="prompt-section">
+    <div class="prompt-label">✦ &nbsp; Today's Reflection</div>
+    <div class="prompt-text">"What foundations are you building in your life right now? Are they aligned with who you truly are?"</div>
+    <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  </div>
+  <div class="prompt-section">
+    <div class="prompt-label">✦ &nbsp; How do I feel right now?</div>
+    <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  </div>
+  <div class="gratitude-section">
+    <div class="prompt-label">✦ &nbsp; Three things I am grateful for today</div>
+    <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  </div>
+  <div class="mood-section">
+    <div class="mood-label">Today's energy</div>
+    <div class="mood-icons">
+      <svg width="20" height="20"><use href="#mood-moon" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-leaf" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-star" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-flame" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-wave" width="20" height="20"/></svg>
+    </div>
+  </div>
+</div>
+
+<!-- DAY 5 -->
+<div class="page daily-page">
+  <div class="day-header">
+    <div class="day-number">05</div>
+    <div class="day-info">
+      <svg width="32" height="32"><use href="#icon-phase-waxing-crescent" width="32" height="32"/></svg>
+      <div class="day-phase-name">Waxing Crescent</div>
+      <div class="day-angel">Angel Number · 555</div>
+    </div>
+  </div>
+  <div class="daily-date-field">Date <span class="date-line"></span></div>
+  <div class="prompt-section">
+    <div class="prompt-label">✦ &nbsp; Today's Reflection</div>
+    <div class="prompt-text">"What change have you been resisting? What if this change is actually leading you somewhere beautiful?"</div>
+    <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  </div>
+  <div class="prompt-section">
+    <div class="prompt-label">✦ &nbsp; How do I feel right now?</div>
+    <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  </div>
+  <div class="gratitude-section">
+    <div class="prompt-label">✦ &nbsp; Three things I am grateful for today</div>
+    <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  </div>
+  <div class="mood-section">
+    <div class="mood-label">Today's energy</div>
+    <div class="mood-icons">
+      <svg width="20" height="20"><use href="#mood-moon" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-leaf" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-star" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-flame" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-wave" width="20" height="20"/></svg>
+    </div>
+  </div>
+</div>
+
+<!-- DAY 6 -->
+<div class="page daily-page">
+  <div class="day-header">
+    <div class="day-number">06</div>
+    <div class="day-info">
+      <svg width="32" height="32"><use href="#icon-phase-waxing-crescent" width="32" height="32"/></svg>
+      <div class="day-phase-name">Waxing Crescent</div>
+      <div class="day-angel">Angel Number · 666</div>
+    </div>
+  </div>
+  <div class="daily-date-field">Date <span class="date-line"></span></div>
+  <div class="prompt-section">
+    <div class="prompt-label">✦ &nbsp; Today's Reflection</div>
+    <div class="prompt-text">"Where are you being too hard on yourself? Write yourself a love letter for today."</div>
+    <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  </div>
+  <div class="prompt-section">
+    <div class="prompt-label">✦ &nbsp; How do I feel right now?</div>
+    <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  </div>
+  <div class="gratitude-section">
+    <div class="prompt-label">✦ &nbsp; Three things I am grateful for today</div>
+    <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  </div>
+  <div class="mood-section">
+    <div class="mood-label">Today's energy</div>
+    <div class="mood-icons">
+      <svg width="20" height="20"><use href="#mood-moon" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-leaf" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-star" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-flame" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-wave" width="20" height="20"/></svg>
+    </div>
+  </div>
+</div>
+
+<!-- DAY 7 -->
+<div class="page daily-page">
+  <div class="day-header">
+    <div class="day-number">07</div>
+    <div class="day-info">
+      <svg width="32" height="32"><use href="#icon-phase-first-quarter" width="32" height="32"/></svg>
+      <div class="day-phase-name">First Quarter</div>
+      <div class="day-angel">Angel Number · 777</div>
+    </div>
+  </div>
+  <div class="daily-date-field">Date <span class="date-line"></span></div>
+  <div class="prompt-section">
+    <div class="prompt-label">✦ &nbsp; Today's Reflection</div>
+    <div class="prompt-text">"You are on the right path. What magic have you already created this week that you haven't acknowledged?"</div>
+    <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  </div>
+  <div class="prompt-section">
+    <div class="prompt-label">✦ &nbsp; How do I feel right now?</div>
+    <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  </div>
+  <div class="gratitude-section">
+    <div class="prompt-label">✦ &nbsp; Three things I am grateful for today</div>
+    <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  </div>
+  <div class="mood-section">
+    <div class="mood-label">Today's energy</div>
+    <div class="mood-icons">
+      <svg width="20" height="20"><use href="#mood-moon" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-leaf" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-star" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-flame" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-wave" width="20" height="20"/></svg>
+    </div>
+  </div>
+</div>
+
+<!-- DAY 8 -->
+<div class="page daily-page">
+  <div class="day-header">
+    <div class="day-number">08</div>
+    <div class="day-info">
+      <svg width="32" height="32"><use href="#icon-phase-first-quarter" width="32" height="32"/></svg>
+      <div class="day-phase-name">First Quarter</div>
+      <div class="day-angel">Angel Number · 888</div>
+    </div>
+  </div>
+  <div class="daily-date-field">Date <span class="date-line"></span></div>
+  <div class="prompt-section">
+    <div class="prompt-label">✦ &nbsp; Today's Reflection</div>
+    <div class="prompt-text">"Abundance is your birthright. What beliefs about money or success are you ready to release?"</div>
+    <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  </div>
+  <div class="prompt-section">
+    <div class="prompt-label">✦ &nbsp; How do I feel right now?</div>
+    <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  </div>
+  <div class="gratitude-section">
+    <div class="prompt-label">✦ &nbsp; Three things I am grateful for today</div>
+    <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  </div>
+  <div class="mood-section">
+    <div class="mood-label">Today's energy</div>
+    <div class="mood-icons">
+      <svg width="20" height="20"><use href="#mood-moon" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-leaf" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-star" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-flame" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-wave" width="20" height="20"/></svg>
+    </div>
+  </div>
+</div>
+
+<!-- DAY 9 -->
+<div class="page daily-page">
+  <div class="day-header">
+    <div class="day-number">09</div>
+    <div class="day-info">
+      <svg width="32" height="32"><use href="#icon-phase-waxing-gibbous" width="32" height="32"/></svg>
+      <div class="day-phase-name">Waxing Gibbous</div>
+      <div class="day-angel">Angel Number · 999</div>
+    </div>
+  </div>
+  <div class="daily-date-field">Date <span class="date-line"></span></div>
+  <div class="prompt-section">
+    <div class="prompt-label">✦ &nbsp; Today's Reflection</div>
+    <div class="prompt-text">"What chapter of your life is coming to a close? What have you learned from it that you'll carry forward?"</div>
+    <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  </div>
+  <div class="prompt-section">
+    <div class="prompt-label">✦ &nbsp; How do I feel right now?</div>
+    <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  </div>
+  <div class="gratitude-section">
+    <div class="prompt-label">✦ &nbsp; Three things I am grateful for today</div>
+    <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  </div>
+  <div class="mood-section">
+    <div class="mood-label">Today's energy</div>
+    <div class="mood-icons">
+      <svg width="20" height="20"><use href="#mood-moon" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-leaf" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-star" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-flame" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-wave" width="20" height="20"/></svg>
+    </div>
+  </div>
+</div>
+
+<!-- DAY 10 -->
+<div class="page daily-page">
+  <div class="day-header">
+    <div class="day-number">10</div>
+    <div class="day-info">
+      <svg width="32" height="32"><use href="#icon-phase-waxing-gibbous" width="32" height="32"/></svg>
+      <div class="day-phase-name">Waxing Gibbous</div>
+      <div class="day-angel">Angel Number · 1010</div>
+    </div>
+  </div>
+  <div class="daily-date-field">Date <span class="date-line"></span></div>
+  <div class="prompt-section">
+    <div class="prompt-label">✦ &nbsp; Today's Reflection</div>
+    <div class="prompt-text">"You are a powerful creator. What are you actively choosing to create in your life right now?"</div>
+    <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  </div>
+  <div class="prompt-section">
+    <div class="prompt-label">✦ &nbsp; How do I feel right now?</div>
+    <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  </div>
+  <div class="gratitude-section">
+    <div class="prompt-label">✦ &nbsp; Three things I am grateful for today</div>
+    <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  </div>
+  <div class="mood-section">
+    <div class="mood-label">Today's energy</div>
+    <div class="mood-icons">
+      <svg width="20" height="20"><use href="#mood-moon" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-leaf" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-star" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-flame" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-wave" width="20" height="20"/></svg>
+    </div>
+  </div>
+</div>
+
+<!-- DAY 11 -->
+<div class="page daily-page">
+  <div class="day-header">
+    <div class="day-number">11</div>
+    <div class="day-info">
+      <svg width="32" height="32"><use href="#icon-phase-waxing-gibbous" width="32" height="32"/></svg>
+      <div class="day-phase-name">Waxing Gibbous</div>
+      <div class="day-angel">Angel Number · 1111</div>
+    </div>
+  </div>
+  <div class="daily-date-field">Date <span class="date-line"></span></div>
+  <div class="prompt-section">
+    <div class="prompt-label">✦ &nbsp; Today's Reflection</div>
+    <div class="prompt-text">"1111 — make a wish. If anything were possible, what would you dare to ask for today?"</div>
+    <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  </div>
+  <div class="prompt-section">
+    <div class="prompt-label">✦ &nbsp; How do I feel right now?</div>
+    <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  </div>
+  <div class="gratitude-section">
+    <div class="prompt-label">✦ &nbsp; Three things I am grateful for today</div>
+    <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  </div>
+  <div class="mood-section">
+    <div class="mood-label">Today's energy</div>
+    <div class="mood-icons">
+      <svg width="20" height="20"><use href="#mood-moon" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-leaf" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-star" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-flame" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-wave" width="20" height="20"/></svg>
+    </div>
+  </div>
+</div>
+
+<!-- DAY 12 -->
+<div class="page daily-page">
+  <div class="day-header">
+    <div class="day-number">12</div>
+    <div class="day-info">
+      <svg width="32" height="32"><use href="#icon-phase-waxing-gibbous" width="32" height="32"/></svg>
+      <div class="day-phase-name">Waxing Gibbous</div>
+      <div class="day-angel">Angel Number · 1212</div>
+    </div>
+  </div>
+  <div class="daily-date-field">Date <span class="date-line"></span></div>
+  <div class="prompt-section">
+    <div class="prompt-label">✦ &nbsp; Today's Reflection</div>
+    <div class="prompt-text">"What relationship in your life is teaching you the most right now? What is it reflecting back to you?"</div>
+    <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  </div>
+  <div class="prompt-section">
+    <div class="prompt-label">✦ &nbsp; How do I feel right now?</div>
+    <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  </div>
+  <div class="gratitude-section">
+    <div class="prompt-label">✦ &nbsp; Three things I am grateful for today</div>
+    <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  </div>
+  <div class="mood-section">
+    <div class="mood-label">Today's energy</div>
+    <div class="mood-icons">
+      <svg width="20" height="20"><use href="#mood-moon" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-leaf" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-star" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-flame" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-wave" width="20" height="20"/></svg>
+    </div>
+  </div>
+</div>
+
+<!-- DAY 13 -->
+<div class="page daily-page">
+  <div class="day-header">
+    <div class="day-number">13</div>
+    <div class="day-info">
+      <svg width="32" height="32"><use href="#icon-phase-waxing-gibbous" width="32" height="32"/></svg>
+      <div class="day-phase-name">Waxing Gibbous</div>
+      <div class="day-angel">Angel Number · 1313</div>
+    </div>
+  </div>
+  <div class="daily-date-field">Date <span class="date-line"></span></div>
+  <div class="prompt-section">
+    <div class="prompt-label">✦ &nbsp; Today's Reflection</div>
+    <div class="prompt-text">"What creative idea has been whispering to you that you haven't acted on yet? Listen to it today."</div>
+    <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  </div>
+  <div class="prompt-section">
+    <div class="prompt-label">✦ &nbsp; How do I feel right now?</div>
+    <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  </div>
+  <div class="gratitude-section">
+    <div class="prompt-label">✦ &nbsp; Three things I am grateful for today</div>
+    <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  </div>
+  <div class="mood-section">
+    <div class="mood-label">Today's energy</div>
+    <div class="mood-icons">
+      <svg width="20" height="20"><use href="#mood-moon" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-leaf" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-star" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-flame" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-wave" width="20" height="20"/></svg>
+    </div>
+  </div>
+</div>
+
+<!-- DAY 14 -->
+<div class="page daily-page">
+  <div class="day-header">
+    <div class="day-number">14</div>
+    <div class="day-info">
+      <svg width="32" height="32"><use href="#icon-phase-waxing-gibbous" width="32" height="32"/></svg>
+      <div class="day-phase-name">Waxing Gibbous</div>
+      <div class="day-angel">Angel Number · 1414</div>
+    </div>
+  </div>
+  <div class="daily-date-field">Date <span class="date-line"></span></div>
+  <div class="prompt-section">
+    <div class="prompt-label">✦ &nbsp; Today's Reflection</div>
+    <div class="prompt-text">"You are almost at the full moon. What has shifted in you since Day 1? How have you grown?"</div>
+    <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  </div>
+  <div class="prompt-section">
+    <div class="prompt-label">✦ &nbsp; How do I feel right now?</div>
+    <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  </div>
+  <div class="gratitude-section">
+    <div class="prompt-label">✦ &nbsp; Three things I am grateful for today</div>
+    <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  </div>
+  <div class="mood-section">
+    <div class="mood-label">Today's energy</div>
+    <div class="mood-icons">
+      <svg width="20" height="20"><use href="#mood-moon" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-leaf" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-star" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-flame" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-wave" width="20" height="20"/></svg>
+    </div>
+  </div>
+</div>
+
+<!-- FULL MOON RITUAL -->
+<div class="page ritual-page">
+  <h2>Full Moon Ritual</h2>
+  <div class="gold-line"></div>
+  <div class="ritual-icon"><svg width="60" height="60"><use href="#icon-phase-full" width="60" height="60"/></svg></div>
+  <div class="ritual-text">"Under the full moon, nothing can hide.<br>Let yourself be fully seen — by the universe and by yourself."</div>
+  <div class="ritual-prompts">
+    <div class="ritual-prompt">
+      <div class="prompt-label">✦ &nbsp; What has come to light this cycle that I needed to see?</div>
+      <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+    </div>
+    <div class="ritual-prompt">
+      <div class="prompt-label">✦ &nbsp; What am I releasing under this full moon?</div>
+      <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+    </div>
+    <div class="ritual-prompt">
+      <div class="prompt-label">✦ &nbsp; What am I celebrating about myself right now?</div>
+      <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+    </div>
+  </div>
+</div>
+
+<!-- DAY 15 -->
+<div class="page daily-page">
+  <div class="day-header">
+    <div class="day-number">15</div>
+    <div class="day-info">
+      <svg width="32" height="32"><use href="#icon-phase-full" width="32" height="32"/></svg>
+      <div class="day-phase-name">Full Moon</div>
+      <div class="day-angel">Angel Number · 111</div>
+    </div>
+  </div>
+  <div class="daily-date-field">Date <span class="date-line"></span></div>
+  <div class="prompt-section">
+    <div class="prompt-label">✦ &nbsp; Today's Reflection</div>
+    <div class="prompt-text">"Full moon energy is at its peak. What truth are you ready to speak out loud — to yourself or to someone else?"</div>
+    <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  </div>
+  <div class="prompt-section">
+    <div class="prompt-label">✦ &nbsp; How do I feel right now?</div>
+    <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  </div>
+  <div class="gratitude-section">
+    <div class="prompt-label">✦ &nbsp; Three things I am grateful for today</div>
+    <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  </div>
+  <div class="mood-section">
+    <div class="mood-label">Today's energy</div>
+    <div class="mood-icons">
+      <svg width="20" height="20"><use href="#mood-moon" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-leaf" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-star" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-flame" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-wave" width="20" height="20"/></svg>
+    </div>
+  </div>
+</div>
+
+<!-- DAY 16 -->
+<div class="page daily-page">
+  <div class="day-header">
+    <div class="day-number">16</div>
+    <div class="day-info">
+      <svg width="32" height="32"><use href="#icon-phase-waning-gibbous" width="32" height="32"/></svg>
+      <div class="day-phase-name">Waning Gibbous</div>
+      <div class="day-angel">Angel Number · 222</div>
+    </div>
+  </div>
+  <div class="daily-date-field">Date <span class="date-line"></span></div>
+  <div class="prompt-section">
+    <div class="prompt-label">✦ &nbsp; Today's Reflection</div>
+    <div class="prompt-text">"What habit, thought pattern or relationship are you finally ready to let go of?"</div>
+    <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  </div>
+  <div class="prompt-section">
+    <div class="prompt-label">✦ &nbsp; How do I feel right now?</div>
+    <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  </div>
+  <div class="gratitude-section">
+    <div class="prompt-label">✦ &nbsp; Three things I am grateful for today</div>
+    <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  </div>
+  <div class="mood-section">
+    <div class="mood-label">Today's energy</div>
+    <div class="mood-icons">
+      <svg width="20" height="20"><use href="#mood-moon" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-leaf" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-star" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-flame" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-wave" width="20" height="20"/></svg>
+    </div>
+  </div>
+</div>
+
+<!-- DAY 17 -->
+<div class="page daily-page">
+  <div class="day-header">
+    <div class="day-number">17</div>
+    <div class="day-info">
+      <svg width="32" height="32"><use href="#icon-phase-waning-gibbous" width="32" height="32"/></svg>
+      <div class="day-phase-name">Waning Gibbous</div>
+      <div class="day-angel">Angel Number · 333</div>
+    </div>
+  </div>
+  <div class="daily-date-field">Date <span class="date-line"></span></div>
+  <div class="prompt-section">
+    <div class="prompt-label">✦ &nbsp; Today's Reflection</div>
+    <div class="prompt-text">"Your guides are near. If they could whisper one thing to you right now, what do you think it would be?"</div>
+    <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  </div>
+  <div class="prompt-section">
+    <div class="prompt-label">✦ &nbsp; How do I feel right now?</div>
+    <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  </div>
+  <div class="gratitude-section">
+    <div class="prompt-label">✦ &nbsp; Three things I am grateful for today</div>
+    <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  </div>
+  <div class="mood-section">
+    <div class="mood-label">Today's energy</div>
+    <div class="mood-icons">
+      <svg width="20" height="20"><use href="#mood-moon" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-leaf" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-star" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-flame" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-wave" width="20" height="20"/></svg>
+    </div>
+  </div>
+</div>
+
+<!-- DAY 18 -->
+<div class="page daily-page">
+  <div class="day-header">
+    <div class="day-number">18</div>
+    <div class="day-info">
+      <svg width="32" height="32"><use href="#icon-phase-waning-gibbous" width="32" height="32"/></svg>
+      <div class="day-phase-name">Waning Gibbous</div>
+      <div class="day-angel">Angel Number · 444</div>
+    </div>
+  </div>
+  <div class="daily-date-field">Date <span class="date-line"></span></div>
+  <div class="prompt-section">
+    <div class="prompt-label">✦ &nbsp; Today's Reflection</div>
+    <div class="prompt-text">"What does your body need today? When did you last truly rest without guilt?"</div>
+    <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  </div>
+  <div class="prompt-section">
+    <div class="prompt-label">✦ &nbsp; How do I feel right now?</div>
+    <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  </div>
+  <div class="gratitude-section">
+    <div class="prompt-label">✦ &nbsp; Three things I am grateful for today</div>
+    <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  </div>
+  <div class="mood-section">
+    <div class="mood-label">Today's energy</div>
+    <div class="mood-icons">
+      <svg width="20" height="20"><use href="#mood-moon" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-leaf" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-star" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-flame" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-wave" width="20" height="20"/></svg>
+    </div>
+  </div>
+</div>
+
+<!-- DAY 19 -->
+<div class="page daily-page">
+  <div class="day-header">
+    <div class="day-number">19</div>
+    <div class="day-info">
+      <svg width="32" height="32"><use href="#icon-phase-last-quarter" width="32" height="32"/></svg>
+      <div class="day-phase-name">Last Quarter</div>
+      <div class="day-angel">Angel Number · 555</div>
+    </div>
+  </div>
+  <div class="daily-date-field">Date <span class="date-line"></span></div>
+  <div class="prompt-section">
+    <div class="prompt-label">✦ &nbsp; Today's Reflection</div>
+    <div class="prompt-text">"What old version of yourself are you finally ready to say goodbye to? Thank her for what she taught you."</div>
+    <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  </div>
+  <div class="prompt-section">
+    <div class="prompt-label">✦ &nbsp; How do I feel right now?</div>
+    <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  </div>
+  <div class="gratitude-section">
+    <div class="prompt-label">✦ &nbsp; Three things I am grateful for today</div>
+    <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  </div>
+  <div class="mood-section">
+    <div class="mood-label">Today's energy</div>
+    <div class="mood-icons">
+      <svg width="20" height="20"><use href="#mood-moon" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-leaf" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-star" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-flame" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-wave" width="20" height="20"/></svg>
+    </div>
+  </div>
+</div>
+
+<!-- DAY 20 -->
+<div class="page daily-page">
+  <div class="day-header">
+    <div class="day-number">20</div>
+    <div class="day-info">
+      <svg width="32" height="32"><use href="#icon-phase-last-quarter" width="32" height="32"/></svg>
+      <div class="day-phase-name">Last Quarter</div>
+      <div class="day-angel">Angel Number · 777</div>
+    </div>
+  </div>
+  <div class="daily-date-field">Date <span class="date-line"></span></div>
+  <div class="prompt-section">
+    <div class="prompt-label">✦ &nbsp; Today's Reflection</div>
+    <div class="prompt-text">"What miracle — big or small — happened this cycle that you almost missed? Celebrate it now."</div>
+    <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  </div>
+  <div class="prompt-section">
+    <div class="prompt-label">✦ &nbsp; How do I feel right now?</div>
+    <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  </div>
+  <div class="gratitude-section">
+    <div class="prompt-label">✦ &nbsp; Three things I am grateful for today</div>
+    <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  </div>
+  <div class="mood-section">
+    <div class="mood-label">Today's energy</div>
+    <div class="mood-icons">
+      <svg width="20" height="20"><use href="#mood-moon" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-leaf" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-star" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-flame" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-wave" width="20" height="20"/></svg>
+    </div>
+  </div>
+</div>
+
+<!-- DAY 21 -->
+<div class="page daily-page">
+  <div class="day-header">
+    <div class="day-number">21</div>
+    <div class="day-info">
+      <svg width="32" height="32"><use href="#icon-phase-last-quarter" width="32" height="32"/></svg>
+      <div class="day-phase-name">Last Quarter</div>
+      <div class="day-angel">Angel Number · 888</div>
+    </div>
+  </div>
+  <div class="daily-date-field">Date <span class="date-line"></span></div>
+  <div class="prompt-section">
+    <div class="prompt-label">✦ &nbsp; Today's Reflection</div>
+    <div class="prompt-text">"How is abundance showing up in your life right now — beyond money? List every form of it."</div>
+    <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  </div>
+  <div class="prompt-section">
+    <div class="prompt-label">✦ &nbsp; How do I feel right now?</div>
+    <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  </div>
+  <div class="gratitude-section">
+    <div class="prompt-label">✦ &nbsp; Three things I am grateful for today</div>
+    <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  </div>
+  <div class="mood-section">
+    <div class="mood-label">Today's energy</div>
+    <div class="mood-icons">
+      <svg width="20" height="20"><use href="#mood-moon" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-leaf" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-star" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-flame" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-wave" width="20" height="20"/></svg>
+    </div>
+  </div>
+</div>
+
+<!-- DAY 22 -->
+<div class="page daily-page">
+  <div class="day-header">
+    <div class="day-number">22</div>
+    <div class="day-info">
+      <svg width="32" height="32"><use href="#icon-phase-waning-crescent" width="32" height="32"/></svg>
+      <div class="day-phase-name">Waning Crescent</div>
+      <div class="day-angel">Angel Number · 999</div>
+    </div>
+  </div>
+  <div class="daily-date-field">Date <span class="date-line"></span></div>
+  <div class="prompt-section">
+    <div class="prompt-label">✦ &nbsp; Today's Reflection</div>
+    <div class="prompt-text">"What is ending beautifully in your life? Write a thank-you note to this closing chapter."</div>
+    <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  </div>
+  <div class="prompt-section">
+    <div class="prompt-label">✦ &nbsp; How do I feel right now?</div>
+    <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  </div>
+  <div class="gratitude-section">
+    <div class="prompt-label">✦ &nbsp; Three things I am grateful for today</div>
+    <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  </div>
+  <div class="mood-section">
+    <div class="mood-label">Today's energy</div>
+    <div class="mood-icons">
+      <svg width="20" height="20"><use href="#mood-moon" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-leaf" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-star" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-flame" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-wave" width="20" height="20"/></svg>
+    </div>
+  </div>
+</div>
+
+<!-- DAY 23 -->
+<div class="page daily-page">
+  <div class="day-header">
+    <div class="day-number">23</div>
+    <div class="day-info">
+      <svg width="32" height="32"><use href="#icon-phase-waning-crescent" width="32" height="32"/></svg>
+      <div class="day-phase-name">Waning Crescent</div>
+      <div class="day-angel">Angel Number · 1111</div>
+    </div>
+  </div>
+  <div class="daily-date-field">Date <span class="date-line"></span></div>
+  <div class="prompt-section">
+    <div class="prompt-label">✦ &nbsp; Today's Reflection</div>
+    <div class="prompt-text">"Make another wish. You are allowed to want more. What do you want your life to feel like one year from now?"</div>
+    <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  </div>
+  <div class="prompt-section">
+    <div class="prompt-label">✦ &nbsp; How do I feel right now?</div>
+    <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  </div>
+  <div class="gratitude-section">
+    <div class="prompt-label">✦ &nbsp; Three things I am grateful for today</div>
+    <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  </div>
+  <div class="mood-section">
+    <div class="mood-label">Today's energy</div>
+    <div class="mood-icons">
+      <svg width="20" height="20"><use href="#mood-moon" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-leaf" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-star" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-flame" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-wave" width="20" height="20"/></svg>
+    </div>
+  </div>
+</div>
+
+<!-- DAY 24 -->
+<div class="page daily-page">
+  <div class="day-header">
+    <div class="day-number">24</div>
+    <div class="day-info">
+      <svg width="32" height="32"><use href="#icon-phase-waning-crescent" width="32" height="32"/></svg>
+      <div class="day-phase-name">Waning Crescent</div>
+      <div class="day-angel">Angel Number · 222</div>
+    </div>
+  </div>
+  <div class="daily-date-field">Date <span class="date-line"></span></div>
+  <div class="prompt-section">
+    <div class="prompt-label">✦ &nbsp; Today's Reflection</div>
+    <div class="prompt-text">"Who have you been showing up for lately? When did you last show up fully for yourself?"</div>
+    <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  </div>
+  <div class="prompt-section">
+    <div class="prompt-label">✦ &nbsp; How do I feel right now?</div>
+    <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  </div>
+  <div class="gratitude-section">
+    <div class="prompt-label">✦ &nbsp; Three things I am grateful for today</div>
+    <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  </div>
+  <div class="mood-section">
+    <div class="mood-label">Today's energy</div>
+    <div class="mood-icons">
+      <svg width="20" height="20"><use href="#mood-moon" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-leaf" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-star" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-flame" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-wave" width="20" height="20"/></svg>
+    </div>
+  </div>
+</div>
+
+<!-- DAY 25 -->
+<div class="page daily-page">
+  <div class="day-header">
+    <div class="day-number">25</div>
+    <div class="day-info">
+      <svg width="32" height="32"><use href="#icon-phase-waning-crescent" width="32" height="32"/></svg>
+      <div class="day-phase-name">Waning Crescent</div>
+      <div class="day-angel">Angel Number · 444</div>
+    </div>
+  </div>
+  <div class="daily-date-field">Date <span class="date-line"></span></div>
+  <div class="prompt-section">
+    <div class="prompt-label">✦ &nbsp; Today's Reflection</div>
+    <div class="prompt-text">"You are protected and held. Where in your life can you finally allow yourself to relax and trust?"</div>
+    <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  </div>
+  <div class="prompt-section">
+    <div class="prompt-label">✦ &nbsp; How do I feel right now?</div>
+    <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  </div>
+  <div class="gratitude-section">
+    <div class="prompt-label">✦ &nbsp; Three things I am grateful for today</div>
+    <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  </div>
+  <div class="mood-section">
+    <div class="mood-label">Today's energy</div>
+    <div class="mood-icons">
+      <svg width="20" height="20"><use href="#mood-moon" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-leaf" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-star" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-flame" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-wave" width="20" height="20"/></svg>
+    </div>
+  </div>
+</div>
+
+<!-- DAY 26 -->
+<div class="page daily-page">
+  <div class="day-header">
+    <div class="day-number">26</div>
+    <div class="day-info">
+      <svg width="32" height="32"><use href="#icon-phase-waning-crescent" width="32" height="32"/></svg>
+      <div class="day-phase-name">Waning Crescent</div>
+      <div class="day-angel">Angel Number · 777</div>
+    </div>
+  </div>
+  <div class="daily-date-field">Date <span class="date-line"></span></div>
+  <div class="prompt-section">
+    <div class="prompt-label">✦ &nbsp; Today's Reflection</div>
+    <div class="prompt-text">"What does your intuition know that your mind is still trying to logic away? Listen to it."</div>
+    <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  </div>
+  <div class="prompt-section">
+    <div class="prompt-label">✦ &nbsp; How do I feel right now?</div>
+    <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  </div>
+  <div class="gratitude-section">
+    <div class="prompt-label">✦ &nbsp; Three things I am grateful for today</div>
+    <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  </div>
+  <div class="mood-section">
+    <div class="mood-label">Today's energy</div>
+    <div class="mood-icons">
+      <svg width="20" height="20"><use href="#mood-moon" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-leaf" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-star" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-flame" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-wave" width="20" height="20"/></svg>
+    </div>
+  </div>
+</div>
+
+<!-- DAY 27 -->
+<div class="page daily-page">
+  <div class="day-header">
+    <div class="day-number">27</div>
+    <div class="day-info">
+      <svg width="32" height="32"><use href="#icon-phase-dark" width="32" height="32"/></svg>
+      <div class="day-phase-name">Dark Moon</div>
+      <div class="day-angel">Angel Number · 999</div>
+    </div>
+  </div>
+  <div class="daily-date-field">Date <span class="date-line"></span></div>
+  <div class="prompt-section">
+    <div class="prompt-label">✦ &nbsp; Today's Reflection</div>
+    <div class="prompt-text">"The dark moon is a portal. In the silence, what is your soul trying to tell you?"</div>
+    <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  </div>
+  <div class="prompt-section">
+    <div class="prompt-label">✦ &nbsp; How do I feel right now?</div>
+    <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  </div>
+  <div class="gratitude-section">
+    <div class="prompt-label">✦ &nbsp; Three things I am grateful for today</div>
+    <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  </div>
+  <div class="mood-section">
+    <div class="mood-label">Today's energy</div>
+    <div class="mood-icons">
+      <svg width="20" height="20"><use href="#mood-moon" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-leaf" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-star" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-flame" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-wave" width="20" height="20"/></svg>
+    </div>
+  </div>
+</div>
+
+<!-- DAY 28 -->
+<div class="page daily-page">
+  <div class="day-header">
+    <div class="day-number">28</div>
+    <div class="day-info">
+      <svg width="32" height="32"><use href="#icon-phase-dark" width="32" height="32"/></svg>
+      <div class="day-phase-name">Dark Moon</div>
+      <div class="day-angel">Angel Number · 1111</div>
+    </div>
+  </div>
+  <div class="daily-date-field">Date <span class="date-line"></span></div>
+  <div class="prompt-section">
+    <div class="prompt-label">✦ &nbsp; Today's Reflection</div>
+    <div class="prompt-text">"You completed a full cycle. Who are you now compared to Day 1? What does the next cycle get to be about?"</div>
+    <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  </div>
+  <div class="prompt-section">
+    <div class="prompt-label">✦ &nbsp; How do I feel right now?</div>
+    <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  </div>
+  <div class="gratitude-section">
+    <div class="prompt-label">✦ &nbsp; Three things I am grateful for today</div>
+    <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  </div>
+  <div class="mood-section">
+    <div class="mood-label">Today's energy</div>
+    <div class="mood-icons">
+      <svg width="20" height="20"><use href="#mood-moon" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-leaf" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-star" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-flame" width="20" height="20"/></svg>
+      <svg width="20" height="20"><use href="#mood-wave" width="20" height="20"/></svg>
+    </div>
+  </div>
+</div>
+
+<!-- CLOSING PAGE -->
+<div class="page closing-page">
+  <svg width="90" height="90" viewBox="0 0 100 100"><use href="#icon-moon-full" width="100" height="100"/></svg>
+  <h2>You Did It</h2>
+  <div class="gold-line" style="margin:14px auto 20px auto;"></div>
+  <p>
+    One full cycle. 28 days of showing up for yourself.<br>
+    Of listening. Of releasing. Of becoming.<br><br>
+    The moon will rise again. And so will you.<br>Always.
+  </p>
+  <svg width="90" height="75" viewBox="0 0 120 100" style="margin-bottom:16px"><use href="#icon-unicorn" width="120" height="100"/></svg>
+  <div style="font-size:10px;letter-spacing:3px;color:#c9a96e;text-transform:uppercase;margin-bottom:20px;">✦ &nbsp; 1111 &nbsp; ✦</div>
+  <div class="reflection-box">
+    <div class="prompt-label" style="margin-bottom:10px;">✦ &nbsp; My biggest insight from this cycle</div>
+    <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+    <div class="prompt-label" style="margin-top:16px;margin-bottom:10px;">✦ &nbsp; My intention for the next cycle</div>
+    <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  </div>
+</div>
+
+
+<!-- ═══════════ WAXING MOON RITUAL ═══════════ -->
+<div class="page ritual-page">
+  <h2>Waxing Moon Ritual</h2>
+  <div class="gold-line"></div>
+  <div class="ritual-icon"><svg width="60" height="60"><use href="#icon-phase-first-quarter" width="60" height="60"/></svg></div>
+  <div class="ritual-text">"The moon is growing — and so are you.<br>Take action. Trust the momentum."</div>
+  <div class="ritual-prompts">
+    <div class="ritual-prompt">
+      <div class="prompt-label">✦ &nbsp; What action am I ready to take this week?</div>
+      <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+    </div>
+    <div class="ritual-prompt">
+      <div class="prompt-label">✦ &nbsp; What fear is trying to stop me — and what do I choose instead?</div>
+      <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+    </div>
+    <div class="ritual-prompt">
+      <div class="prompt-label">✦ &nbsp; My affirmation for the waxing phase</div>
+      <div class="write-line"></div><div class="write-line"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ WEEK 1 CHECK-IN ═══════════ -->
+<div class="page closing-page">
+  <svg width="70" height="70" viewBox="0 0 40 40"><use href="#icon-phase-waxing-crescent" width="40" height="40"/></svg>
+  <h2>Week One</h2>
+  <div class="gold-line" style="margin:14px auto 20px auto;"></div>
+  <div class="reflection-box" style="text-align:left;">
+    <div class="prompt-label" style="margin-bottom:10px;">✦ &nbsp; How do I feel compared to Day 1?</div>
+    <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+    <div class="prompt-label" style="margin-top:16px;margin-bottom:10px;">✦ &nbsp; What surprised me this week?</div>
+    <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+    <div class="prompt-label" style="margin-top:16px;margin-bottom:10px;">✦ &nbsp; One thing I'm proud of myself for</div>
+    <div class="write-line"></div><div class="write-line"></div>
+    <div class="prompt-label" style="margin-top:16px;margin-bottom:10px;">✦ &nbsp; My energy level this week (circle): Low · Steady · High · Electric</div>
+    <div class="write-line"></div>
+  </div>
+</div>
+
+<!-- ═══════════ FULL MOON RITUAL ═══════════ -->
+<div class="page ritual-page">
+  <h2>Full Moon Ritual</h2>
+  <div class="gold-line"></div>
+  <div class="ritual-icon"><svg width="60" height="60"><use href="#icon-phase-full" width="60" height="60"/></svg></div>
+  <div class="ritual-text">"Under the full moon, nothing is hidden.<br>Celebrate what bloomed. Release what didn't."</div>
+  <div class="ritual-prompts">
+    <div class="ritual-prompt">
+      <div class="prompt-label">✦ &nbsp; What has come to fruition since the new moon?</div>
+      <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+    </div>
+    <div class="ritual-prompt">
+      <div class="prompt-label">✦ &nbsp; What am I ready to release under this full moon?</div>
+      <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+    </div>
+    <div class="ritual-prompt">
+      <div class="prompt-label">✦ &nbsp; A letter to the full moon (say anything)</div>
+      <div class="write-line"></div><div class="write-line"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ WEEK 2 CHECK-IN ═══════════ -->
+<div class="page closing-page">
+  <svg width="70" height="70" viewBox="0 0 40 40"><use href="#icon-phase-full" width="40" height="40"/></svg>
+  <h2>Week Two</h2>
+  <div class="gold-line" style="margin:14px auto 20px auto;"></div>
+  <div class="reflection-box" style="text-align:left;">
+    <div class="prompt-label" style="margin-bottom:10px;">✦ &nbsp; What is the moon illuminating in my life right now?</div>
+    <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+    <div class="prompt-label" style="margin-top:16px;margin-bottom:10px;">✦ &nbsp; What am I celebrating?</div>
+    <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+    <div class="prompt-label" style="margin-top:16px;margin-bottom:10px;">✦ &nbsp; What am I letting go of?</div>
+    <div class="write-line"></div><div class="write-line"></div>
+    <div class="prompt-label" style="margin-top:16px;margin-bottom:10px;">✦ &nbsp; My energy level this week (circle): Low · Steady · High · Electric</div>
+    <div class="write-line"></div>
+  </div>
+</div>
+
+<!-- ═══════════ WANING MOON RITUAL ═══════════ -->
+<div class="page ritual-page">
+  <h2>Waning Moon Ritual</h2>
+  <div class="gold-line"></div>
+  <div class="ritual-icon"><svg width="60" height="60"><use href="#icon-phase-last-quarter" width="60" height="60"/></svg></div>
+  <div class="ritual-text">"The moon is softening. So can you.<br>This is the time to let go with grace."</div>
+  <div class="ritual-prompts">
+    <div class="ritual-prompt">
+      <div class="prompt-label">✦ &nbsp; What patterns or habits am I releasing this cycle?</div>
+      <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+    </div>
+    <div class="ritual-prompt">
+      <div class="prompt-label">✦ &nbsp; What does my body need more of right now?</div>
+      <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+    </div>
+    <div class="ritual-prompt">
+      <div class="prompt-label">✦ &nbsp; One thing I forgive myself for this cycle</div>
+      <div class="write-line"></div><div class="write-line"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ WEEK 3 CHECK-IN ═══════════ -->
+<div class="page closing-page">
+  <svg width="70" height="70" viewBox="0 0 40 40"><use href="#icon-phase-waning-gibbous" width="40" height="40"/></svg>
+  <h2>Week Three</h2>
+  <div class="gold-line" style="margin:14px auto 20px auto;"></div>
+  <div class="reflection-box" style="text-align:left;">
+    <div class="prompt-label" style="margin-bottom:10px;">✦ &nbsp; What am I releasing that has been holding me back?</div>
+    <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+    <div class="prompt-label" style="margin-top:16px;margin-bottom:10px;">✦ &nbsp; Where have I grown the most this cycle?</div>
+    <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+    <div class="prompt-label" style="margin-top:16px;margin-bottom:10px;">✦ &nbsp; What do I want to do differently next cycle?</div>
+    <div class="write-line"></div><div class="write-line"></div>
+    <div class="prompt-label" style="margin-top:16px;margin-bottom:10px;">✦ &nbsp; My energy level this week (circle): Low · Steady · High · Electric</div>
+    <div class="write-line"></div>
+  </div>
+</div>
+
+<!-- ═══════════ DARK MOON RITUAL ═══════════ -->
+<div class="page ritual-page">
+  <h2>Dark Moon Ritual</h2>
+  <div class="gold-line"></div>
+  <div class="ritual-icon"><svg width="60" height="60"><use href="#icon-phase-dark" width="60" height="60"/></svg></div>
+  <div class="ritual-text">"In the dark, seeds are planted.<br>Rest is not retreat — it is preparation."</div>
+  <div class="ritual-prompts">
+    <div class="ritual-prompt">
+      <div class="prompt-label">✦ &nbsp; What do I need to rest from?</div>
+      <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+    </div>
+    <div class="ritual-prompt">
+      <div class="prompt-label">✦ &nbsp; What is waiting to be born in my next cycle?</div>
+      <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+    </div>
+    <div class="ritual-prompt">
+      <div class="prompt-label">✦ &nbsp; A word or intention I carry into the next moon</div>
+      <div class="write-line"></div><div class="write-line"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ WEEK 4 CHECK-IN ═══════════ -->
+<div class="page closing-page">
+  <svg width="70" height="70" viewBox="0 0 40 40"><use href="#icon-phase-dark" width="40" height="40"/></svg>
+  <h2>Week Four</h2>
+  <div class="gold-line" style="margin:14px auto 20px auto;"></div>
+  <div class="reflection-box" style="text-align:left;">
+    <div class="prompt-label" style="margin-bottom:10px;">✦ &nbsp; How do I feel as this cycle closes?</div>
+    <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+    <div class="prompt-label" style="margin-top:16px;margin-bottom:10px;">✦ &nbsp; What is the single most important thing this cycle taught me?</div>
+    <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+    <div class="prompt-label" style="margin-top:16px;margin-bottom:10px;">✦ &nbsp; My seed intention for the next new moon</div>
+    <div class="write-line"></div><div class="write-line"></div>
+    <div class="prompt-label" style="margin-top:16px;margin-bottom:10px;">✦ &nbsp; My energy level this week (circle): Low · Steady · High · Electric</div>
+    <div class="write-line"></div>
+  </div>
+</div>
+
+<!-- ═══════════ MY MANIFESTATION LIST ═══════════ -->
+<div class="page intro-page">
+  <h2>My Manifestations</h2>
+  <div class="gold-line"></div>
+  <p style="font-size:11px;font-weight:300;line-height:2;color:#6a6a6a;margin-bottom:16px;">Write everything you are calling in — big and small. Write it as if it has already happened. The universe is listening.</p>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+</div>
+
+<!-- ═══════════ WHAT I'M RELEASING ═══════════ -->
+<div class="page intro-page">
+  <h2>What I'm Releasing</h2>
+  <div class="gold-line"></div>
+  <p style="font-size:11px;font-weight:300;line-height:2;color:#6a6a6a;margin-bottom:16px;">Write what no longer serves you — thoughts, habits, relationships, fears. Release them here. They have no power over your next cycle.</p>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+</div>
+
+<!-- ═══════════ MOON AFFIRMATIONS — WAXING ═══════════ -->
+<div class="page angel-page">
+  <h2>Waxing Moon Affirmations</h2>
+  <div class="gold-line"></div>
+  <p style="font-size:11px;font-weight:300;line-height:2;color:#6a6a6a;margin-bottom:8px;">Read these aloud during the waxing phase. Place your hand on your heart. Breathe. Receive.</p>
+  <div class="angel-list">
+    <div class="angel-item"><div class="angel-number-badge" style="font-size:14px;min-width:20px;">✦</div><div class="angel-meaning"><strong>I am magnetic.</strong>Everything I need is already flowing toward me. I open my arms and receive.</div></div>
+    <div class="angel-item"><div class="angel-number-badge" style="font-size:14px;min-width:20px;">✦</div><div class="angel-meaning"><strong>I am in motion.</strong>Every step I take, no matter how small, moves me closer to my dreams.</div></div>
+    <div class="angel-item"><div class="angel-number-badge" style="font-size:14px;min-width:20px;">✦</div><div class="angel-meaning"><strong>I trust the timing.</strong>My growth is unfolding exactly as it should. I am not behind. I am right on time.</div></div>
+    <div class="angel-item"><div class="angel-number-badge" style="font-size:14px;min-width:20px;">✦</div><div class="angel-meaning"><strong>I am worthy.</strong>I deserve everything I am calling in. My desires are valid and sacred.</div></div>
+    <div class="angel-item"><div class="angel-number-badge" style="font-size:14px;min-width:20px;">✦</div><div class="angel-meaning"><strong>I am courageous.</strong>I take aligned action even when I am afraid. My courage grows every day.</div></div>
+    <div class="angel-item"><div class="angel-number-badge" style="font-size:14px;min-width:20px;">✦</div><div class="angel-meaning"><strong>I am expanding.</strong>My capacity for love, abundance, and joy grows with each passing day.</div></div>
+  </div>
+</div>
+
+<!-- ═══════════ MOON AFFIRMATIONS — WANING ═══════════ -->
+<div class="page angel-page">
+  <h2>Waning Moon Affirmations</h2>
+  <div class="gold-line"></div>
+  <p style="font-size:11px;font-weight:300;line-height:2;color:#6a6a6a;margin-bottom:8px;">Read these aloud during the waning phase. Let each one be a gentle permission slip to rest.</p>
+  <div class="angel-list">
+    <div class="angel-item"><div class="angel-number-badge" style="font-size:14px;min-width:20px;">✦</div><div class="angel-meaning"><strong>I release with grace.</strong>I let go of what no longer serves me. I trust that space creates miracles.</div></div>
+    <div class="angel-item"><div class="angel-number-badge" style="font-size:14px;min-width:20px;">✦</div><div class="angel-meaning"><strong>I rest without guilt.</strong>My rest is sacred. Stillness is productive. Slowing down is not giving up.</div></div>
+    <div class="angel-item"><div class="angel-number-badge" style="font-size:14px;min-width:20px;">✦</div><div class="angel-meaning"><strong>I forgive myself.</strong>I release judgment about what didn't happen this cycle. I did my best.</div></div>
+    <div class="angel-item"><div class="angel-number-badge" style="font-size:14px;min-width:20px;">✦</div><div class="angel-meaning"><strong>I am enough.</strong>Exactly as I am, in this moment, I am more than enough. Nothing to prove.</div></div>
+    <div class="angel-item"><div class="angel-number-badge" style="font-size:14px;min-width:20px;">✦</div><div class="angel-meaning"><strong>I surrender.</strong>I release control over what I cannot change. The universe holds what I cannot carry.</div></div>
+    <div class="angel-item"><div class="angel-number-badge" style="font-size:14px;min-width:20px;">✦</div><div class="angel-meaning"><strong>I am complete.</strong>This cycle has given me exactly what I needed. I close it with love and gratitude.</div></div>
+  </div>
+</div>
+
+<!-- ═══════════ CRYSTAL & MOON GUIDE ═══════════ -->
+<div class="page intro-page">
+  <h2>Crystals & The Moon</h2>
+  <div class="gold-line"></div>
+  <p style="font-size:11px;font-weight:300;line-height:2;color:#6a6a6a;margin-bottom:16px;">Each moon phase carries a unique energy. These crystals amplify that energy and support your practice.</p>
+  <div class="phases-grid">
+    <div class="phase-card">
+      <svg width="28" height="28"><use href="#icon-phase-new" width="28" height="28"/></svg>
+      <h4>New Moon</h4>
+      <p><strong style="color:#2e1a47;">Labradorite · Black Tourmaline</strong><br>Protection, new beginnings, setting intentions, clearing old energy.</p>
+    </div>
+    <div class="phase-card">
+      <svg width="28" height="28"><use href="#icon-phase-waxing-crescent" width="28" height="28"/></svg>
+      <h4>Waxing Moon</h4>
+      <p><strong style="color:#2e1a47;">Citrine · Green Aventurine</strong><br>Attraction, growth, abundance, momentum, manifestation in motion.</p>
+    </div>
+    <div class="phase-card">
+      <svg width="28" height="28"><use href="#icon-phase-full" width="28" height="28"/></svg>
+      <h4>Full Moon</h4>
+      <p><strong style="color:#2e1a47;">Selenite · Moonstone</strong><br>Amplification, clarity, releasing, charging other crystals, divine feminine.</p>
+    </div>
+    <div class="phase-card">
+      <svg width="28" height="28"><use href="#icon-phase-waning-crescent" width="28" height="28"/></svg>
+      <h4>Waning Moon</h4>
+      <p><strong style="color:#2e1a47;">Amethyst · Obsidian</strong><br>Release, forgiveness, cleansing, shadow work, inner peace.</p>
+    </div>
+  </div>
+  <div style="margin-top:20px;padding:14px;border-left:2px solid #c9a96e;background:#faf6f0;">
+    <div class="prompt-label" style="margin-bottom:8px;">✦ &nbsp; My crystals for this cycle</div>
+    <div class="write-line"></div><div class="write-line"></div>
+  </div>
+</div>
+
+<!-- ═══════════ FREE WRITING PAGES (25 pages) ═══════════ -->
+<div class="page intro-page">
+  <h2>Free Writing</h2>
+  <div class="gold-line"></div>
+  <p style="font-size:11px;font-weight:300;line-height:2;color:#6a6a6a;margin-bottom:16px;">This space is yours. No prompts. No rules. Write whatever wants to come through.</p>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+</div>
+
+<!-- Free Writing 2-25 -->
+<div class="page daily-page" style="display:flex;flex-direction:column;justify-content:flex-start;">
+  <div style="font-size:9px;letter-spacing:3px;color:#c9a96e;text-transform:uppercase;margin-bottom:18px;">✦ &nbsp; Free Writing</div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+</div>
+<div class="page daily-page" style="display:flex;flex-direction:column;justify-content:flex-start;">
+  <div style="font-size:9px;letter-spacing:3px;color:#c9a96e;text-transform:uppercase;margin-bottom:18px;">✦ &nbsp; Free Writing</div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+</div>
+<div class="page daily-page" style="display:flex;flex-direction:column;justify-content:flex-start;">
+  <div style="font-size:9px;letter-spacing:3px;color:#c9a96e;text-transform:uppercase;margin-bottom:18px;">✦ &nbsp; Free Writing</div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+</div>
+<div class="page daily-page" style="display:flex;flex-direction:column;justify-content:flex-start;">
+  <div style="font-size:9px;letter-spacing:3px;color:#c9a96e;text-transform:uppercase;margin-bottom:18px;">✦ &nbsp; Free Writing</div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+</div>
+<div class="page daily-page" style="display:flex;flex-direction:column;justify-content:flex-start;">
+  <div style="font-size:9px;letter-spacing:3px;color:#c9a96e;text-transform:uppercase;margin-bottom:18px;">✦ &nbsp; Free Writing</div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+</div>
+<div class="page daily-page" style="display:flex;flex-direction:column;justify-content:flex-start;">
+  <div style="font-size:9px;letter-spacing:3px;color:#c9a96e;text-transform:uppercase;margin-bottom:18px;">✦ &nbsp; Free Writing</div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+</div>
+<div class="page daily-page" style="display:flex;flex-direction:column;justify-content:flex-start;">
+  <div style="font-size:9px;letter-spacing:3px;color:#c9a96e;text-transform:uppercase;margin-bottom:18px;">✦ &nbsp; Free Writing</div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+</div>
+<div class="page daily-page" style="display:flex;flex-direction:column;justify-content:flex-start;">
+  <div style="font-size:9px;letter-spacing:3px;color:#c9a96e;text-transform:uppercase;margin-bottom:18px;">✦ &nbsp; Free Writing</div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+</div>
+<div class="page daily-page" style="display:flex;flex-direction:column;justify-content:flex-start;">
+  <div style="font-size:9px;letter-spacing:3px;color:#c9a96e;text-transform:uppercase;margin-bottom:18px;">✦ &nbsp; Free Writing</div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+</div>
+<div class="page daily-page" style="display:flex;flex-direction:column;justify-content:flex-start;">
+  <div style="font-size:9px;letter-spacing:3px;color:#c9a96e;text-transform:uppercase;margin-bottom:18px;">✦ &nbsp; Free Writing</div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+</div>
+<div class="page daily-page" style="display:flex;flex-direction:column;justify-content:flex-start;">
+  <div style="font-size:9px;letter-spacing:3px;color:#c9a96e;text-transform:uppercase;margin-bottom:18px;">✦ &nbsp; Free Writing</div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+</div>
+<div class="page daily-page" style="display:flex;flex-direction:column;justify-content:flex-start;">
+  <div style="font-size:9px;letter-spacing:3px;color:#c9a96e;text-transform:uppercase;margin-bottom:18px;">✦ &nbsp; Free Writing</div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+</div>
+<div class="page daily-page" style="display:flex;flex-direction:column;justify-content:flex-start;">
+  <div style="font-size:9px;letter-spacing:3px;color:#c9a96e;text-transform:uppercase;margin-bottom:18px;">✦ &nbsp; Free Writing</div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+</div>
+<div class="page daily-page" style="display:flex;flex-direction:column;justify-content:flex-start;">
+  <div style="font-size:9px;letter-spacing:3px;color:#c9a96e;text-transform:uppercase;margin-bottom:18px;">✦ &nbsp; Free Writing</div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+</div>
+<div class="page daily-page" style="display:flex;flex-direction:column;justify-content:flex-start;">
+  <div style="font-size:9px;letter-spacing:3px;color:#c9a96e;text-transform:uppercase;margin-bottom:18px;">✦ &nbsp; Free Writing</div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+</div>
+<div class="page daily-page" style="display:flex;flex-direction:column;justify-content:flex-start;">
+  <div style="font-size:9px;letter-spacing:3px;color:#c9a96e;text-transform:uppercase;margin-bottom:18px;">✦ &nbsp; Free Writing</div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+</div>
+<div class="page daily-page" style="display:flex;flex-direction:column;justify-content:flex-start;">
+  <div style="font-size:9px;letter-spacing:3px;color:#c9a96e;text-transform:uppercase;margin-bottom:18px;">✦ &nbsp; Free Writing</div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+</div>
+<div class="page daily-page" style="display:flex;flex-direction:column;justify-content:flex-start;">
+  <div style="font-size:9px;letter-spacing:3px;color:#c9a96e;text-transform:uppercase;margin-bottom:18px;">✦ &nbsp; Free Writing</div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+</div>
+<div class="page daily-page" style="display:flex;flex-direction:column;justify-content:flex-start;">
+  <div style="font-size:9px;letter-spacing:3px;color:#c9a96e;text-transform:uppercase;margin-bottom:18px;">✦ &nbsp; Free Writing</div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+</div>
+<div class="page daily-page" style="display:flex;flex-direction:column;justify-content:flex-start;">
+  <div style="font-size:9px;letter-spacing:3px;color:#c9a96e;text-transform:uppercase;margin-bottom:18px;">✦ &nbsp; Free Writing</div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+</div>
+<div class="page daily-page" style="display:flex;flex-direction:column;justify-content:flex-start;">
+  <div style="font-size:9px;letter-spacing:3px;color:#c9a96e;text-transform:uppercase;margin-bottom:18px;">✦ &nbsp; Free Writing</div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+</div>
+<div class="page daily-page" style="display:flex;flex-direction:column;justify-content:flex-start;">
+  <div style="font-size:9px;letter-spacing:3px;color:#c9a96e;text-transform:uppercase;margin-bottom:18px;">✦ &nbsp; Free Writing</div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+</div>
+<div class="page daily-page" style="display:flex;flex-direction:column;justify-content:flex-start;">
+  <div style="font-size:9px;letter-spacing:3px;color:#c9a96e;text-transform:uppercase;margin-bottom:18px;">✦ &nbsp; Free Writing</div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+</div>
+<div class="page daily-page" style="display:flex;flex-direction:column;justify-content:flex-start;">
+  <div style="font-size:9px;letter-spacing:3px;color:#c9a96e;text-transform:uppercase;margin-bottom:18px;">✦ &nbsp; Free Writing</div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+  <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,800;0,900;1,400;1,700&family=Inter:wght@400;500;600;700&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { width: 600px; height: 600px; background: #E5E2DC; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+
+  .scene { width: 600px; height: 600px; position: relative; display: flex; align-items: center; justify-content: center; background: #DEDAD3; }
+
+  .card {
+    position: absolute;
+    width: 170px;
+    height: 240px;
+    background: #F5F2EE;
+    border-radius: 4px;
+    border: 1px solid #D8D4CE;
+    overflow: hidden;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.13), 0 2px 8px rgba(0,0,0,0.08);
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Thin colored top band */
+  .card-band {
+    height: 44px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10px;
+  }
+
+  .band-cat {
+    font-family: 'Inter', sans-serif;
+    font-size: 5pt;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.9);
+  }
+
+  .band-level {
+    font-family: 'Inter', sans-serif;
+    font-size: 5pt;
+    font-weight: 500;
+    color: rgba(255,255,255,0.65);
+    letter-spacing: 0.08em;
+  }
+
+  /* Body */
+  .card-body {
+    flex: 1;
+    padding: 10px 11px 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+  }
+
+  /* Corner marks */
+  .card-body::before {
+    content: '';
+    position: absolute;
+    top: 6px; left: 6px; right: 6px; bottom: 6px;
+    border: 0.7px solid #E0DDD8;
+    pointer-events: none;
+  }
+
+  .q-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 9.5pt;
+    font-weight: 800;
+    color: #1A1814;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    padding: 6px 2px;
+  }
+
+  .card-foot {
+    border-top: 0.7px solid #E0DDD8;
+    padding-top: 6px;
+    margin-top: 4px;
+  }
+
+  .foot-concept {
+    font-family: 'Inter', sans-serif;
+    font-size: 4.5pt;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .foot-ref {
+    font-family: 'Playfair Display', serif;
+    font-size: 5.5pt;
+    font-style: italic;
+    color: #AAA49E;
+    margin-top: 1px;
+  }
+
+  /* Bottom color strip */
+  .card-strip {
+    height: 6px;
+    display: flex;
+    flex-shrink: 0;
+  }
+  .strip-seg { flex: 1; }
+
+  /* Rotations — 3 cards, more breathing room */
+  .c1 { transform: rotate(-14deg) translate(-95px, 22px); z-index: 1; }
+  .c2 { transform: rotate(0deg) translate(0px, -18px); z-index: 3; }
+  .c3 { transform: rotate(14deg) translate(95px, 22px); z-index: 2; }
+  .c4 { display: none; }
+
+  /* Title overlay */
+  .title-block {
+    position: absolute;
+    bottom: 28px;
+    left: 0; right: 0;
+    text-align: center;
+    z-index: 10;
+  }
+
+  .title-eyebrow {
+    font-family: 'Inter', sans-serif;
+    font-size: 5.5pt;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #8A8680;
+    margin-bottom: 5px;
+  }
+
+  .title-main {
+    font-family: 'Playfair Display', serif;
+    font-size: 18pt;
+    font-weight: 900;
+    color: #1A1814;
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+  }
+
+  .title-main em {
+    font-weight: 400;
+    font-style: italic;
+  }
+
+  .title-by {
+    font-family: 'Inter', sans-serif;
+    font-size: 5.5pt;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #AAA49E;
+    margin-top: 7px;
+  }
+
+  /* Category color dots row */
+  .cat-dots {
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+    margin-top: 8px;
+  }
+
+  .dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+  }
+</style>
+</head>
+<body>
+<div class="scene">
+
+  <!-- Card 1 — Friends (sage green) -->
+  <div class="card c1">
+    <div class="card-band" style="background:#7BA87A;">
+      <div class="band-cat">Friends</div>
+      <div class="band-level">01 · Surface</div>
+    </div>
+    <div class="card-body">
+      <div class="q-text">When was the moment you felt we were truly friends?</div>
+      <div class="card-foot">
+        <div class="foot-concept" style="color:#7BA87A;">Relational turning point</div>
+        <div class="foot-ref">— Attachment Theory</div>
+      </div>
+    </div>
+    <div class="card-strip">
+      <div class="strip-seg" style="background:#7BA87A;"></div>
+      <div class="strip-seg" style="background:#C4907A;"></div>
+      <div class="strip-seg" style="background:#9B7E9E;"></div>
+      <div class="strip-seg" style="background:#7A8FAD;"></div>
+    </div>
+  </div>
+
+  <!-- Card 2 — Family (dusty rose) -->
+  <div class="card c2">
+    <div class="card-band" style="background:#C4907A;">
+      <div class="band-cat">Family</div>
+      <div class="band-level">02 · Deep</div>
+    </div>
+    <div class="card-body">
+      <div class="q-text">What family tradition would you never want to disappear?</div>
+      <div class="card-foot">
+        <div class="foot-concept" style="color:#C4907A;">Collective memory</div>
+        <div class="foot-ref">— Family Systems Theory</div>
+      </div>
+    </div>
+    <div class="card-strip">
+      <div class="strip-seg" style="background:#7BA87A;"></div>
+      <div class="strip-seg" style="background:#C4907A;"></div>
+      <div class="strip-seg" style="background:#9B7E9E;"></div>
+      <div class="strip-seg" style="background:#7A8FAD;"></div>
+    </div>
+  </div>
+
+  <!-- Card 3 — Partner (mauve) — front -->
+  <div class="card c3">
+    <div class="card-band" style="background:#9B7E9E;">
+      <div class="band-cat">Partner</div>
+      <div class="band-level">03 · Soul</div>
+    </div>
+    <div class="card-body">
+      <div class="q-text">When was the last time you felt truly seen by me?</div>
+      <div class="card-foot">
+        <div class="foot-concept" style="color:#9B7E9E;">Vulnerability as bond</div>
+        <div class="foot-ref">— Brené Brown</div>
+      </div>
+    </div>
+    <div class="card-strip">
+      <div class="strip-seg" style="background:#7BA87A;"></div>
+      <div class="strip-seg" style="background:#C4907A;"></div>
+      <div class="strip-seg" style="background:#9B7E9E;"></div>
+      <div class="strip-seg" style="background:#7A8FAD;"></div>
+    </div>
+  </div>
+
+  <!-- Card 4 — With Yourself (slate blue) -->
+  <div class="card c4">
+    <div class="card-band" style="background:#7A8FAD;">
+      <div class="band-cat">With Yourself</div>
+      <div class="band-level">02 · Deep</div>
+    </div>
+    <div class="card-body">
+      <div class="q-text">What part of yourself are you still learning to accept?</div>
+      <div class="card-foot">
+        <div class="foot-concept" style="color:#7A8FAD;">Self-compassion</div>
+        <div class="foot-ref">— Kristin Neff</div>
+      </div>
+    </div>
+    <div class="card-strip">
+      <div class="strip-seg" style="background:#7BA87A;"></div>
+      <div class="strip-seg" style="background:#C4907A;"></div>
+      <div class="strip-seg" style="background:#9B7E9E;"></div>
+      <div class="strip-seg" style="background:#7A8FAD;"></div>
+    </div>
+  </div>
+
+  <!-- Title -->
+  <div class="title-block">
+    <div class="title-eyebrow">Conversation Game · 52 Cards</div>
+    <div class="title-main">The Art of<br><em>Knowing Us</em></div>
+    <div class="cat-dots">
+      <div class="dot" style="background:#7BA87A;"></div>
+      <div class="dot" style="background:#C4907A;"></div>
+      <div class="dot" style="background:#9B7E9E;"></div>
+      <div class="dot" style="background:#7A8FAD;"></div>
+    </div>
+    <div class="title-by">Alana · By Ana Llanos</div>
+  </div>
+
+</div>
+</body>
+</html>
