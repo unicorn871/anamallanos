@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>I Know That Song — Projection</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --paper:#faf9f6;--ink:#15171d;--blue:#153ced;--blue-deep:#112066;
+  --red:#ba2537;--warm-white:#faf9f6;--muted:#6b7280;--line:#e5e7eb;
+}
+html,body{width:100%;height:100%;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;overflow:hidden;background:var(--paper)}
+.phase{display:none;width:100%;height:100vh;padding:56px 80px;flex-direction:column}
+.phase.active{display:flex;animation:fadeIn .35s ease}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
+/* ── WAVEFORM ───────────────────────────────────────────────── */
+.waveform{display:flex;gap:5px;align-items:center;height:72px}
+.waveform span{flex:1;max-width:11px;border-radius:5px;height:var(--h);background:rgba(255,255,255,.55)}
+@media(prefers-reduced-motion:no-preference){
+  .waveform.animated span{animation:wavepulse 1.3s ease-in-out infinite alternate;animation-delay:calc(var(--i)*.04s)}
+}
+@keyframes wavepulse{from{transform:scaleY(.28)}to{transform:scaleY(1)}}
+.waveform.frozen span{animation:none!important;background:rgba(21,60,237,.22)}
+.waveform.small{height:36px}
+.waveform.small span{max-width:7px}
+
+/* ── SHARED ─────────────────────────────────────────────────── */
+.tag{display:inline-block;padding:6px 16px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;margin-bottom:28px;width:fit-content}
+.tag-blue{background:rgba(255,255,255,.18);color:rgba(255,255,255,.9)}
+.tag-dark{background:var(--ink);color:#fff}
+.tag-red{background:var(--red);color:#fff}
+.counter{font-size:20px;opacity:.5;margin-top:auto}
+
+/* ── WAITING ────────────────────────────────────────────────── */
+#p-waiting{background:var(--blue-deep);color:var(--warm-white);flex-direction:row;align-items:center;gap:72px}
+#p-waiting .left{flex:1}
+#p-waiting .eyebrow{font-size:14px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;opacity:.55;margin-bottom:16px}
+#p-waiting h1{font-size:clamp(72px,10vw,120px);font-weight:700;letter-spacing:-.07em;line-height:.88;margin-bottom:28px}
+#p-waiting .sub{font-size:26px;opacity:.65}
+#p-waiting .url{font-size:16px;opacity:.4;margin-top:10px;word-break:break-all}
+#qr-waiting{background:#fff;border-radius:16px;padding:16px;width:220px;height:220px;flex-shrink:0}
+
+/* ── R1 OPEN — music player feel ───────────────────────────── */
+#p-r1-open{background:var(--blue-deep);color:var(--warm-white);justify-content:flex-end;gap:0;padding-bottom:72px}
+#p-r1-open .top-row{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:auto}
+#p-r1-open .listening-label{font-size:13px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;opacity:.55}
+#qr-r1{background:#fff;border-radius:12px;padding:12px;width:140px;height:140px;flex-shrink:0}
+#p-r1-open .wave-wrap{margin-bottom:36px}
+#p-r1-open h2{font-size:clamp(48px,7vw,88px);font-weight:700;letter-spacing:-.06em;line-height:.92;margin-bottom:28px}
+#p-r1-open .r1-hint{font-size:20px;opacity:.5}
+#p-r1-open .r1-counter{font-size:18px;opacity:.45;margin-top:14px}
+
+/* ── R1 CLOSED ──────────────────────────────────────────────── */
+#p-r1-closed{background:var(--paper);color:var(--ink);justify-content:center}
+#p-r1-closed .reveal-label{font-size:13px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--blue);margin-bottom:16px}
+#p-r1-closed .wave-row{margin-bottom:28px}
+#p-r1-closed .song{font-size:clamp(48px,7vw,88px);font-weight:700;letter-spacing:-.06em;line-height:.92;margin-bottom:12px}
+#p-r1-closed .artist{font-size:clamp(26px,3.8vw,46px);opacity:.45;margin-bottom:44px;letter-spacing:-.03em}
+.counts{display:flex;gap:60px}
+.count-num{font-size:clamp(52px,8vw,88px);font-weight:700;letter-spacing:-.05em;color:var(--blue);line-height:1}
+.count-label{font-size:19px;opacity:.5;margin-top:4px}
+
+/* ── R2 OPEN — three sealed card backs ─────────────────────── */
+#p-r2-open{background:var(--paper);color:var(--ink)}
+#p-r2-open h2{font-size:clamp(28px,4vw,52px);font-weight:700;letter-spacing:-.05em;line-height:.95;margin-bottom:28px;max-width:800px}
+.cards-row{display:flex;gap:20px;flex:1;align-items:stretch;margin-bottom:24px}
+.sealed-card{flex:1;border:2.5px solid var(--line);border-radius:18px;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:28px 20px;position:relative}
+.sealed-card .lock{font-size:40px;opacity:.25}
+.sealed-card .card-label{font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);opacity:.7}
+
+/* ── R2 CLOSED ──────────────────────────────────────────────── */
+#p-r2-closed{background:var(--paper);color:var(--ink);align-items:center;justify-content:center}
+#p-r2-closed .wait-txt{font-size:clamp(32px,5vw,56px);font-weight:700;letter-spacing:-.05em;opacity:.3}
+
+/* ── R2 REVEALED — winner opens in red, others stay sealed ──── */
+#p-r2-revealed{background:var(--paper);color:var(--ink)}
+#p-r2-revealed h2{font-size:clamp(22px,3vw,36px);font-weight:700;letter-spacing:-.04em;margin-bottom:28px;opacity:.5}
+.reveal-cards-row{display:flex;gap:20px;flex:1;align-items:stretch}
+.sealed-card.opened{border-color:var(--red);background:#fff7f8}
+.sealed-card.opened .lock{display:none}
+.sealed-card.opened .card-label{display:none}
+.opened-content .ev-title{font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--red);margin-bottom:12px}
+.opened-content .ev-finding{font-size:clamp(18px,2.5vw,28px);font-weight:600;line-height:1.3;letter-spacing:-.02em}
+#p-r2-revealed .next-label{font-size:19px;opacity:.45;margin-top:auto}
+
+/* ── R3 OPEN ────────────────────────────────────────────────── */
+#p-r3-open{background:var(--paper);color:var(--ink)}
+#p-r3-open .qlabel{font-size:13px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--red);margin-bottom:20px}
+.ev-card-sm{border:1px solid #e7bdc4;border-left:6px solid var(--red);padding:22px 26px;border-radius:12px;background:#fff7f8;max-width:820px;margin-bottom:28px}
+.ev-card-sm .ev-title{font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--red);margin-bottom:7px}
+.ev-card-sm .ev-finding{font-size:clamp(18px,2.5vw,26px);line-height:1.35}
+#p-r3-open h2{font-size:clamp(28px,4vw,52px);font-weight:700;letter-spacing:-.05em;line-height:.95;max-width:820px;margin-bottom:auto}
+#p-r3-open .options{display:flex;gap:16px;margin-top:auto;flex-wrap:wrap}
+.opt-pill{border:2.5px solid var(--ink);border-radius:12px;padding:16px 26px;font-size:clamp(16px,2.2vw,24px);font-weight:700;letter-spacing:-.02em}
+
+/* ── R3 CLOSED ──────────────────────────────────────────────── */
+#p-r3-closed{background:var(--paper);color:var(--ink)}
+#p-r3-closed .rlabel{font-size:13px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--red);margin-bottom:20px}
+.vote-row{display:flex;gap:60px;align-items:flex-end;margin-bottom:32px}
+.vote-num{font-size:clamp(72px,11vw,120px);font-weight:700;letter-spacing:-.06em;line-height:1}
+.vote-num.blue{color:var(--blue)}
+.vote-num.muted{color:var(--muted)}
+.vote-lbl{font-size:18px;opacity:.5;margin-top:6px}
+.discussion{font-size:clamp(22px,3vw,36px);font-weight:700;letter-spacing:-.03em;border-top:1px solid rgba(0,0,0,.12);padding-top:28px}
+</style>
+</head>
+<body>
+
+<!-- 1. WAITING -->
+<div class="phase active" id="p-waiting">
+  <div class="left">
+    <div class="eyebrow">Classroom game</div>
+    <h1>I Know<br>That Song</h1>
+    <div class="sub">Scan to join.</div>
+    <div class="url" id="join-url"></div>
+  </div>
+  <div id="qr-waiting"></div>
+</div>
+
+<!-- 2. ROUND 1 OPEN — music player -->
+<div class="phase" id="p-r1-open">
+  <div class="top-row">
+    <div class="listening-label">I Know That Song · Now playing</div>
+    <div id="qr-r1"></div>
+  </div>
+  <div class="wave-wrap">
+    <div class="waveform animated" id="wave-live" aria-hidden="true"></div>
+  </div>
+  <h2>Do you recognize<br>this song?</h2>
+  <div class="r1-hint">Answer on your phone.</div>
+  <div class="r1-counter" id="r1-counter">0 responses received</div>
+</div>
+
+<!-- 3. ROUND 1 CLOSED -->
+<div class="phase" id="p-r1-closed">
+  <div class="reveal-label">Song revealed</div>
+  <div class="wave-row">
+    <div class="waveform frozen small" id="wave-frozen" aria-hidden="true"></div>
+  </div>
+  <div class="song">All I Want for Christmas Is You</div>
+  <div class="artist">Mariah Carey</div>
+  <div class="counts">
+    <div>
+      <div class="count-num" id="r1-knew">—</div>
+      <div class="count-label">said yes</div>
+    </div>
+    <div>
+      <div class="count-num" id="r1-song-count" style="font-size:clamp(32px,5vw,56px);color:var(--muted)">—</div>
+      <div class="count-label">named the song</div>
+    </div>
+  </div>
+</div>
+
+<!-- 4. ROUND 2 OPEN — three sealed cards -->
+<div class="phase" id="p-r2-open">
+  <div class="tag tag-dark">Hypothetical scenario</div>
+  <h2>Open one piece of evidence.</h2>
+  <div class="cards-row">
+    <div class="sealed-card">
+      <div class="lock">&#x1F512;</div>
+      <div class="card-label">Evidence A</div>
+    </div>
+    <div class="sealed-card">
+      <div class="lock">&#x1F512;</div>
+      <div class="card-label">Evidence B</div>
+    </div>
+    <div class="sealed-card">
+      <div class="lock">&#x1F512;</div>
+      <div class="card-label">Evidence C</div>
+    </div>
+  </div>
+  <div class="counter" id="r2-counter">0 votes received</div>
+</div>
+
+<!-- 5. ROUND 2 CLOSED (neutral — class waits) -->
+<div class="phase" id="p-r2-closed">
+  <div class="wait-txt">Reviewing responses…</div>
+</div>
+
+<!-- 6. ROUND 2 REVEALED — winner opens in red, others stay sealed -->
+<div class="phase" id="p-r2-revealed">
+  <div class="tag tag-red">Evidence revealed</div>
+  <div class="reveal-cards-row" id="reveal-cards-row">
+    <!-- built by JS -->
+  </div>
+  <div class="next-label">Next: Does the model itself contain a copy?</div>
+</div>
+
+<!-- 7. ROUND 3 OPEN -->
+<div class="phase" id="p-r3-open">
+  <div class="qlabel">Make your ruling</div>
+  <div class="ev-card-sm" id="r3-ev-card">
+    <div class="ev-title" id="r3-ev-title">—</div>
+    <div class="ev-finding" id="r3-ev-finding">—</div>
+  </div>
+  <h2>On this evidence — does the model itself contain a copy of the song?</h2>
+  <div class="options">
+    <div class="opt-pill">Yes, on this evidence</div>
+    <div class="opt-pill">I'd need more evidence</div>
+  </div>
+  <div class="counter" id="r3-counter" style="margin-top:20px">0 votes received</div>
+</div>
+
+<!-- 8. ROUND 3 CLOSED -->
+<div class="phase" id="p-r3-closed">
+  <div class="rlabel">Ruling · Results</div>
+  <div class="ev-card-sm" id="r3-ev-card-final">
+    <div class="ev-title" id="r3-ev-title-final">—</div>
+    <div class="ev-finding" id="r3-ev-finding-final">—</div>
+  </div>
+  <div class="vote-row">
+    <div>
+      <div class="vote-num blue" id="r3-yes">—</div>
+      <div class="vote-lbl">Yes, on this evidence</div>
+    </div>
+    <div>
+      <div class="vote-num muted" id="r3-need">—</div>
+      <div class="vote-lbl">I'd need more evidence</div>
+    </div>
+  </div>
+  <div class="discussion">What would you want to see next?</div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
+<script>
+// ── CONFIG ──────────────────────────────────────────────────────────────
+const firebaseConfig = {
+  apiKey:            "AIzaSyBqRtNXyb_yzDBKdPiVrwOK_XNyGSu5S7k",
+  authDomain:        "i-know-that-song.firebaseapp.com",
+  databaseURL:       "https://i-know-that-song-default-rtdb.firebaseio.com",
+  projectId:         "i-know-that-song",
+  storageBucket:     "i-know-that-song.firebasestorage.app",
+  messagingSenderId: "494835240164",
+  appId:             "1:494835240164:web:33f93e75abc44ea468f0f1"
+};
+const SESSION_ID     = "SONG2026";
+const PARTICIPANT_URL = "https://anamallanos.com/game/participant.html";
+// ────────────────────────────────────────────────────────────────────────
+
+const EVIDENCE = {
+  run_again:   { title:"Run it again",           finding:"Three differently worded prompts returned substantially the same melody." },
+  check_data:  { title:"Check the training data", finding:"The song appears in the training dataset." },
+  trace_audio: { title:"Trace the audio",        finding:"For this request, the system retrieved an external clip and used it in its response." }
+};
+
+const CARD_ORDER = ['run_again','check_data','trace_audio'];
+
+firebase.initializeApp(firebaseConfig);
+const db   = firebase.database();
+const sess = db.ref('sessions/' + SESSION_ID);
+
+// Build waveforms
+const HEIGHTS = [16,22,13,38,26,45,32,18,29,43,23,36,15,29,46,32,14,25,40,19,34,28,14,23,17,33,20,12];
+['wave-live','wave-frozen'].forEach(id => {
+  const el = document.getElementById(id);
+  if (!el) return;
+  HEIGHTS.forEach((h,i) => {
+    const bar = document.createElement('span');
+    bar.style.setProperty('--h', h+'px');
+    bar.style.setProperty('--i', i);
+    el.appendChild(bar);
+  });
+});
+
+// QR codes
+setTimeout(() => {
+  ['qr-waiting','qr-r1'].forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.innerHTML = '';
+    new QRCode(el, { text:PARTICIPANT_URL, width:160, height:160, colorDark:"#112066", colorLight:"#ffffff" });
+  });
+  document.getElementById('join-url').textContent = PARTICIPANT_URL;
+}, 400);
+
+function showPhase(id) {
+  document.querySelectorAll('.phase').forEach(p => p.classList.remove('active'));
+  const el = document.getElementById(id);
+  if (el) el.classList.add('active');
+}
+
+function plural(n, word) { return n + ' ' + word + (n===1?'':'s') + ' received'; }
+
+function matchesSong(a) {
+  const n = a.toLowerCase().replace(/[^a-z0-9 ]/g,'');
+  return n.includes('all i want for christmas') || n.includes('all i want christmas') || n.includes('all i want for xmas');
+}
+
+function buildRevealCards(winner) {
+  const row = document.getElementById('reveal-cards-row');
+  row.innerHTML = '';
+  CARD_ORDER.forEach(key => {
+    const card = document.createElement('div');
+    card.className = 'sealed-card' + (key === winner ? ' opened' : '');
+    if (key === winner) {
+      const ev = EVIDENCE[key];
+      card.innerHTML = `<div class="opened-content">
+        <div class="ev-title">${ev.title}</div>
+        <div class="ev-finding">${ev.finding}</div>
+      </div>`;
+    } else {
+      card.innerHTML = `<div class="lock">&#x1F512;</div><div class="card-label">Sealed</div>`;
+    }
+    row.appendChild(card);
+  });
+}
+
+sess.on('value', snap => {
+  const d = snap.val() || {};
+  const phase  = d.phase || 'waiting';
+  const r1     = d.r1 || {};
+  const r2     = d.r2 || {};
+  const r3     = d.r3 || {};
+  const winner = d.winning_card;
+
+  if (phase === 'waiting') { showPhase('p-waiting'); return; }
+
+  if (phase === 'r1_open') {
+    showPhase('p-r1-open');
+    document.getElementById('r1-counter').textContent = plural(Object.keys(r1).length, 'response');
+    return;
+  }
+
+  if (phase === 'r1_closed') {
+    showPhase('p-r1-closed');
+    let knew = 0, namedSong = 0;
+    Object.values(r1).forEach(a => {
+      if (typeof a === 'string' && a.startsWith('yes')) { knew++; if(matchesSong(a)) namedSong++; }
+    });
+    document.getElementById('r1-knew').textContent       = knew;
+    document.getElementById('r1-song-count').textContent = namedSong;
+    return;
+  }
+
+  if (phase === 'r2_open') {
+    showPhase('p-r2-open');
+    document.getElementById('r2-counter').textContent = plural(Object.keys(r2).length, 'vote');
+    return;
+  }
+
+  if (phase === 'r2_closed') { showPhase('p-r2-closed'); return; }
+
+  if (phase === 'r2_revealed') {
+    buildRevealCards(winner);
+    showPhase('p-r2-revealed');
+    return;
+  }
+
+  if (phase === 'r3_open') {
+    showPhase('p-r3-open');
+    if (winner && EVIDENCE[winner]) {
+      document.getElementById('r3-ev-title').textContent   = EVIDENCE[winner].title;
+      document.getElementById('r3-ev-finding').textContent = EVIDENCE[winner].finding;
+    }
+    document.getElementById('r3-counter').textContent = plural(Object.keys(r3).length, 'vote');
+    return;
+  }
+
+  if (phase === 'r3_closed') {
+    showPhase('p-r3-closed');
+    if (winner && EVIDENCE[winner]) {
+      document.getElementById('r3-ev-title-final').textContent   = EVIDENCE[winner].title;
+      document.getElementById('r3-ev-finding-final').textContent = EVIDENCE[winner].finding;
+    }
+    let yes = 0, need = 0;
+    Object.values(r3).forEach(v => { if(v==='yes') yes++; else if(v==='need_more') need++; });
+    document.getElementById('r3-yes').textContent  = yes;
+    document.getElementById('r3-need').textContent = need;
+    return;
+  }
+});
+</script>
+</body>
+</html>

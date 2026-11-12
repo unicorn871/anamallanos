@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>I Know That Song</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --paper:#faf9f6;--ink:#15171d;--blue:#153ced;--blue-deep:#112066;
+  --red:#ba2537;--muted:#6b7280;--line:#e5e7eb;
+}
+html,body{height:100%;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;background:var(--paper);color:var(--ink)}
+body{display:flex;flex-direction:column;min-height:100vh;padding:28px 22px 36px}
+.screen{display:none;flex-direction:column;flex:1;animation:fadeIn .2s ease}
+.screen.active{display:flex}
+@keyframes fadeIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+
+/* Labels */
+.label{font-size:11px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--blue);margin-bottom:16px}
+.label-red{font-size:11px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--red);margin-bottom:16px}
+
+/* Headings */
+h2{font-size:26px;font-weight:700;letter-spacing:-.03em;line-height:1.1;margin-bottom:22px}
+.big{font-size:36px;font-weight:700;letter-spacing:-.04em;line-height:1.1;margin-bottom:10px}
+.sub{font-size:17px;color:var(--muted)}
+
+/* Waveform */
+.wave{display:flex;gap:3px;align-items:center;height:48px;margin-bottom:28px}
+.wave span{flex:1;max-width:8px;border-radius:3px;height:var(--h);background:var(--blue);opacity:.5}
+@media(prefers-reduced-motion:no-preference){
+  .wave.animated span{animation:wavepulse 1.3s ease-in-out infinite alternate;animation-delay:calc(var(--i)*.04s)}
+}
+@keyframes wavepulse{from{transform:scaleY(.3)}to{transform:scaleY(1)}}
+.wave.small{height:28px;margin-bottom:20px}
+.wave.small span{max-width:5px;background:var(--red);opacity:.4}
+
+/* Buttons */
+.btn{display:block;width:100%;padding:17px;border:none;border-radius:12px;font-size:17px;font-weight:700;font-family:inherit;cursor:pointer;margin-top:10px;transition:opacity .15s,transform .1s;text-align:center}
+.btn:active{transform:scale(.98)}
+.btn:disabled{opacity:.35;cursor:default}
+.btn-blue{background:var(--blue);color:#fff}
+.btn-outline{background:#fff;color:var(--ink);border:2px solid var(--line)}
+.btn-red{background:var(--red);color:#fff}
+
+/* Recognition buttons */
+.recog-row{display:flex;flex-direction:column;gap:10px;margin-top:4px}
+.recog-btn{padding:20px 16px;border:2.5px solid var(--line);border-radius:14px;background:#fff;font-size:17px;font-weight:700;font-family:inherit;cursor:pointer;text-align:center;transition:border-color .15s,background .15s;-webkit-tap-highlight-color:transparent}
+.recog-btn.selected-yes{border-color:var(--blue);background:#eef2ff;color:var(--blue)}
+.recog-btn.selected-no{border-color:var(--muted);background:#f5f5f4;color:var(--muted)}
+.recog-btn:active{transform:scale(.98)}
+
+/* Title input (shown after Yes) */
+.title-field{margin-top:16px;display:none}
+.title-field.visible{display:block}
+.title-field textarea{width:100%;border:2px solid var(--line);border-radius:10px;padding:13px;font-size:16px;font-family:inherit;outline:none;resize:none;background:#fff;transition:border-color .15s}
+.title-field textarea:focus{border-color:var(--blue)}
+.title-field .optional{font-size:12px;color:var(--muted);margin-bottom:8px}
+
+/* Evidence cards */
+.card{border:2px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:10px;cursor:pointer;transition:border-color .15s,background .15s;-webkit-tap-highlight-color:transparent;position:relative}
+.card:active{background:#f5f5f5}
+.card.selected{border-color:var(--blue);background:#eef2ff}
+.card-title{font-weight:700;font-size:16px;margin-bottom:3px}
+.card-q{font-size:13px;color:var(--muted);line-height:1.4}
+.card-seal{position:absolute;right:16px;top:50%;transform:translateY(-50%);font-size:18px;opacity:.3}
+
+/* Spacer */
+.flex1{flex:1}
+</style>
+</head>
+<body>
+
+<!-- WAITING -->
+<div class="screen active" id="s-waiting">
+  <div class="flex1"></div>
+  <div class="label">I Know That Song</div>
+  <div class="big">Starting soon.</div>
+  <div class="sub">Look up at the screen.</div>
+  <div class="flex1"></div>
+</div>
+
+<!-- ROUND 1: RECOGNITION -->
+<div class="screen" id="s-r1">
+  <div class="wave animated" id="wave-r1" aria-hidden="true"></div>
+  <div class="label">Listen</div>
+  <h2>Do you recognize this song?</h2>
+  <div class="recog-row">
+    <button class="recog-btn" id="btn-yes" onclick="selectRecog('yes')">Yes, I know it</button>
+    <button class="recog-btn" id="btn-no"  onclick="selectRecog('no')">I'm not sure</button>
+  </div>
+  <div class="title-field" id="title-field">
+    <div class="optional">Optional — what's the title?</div>
+    <textarea id="r1-title" rows="2" placeholder="Song title…" maxlength="200"></textarea>
+  </div>
+  <button class="btn btn-blue" id="r1-submit" onclick="submitR1()" disabled style="margin-top:18px">Lock in answer</button>
+</div>
+
+<!-- AFTER ROUND 1 SUBMIT -->
+<div class="screen" id="s-r1-done">
+  <div class="flex1"></div>
+  <div class="big">Response received.</div>
+  <div class="sub">Look up.</div>
+  <div class="flex1"></div>
+</div>
+
+<!-- ROUND 2: EVIDENCE CARDS -->
+<div class="screen" id="s-r2">
+  <div class="wave small" id="wave-r2" aria-hidden="true"></div>
+  <div class="label-red">Hypothetical scenario</div>
+  <h2>Open one piece of evidence.</h2>
+  <div class="card" id="card-run" onclick="selectCard('run_again')">
+    <div class="card-title">Run it again</div>
+    <div class="card-q">Does the same melody come back with a different prompt?</div>
+    <span class="card-seal">&#x1F512;</span>
+  </div>
+  <div class="card" id="card-check" onclick="selectCard('check_data')">
+    <div class="card-title">Check the training data</div>
+    <div class="card-q">Was the song included in the training dataset?</div>
+    <span class="card-seal">&#x1F512;</span>
+  </div>
+  <div class="card" id="card-trace" onclick="selectCard('trace_audio')">
+    <div class="card-title">Trace the audio</div>
+    <div class="card-q">Where did the audio in this particular response come from?</div>
+    <span class="card-seal">&#x1F512;</span>
+  </div>
+  <button class="btn btn-red" id="r2-submit" onclick="submitR2()" disabled>Open this evidence</button>
+</div>
+
+<!-- AFTER ROUND 2 SUBMIT -->
+<div class="screen" id="s-r2-done">
+  <div class="flex1"></div>
+  <div class="big">Choice locked.</div>
+  <div class="sub">Look up.</div>
+  <div class="flex1"></div>
+</div>
+
+<!-- ROUND 3: RULING -->
+<div class="screen" id="s-r3">
+  <div class="label-red">Make your ruling</div>
+  <h2>Does this evidence show that the model itself contains a copy of the song?</h2>
+  <div class="recog-row" style="margin-top:4px">
+    <button class="recog-btn" id="btn-r3-yes"  onclick="selectRuling('yes')">Yes, on this evidence</button>
+    <button class="recog-btn" id="btn-r3-need" onclick="selectRuling('need_more')">I'd need more evidence</button>
+  </div>
+  <button class="btn btn-red" id="r3-submit" onclick="submitR3()" disabled style="margin-top:18px">Submit ruling</button>
+</div>
+
+<!-- DONE -->
+<div class="screen" id="s-done">
+  <div class="flex1"></div>
+  <div class="big">Choice locked.</div>
+  <div class="sub">Look up for the results.</div>
+  <div class="flex1"></div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+<script>
+// ── CONFIG ─────────────────────────────────────────────────────────────
+const firebaseConfig = {
+  apiKey:            "AIzaSyBqRtNXyb_yzDBKdPiVrwOK_XNyGSu5S7k",
+  authDomain:        "i-know-that-song.firebaseapp.com",
+  databaseURL:       "https://i-know-that-song-default-rtdb.firebaseio.com",
+  projectId:         "i-know-that-song",
+  storageBucket:     "i-know-that-song.firebasestorage.app",
+  messagingSenderId: "494835240164",
+  appId:             "1:494835240164:web:33f93e75abc44ea468f0f1"
+};
+const SESSION_ID = "SONG2026";
+// ───────────────────────────────────────────────────────────────────────
+
+firebase.initializeApp(firebaseConfig);
+const db   = firebase.database();
+const sess = db.ref('sessions/' + SESSION_ID);
+
+// Participant ID
+let uid = localStorage.getItem('ikts_uid');
+if (!uid) { uid = 'p_' + Math.random().toString(36).slice(2,11); localStorage.setItem('ikts_uid', uid); }
+
+function getSubmitted() {
+  return {
+    r1: localStorage.getItem('ikts_'+SESSION_ID+'_r1') === '1',
+    r2: localStorage.getItem('ikts_'+SESSION_ID+'_r2') === '1',
+    r3: localStorage.getItem('ikts_'+SESSION_ID+'_r3') === '1',
+  };
+}
+function markSubmitted(r) { localStorage.setItem('ikts_'+SESSION_ID+'_'+r, '1'); }
+
+// Build waveforms
+const HEIGHTS = [16,22,13,38,26,45,32,18,29,43,23,36,15,29,46,32,14,25,40,19,34,28,14,23,17,33,20,12];
+['wave-r1','wave-r2'].forEach(id => {
+  const el = document.getElementById(id);
+  HEIGHTS.forEach((h,i) => {
+    const b = document.createElement('span');
+    b.style.setProperty('--h', h+'px');
+    b.style.setProperty('--i', i);
+    el.appendChild(b);
+  });
+});
+
+let r1Choice = null, r2Choice = null, r3Choice = null;
+
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  const el = document.getElementById(id);
+  if (el) el.classList.add('active');
+}
+
+function handlePhase(phase) {
+  const sub = getSubmitted();
+  if (!phase || phase === 'waiting')                      return showScreen('s-waiting');
+  if (phase === 'r1_open')                                return showScreen(sub.r1 ? 's-r1-done' : 's-r1');
+  if (phase === 'r1_closed')                              return showScreen('s-r1-done');
+  if (phase === 'r2_open')                                return showScreen(sub.r2 ? 's-r2-done' : 's-r2');
+  if (phase === 'r2_closed' || phase === 'r2_revealed')   return showScreen('s-r2-done');
+  if (phase === 'r3_open')                                return showScreen(sub.r3 ? 's-done' : 's-r3');
+  if (phase === 'r3_closed')                              return showScreen('s-done');
+  showScreen('s-waiting');
+}
+
+sess.child('phase').on('value', snap => handlePhase(snap.val()));
+sess.child('participants/'+uid).set(true);
+
+// ── Round 1 ─────────────────────────────────────────────────────────────
+function selectRecog(choice) {
+  r1Choice = choice;
+  document.getElementById('btn-yes').classList.toggle('selected-yes', choice === 'yes');
+  document.getElementById('btn-no').classList.toggle('selected-no',  choice === 'no');
+  document.getElementById('title-field').classList.toggle('visible', choice === 'yes');
+  document.getElementById('r1-submit').disabled = false;
+}
+
+function submitR1() {
+  if (!r1Choice || getSubmitted().r1) return;
+  document.getElementById('r1-submit').disabled = true;
+  const title = document.getElementById('r1-title').value.trim();
+  const val   = r1Choice === 'yes' && title ? 'yes:' + title : r1Choice;
+  sess.child('r1/'+uid).transaction(cur => cur !== null ? undefined : val, (err, ok) => {
+    if (ok) { markSubmitted('r1'); showScreen('s-r1-done'); }
+    else document.getElementById('r1-submit').disabled = false;
+  });
+}
+
+// ── Round 2 ─────────────────────────────────────────────────────────────
+function selectCard(choice) {
+  r2Choice = choice;
+  ['run_again','check_data','trace_audio'].forEach(c => {
+    const id = c==='run_again'?'card-run':c==='check_data'?'card-check':'card-trace';
+    document.getElementById(id).classList.toggle('selected', c===choice);
+  });
+  document.getElementById('r2-submit').disabled = false;
+}
+
+function submitR2() {
+  if (!r2Choice || getSubmitted().r2) return;
+  document.getElementById('r2-submit').disabled = true;
+  sess.child('r2/'+uid).transaction(cur => cur !== null ? undefined : r2Choice, (err, ok) => {
+    if (ok) { markSubmitted('r2'); showScreen('s-r2-done'); }
+    else document.getElementById('r2-submit').disabled = false;
+  });
+}
+
+// ── Round 3 ─────────────────────────────────────────────────────────────
+function selectRuling(choice) {
+  r3Choice = choice;
+  document.getElementById('btn-r3-yes').classList.toggle('selected-yes',  choice==='yes');
+  document.getElementById('btn-r3-need').classList.toggle('selected-no', choice==='need_more');
+  document.getElementById('r3-submit').disabled = false;
+}
+
+function submitR3() {
+  if (!r3Choice || getSubmitted().r3) return;
+  document.getElementById('r3-submit').disabled = true;
+  sess.child('r3/'+uid).transaction(cur => cur !== null ? undefined : r3Choice, (err, ok) => {
+    if (ok) { markSubmitted('r3'); showScreen('s-done'); }
+    else document.getElementById('r3-submit').disabled = false;
+  });
+}
+</script>
+</body>
+</html>
